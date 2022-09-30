@@ -14,14 +14,9 @@ Description
 # Third party modules:
 
 # Local scripts and modules:
-import honest_calculator.run
+
 # --------------------
 
 
 def run():
-    honest_calculator.run.run()
-    pass
-
-
-if __name__ == "__main__":
-    run()
+    print("Honest Calculator project stub.")
