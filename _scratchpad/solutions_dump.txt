@@ -1,0 +1,2092 @@
+
+==============================================================================
+# Prime number
+# Hard
+# 5614 users solved this problem. Latest completion was about 1 hour ago. 
+# A is_prime number is a number greater than 1 and divisible only by 1 and
+# itself. If a number is divisible by any other number, then it's not a
+# is_prime number. Determine whether the input number is a is_prime number.
+
+# ---- code start -----
+
+num = int(input())
+if num < 2:
+    is_prime = False
+else:
+    is_prime = True
+    check_num = 2
+    while is_prime:
+        if check_num > num // 2: break
+        is_prime = num % check_num != 0
+        check_num += 1
+print('This number is prime' if is_prime else 'This number is not prime')
+==============================================================================
+# Cat cafés
+# Hard
+# 4756 users solved this problem. Latest completion was 42 minutes ago.
+# Kitty wants to visit a cat café! Help her find the one with the largest
+# number of cats. It is guaranteed that all cafés have a different number of
+# cats.
+# Input format
+# Each string contains a café's cafe_name followed by a space and the number of
+# cats in it, e.g. Paws 11, Kittens 9.
+# The names would be one-word only. Read input lines until you get a string
+# MEOW (without any number).
+# Output format
+# The café with the maximum number of cats.
+
+# ---- code start -----
+max_cats = 0
+top_cafe = ''
+while True:
+    cafe_info = input().split(sep=' ')
+    cafe_name = cafe_info[0]
+    if len(cafe_info) != 2:
+        if cafe_name == 'MEOW':
+            break
+        else:
+            continue
+    cats = int(cafe_info[1])
+    if cats > max_cats:
+        max_cats = cats
+        top_cafe = cafe_name
+print(top_cafe)
+==============================================================================
+
+# Small scale
+# Hard
+# 5079 users solved this problem. Latest completion was about 2 hours ago.
+# Read lines with floats from the input until you get a single period . that
+# signals you to stop.
+# Find the minimum of these numbers and print it out.
+
+# ---- code start -----
+min_float = 99999999
+while True:
+    input_str = input()
+    if input_str == '.':
+        break
+    test_float = float(input_str)
+    if test_float < min_float:
+        min_float = test_float
+print(min_float)
+==============================================================================
+
+# The mean
+# Hard
+# 5187 users solved this problem. Latest completion was about 5 hours ago.
+# Calculate the arithmetic mean of integer numbers and output it. You will receive the integers on separate lines. The numeric sequence ends with a period ., so stop reading the input on it.
+# Don't round your result before outputting it.
+# The input will always have at least one number.
+
+# ---- code start -----
+num_count = 0
+num_sum = 0
+while True:
+    input_str = input()
+    if input_str == '.':
+        break
+    num_sum += int(input_str)
+    num_count += 1
+print(num_sum / num_count)
+==============================================================================
+
+# Vowels and consonants
+# Hard
+# 5247 users solved this problem. Latest completion was about 2 hours ago.
+# Let's work with texts! You'll get a sequence of characters (a word, a
+# sentence or just gibberish). For each character tell if it's a vowel or a
+# consonant. If you hit a non-alphabetic symbol, just stop processing.
+# The input format:
+# One line with N characters.
+# We will use letters from the English alphabet. The symbols aeiou are
+# considered vowels. Treat the rest of the letters as consonants.
+# The output format:
+# Print the line vowel if the character is a vowel, and consonant if the
+# character is a consonant. Stop printing information at the first
+# non-alphabetic symbol.
+
+# ---- code start -----
+import string
+
+input_str = input()
+valid_characters = string.ascii_letters
+vowels = 'aeiou'
+for char in input_str:
+    if char not in valid_characters:
+        break
+    if char in vowels:
+        print('vowel')
+    else:
+        print('consonant')
+==============================================================================
+
+# Game over
+# Hard
+# 4942 users solved this problem. Latest completion was about 2 hours ago.
+# In online test games, there is usually a limited number of lives: if, for
+# example, you make 3 mistakes, you lose, and cannot continue with the game.
+# Let's try to implement this system.
+# Read the line with user answers from the input: C for a correct answer and
+# I for an incorrect one, separated by space. Then count the number of
+# correct answers (this number is the final score) before a user has reached
+# the limit of wrong answers, equal to 3. They lose after their third
+# mistake. If they make no more than 2 mistakes, they win. If a user loses
+# the game, print "Game over" and their score. If the user wins, print "You
+# won" and their score. The message should be printed without quotation
+# marks. The message and the score should be printed on separate lines.
+# The input format:
+# A line with N user answers in a game separated by space
+# The output format:
+# Game over or You won
+# Final score
+
+# ---- code start -----
+answers = input().split()
+ p
+score = 0
+mistakes = 0
+win = True
+for answer in answers:
+    if answer == 'C':
+        score += 1
+    else:
+        mistakes += 1
+    if mistakes >= 3:
+        win = False
+        break
+print('You won' if win else 'Game over')
+print(score)
+==============================================================================
+
+#  Process integer input
+#  Hard
+#  5430 users solved this problem. Latest completion was about 3 hours ago.
+#  Write a program that reads integers from the console, one number per line.
+#  For each input number you should check:
+#  if the number is less than 10, then skip this number;
+#  if the number is greater than 100, then stop reading numbers
+#  from the console;
+#  in other cases, print this number back to the console on a
+#  separate line.
+
+# ---- code start -----
+valid_numbers = []
+while True:
+    test_number = int(input())
+    if test_number > 100:
+        break
+    if test_number >= 10:
+        valid_numbers.append(test_number)
+for number in valid_numbers:
+    print(number)
+==============================================================================
+
+# Count up the squares
+# Hard
+# 4979 users solved this problem. Latest completion was about 13 hours ago.
+# Write a program that reads integers (one per line) from the console until
+# their sum is equal to 0. After that, the program should display the sum of
+# the squares of all the entered numbers.
+# It is guaranteed that at some point the sum of the entered numbers will be
+# equal to 0. After that, you should stop reading the input.
+# In case the first integer equals 0, just print out 0 instead of the sum of
+# the squares.
+# You only need to output the sum of the squares once.
+
+# ---- code start -----
+num_sum = 0
+square_sum = 0
+while True:
+    test_number = int(input())
+    num_sum += test_number
+    square_sum += test_number**2
+    if num_sum == 0:
+        break
+print(square_sum)
+==============================================================================
+
+# Palindrome
+# Medium
+# 5738 users solved this problem. Latest completion was about 16 hours ago.
+# A palindrome is a word or a text that reads the same backward as forward.
+# Create a program that checks if the word is a palindrome.
+# The input format:
+# Word that needs to be checked. It is guaranteed that the word will be
+# of even length.
+# The output format:
+# If the word is a palindrome, write Palindrome. Otherwise, write Not
+# palindrome.
+
+# ---- code start -----
+test_word = input()
+for i in range(len(test_word) // 2):
+    if test_word[i] != test_word[-(i + 1)]:
+        print('Not palindrome')
+        break
+else:
+    print('Palindrome')
+==============================================================================
+
+# Party time Problem of the day
+# Next problem in: 22h 17m 23s
+# Medium
+# 4939 users solved this problem. Latest completion was about 10 hours ago.
+# James is hosting a party today. He decided to welcome all new guests
+# personally. To remember their names, James kindly asks you to write them
+# in a list. Read the names from the input, each on a new line, and stop at
+# a single period . that denotes the end of the sequence.
+# Print your list and its length (the number of guests) for James.
+
+# ---- code start -----
+guest_list = []
+while True:
+    guest = input()
+    if guest == '.':
+        break
+    guest_list.append(guest)
+print(guest_list)
+print(len(guest_list))
+==============================================================================
+
+# Triple-quoted string
+# Medium
+# 35677 users solved this problem. Latest completion was about 3 hours ago.
+# Create a program that will print this multi-line string containing triple double quotes:
+# """
+# THIS IS A STRING
+# """
+# Note: quotes, too, should be printed!
+
+# ---- code start -----
+print('''
+"""
+THIS IS A STRING
+"""''')
+==============================================================================
+
+# Taking turns
+# Medium
+# 31761 users solved this problem. Latest completion was about 14 hours ago.
+# Write a program that will print the following multi-line string:
+# ' '' '''
+# ' '' '''
+# ' '' '''
+
+# ---- code start -----
+print("""' '' '''
+' '' '''
+' '' '''""")
+==============================================================================
+
+# Poetry
+# Medium
+# 31604 users solved this problem. Latest completion was about 4 hours ago.
+# Write a program that will create and print this string from "How The Grinch Stole Christmas":
+# Did that stop the old Grinch?
+# No! The Grinch simply said,
+# "If I can't find a reindeer,
+# I'll make one instead!"
+
+# ---- code start -----
+print('''Did that stop the old Grinch?
+No! The Grinch simply said,
+"If I can't find a reindeer,
+I'll make one instead!"''')
+==============================================================================
+
+# A pyramid!
+# Medium
+# 28991 users solved this problem. Latest completion was about 6 hours ago.
+# Print a four-line string that includes:
+# One single quote;
+# One single quote, one double quote, and one single quote;
+# Five alternating single and double quotes, starting with a single quote;
+# Seven alternating single and double quotes, starting with a single quote.
+# output should look like this:
+# '
+# '"'
+# '"'"'
+# '"'"'"'
+# To make the task easier, start your string with three pairs of double quotes
+# to indicate the beginning and the end of your string. In this case, you don't
+# have to use escaping.
+
+# ---- code start -----
+print("""'
+'"'
+'"'"'
+'"'"'"'""")
+==============================================================================
+
+# Index of synthesis
+# Medium
+# 7353 users solved this problem. Latest completion was about 2 hours ago.
+# One way to classify the languages of the world is by looking at their
+# morphological systems. One classification is based on the index of synthesis
+# that reflects the average number of morphemes in a word. The values vary
+# between 1 and 4 and there are 3 types of languages according to that system.
+# Here they are:
+# Type — Index
+# Analytic — less than 2
+# Synthetic — from 2 to 3 (inclusively)
+# Polysynthetic — more than 3
+# Write a program that given the index of synthesis determines the type of the language.
+# The input format:
+#  The value of the index of synthesis.
+# The output format:
+#  The type of language.
+
+# ---- code start -----
+syn_index = float(input())
+if syn_index > 3:
+    print('Polysynthetic')
+elif syn_index >= 2:
+    print('Synthetic')
+else:
+    print('Analytic')
+==============================================================================
+
+ # Healthy sleep
+ # Medium
+ # 7760 users solved this problem. Latest completion was about 1 hour ago.
+ # Ann watched a TV program about health and learned that it is recommended to sleep at least AAA hours per day. Oversleeping is also unhealthy and you should not sleep more than BBB hours. Now, Ann sleeps HHH hours per day.
+ # Check if Ann's sleep schedule complies with the requirements of that TV program.
+ # The input format:
+ # The input comprises three strings with variables in the following order: A A A, B B B, H H H.
+ # A A A is always less than or equal to B B B.
+ # The output format:
+ # If Ann sleeps less than AAA hours, output "Deficiency", if she sleeps more than BBB hours, output "Excess".
+ # If HHH lies between AAA and BBB, print "Normal".
+
+ # ---- code start -----
+ Healthy sleep
+Medium
+7760 users solved this problem. Latest completion was about 1 hour ago.
+
+Ann watched a TV program about health and learned that it is recommended to sleep at least AAA hours per day. Oversleeping is also unhealthy and you should not sleep more than BBB hours. Now, Ann sleeps HHH hours per day.
+
+Check if Ann's sleep schedule complies with the requirements of that TV program.
+
+The input format:
+
+The input comprises three strings with variables in the following order: A A A, B B B, H H H.
+
+A A A is always less than or equal to B B B.
+
+The output format:
+
+If Ann sleeps less than AAA hours, output "Deficiency", if she sleeps more than BBB hours, output "Excess".
+
+If HHH lies between AAA and BBB, print "Normal".
+==============================================================================
+
+H
+M
+7
+A
+C
+T
+T
+A
+T
+I
+I
+==============================================================================
+
+# Healthy sleep
+# Medium
+# 7760 users solved this problem. Latest completion was about 1 hour ago.
+# Ann watched a TV program about health and learned that it is recommended to
+# sleep at least A hours per day. Oversleeping is also unhealthy and you
+# should not sleep more than B hours. Now, Ann sleeps H hours per day.
+# Check if Ann's sleep schedule complies with the requirements of that TV program.
+# The input format:
+# The input comprises three strings with variables in the following order: A, B, H.
+# A is always less than or equal to B.
+# The output format:
+# If Ann sleeps less than A hours, output "Deficiency", if she sleeps more than B hours, output "Excess".
+# If H lies between A and B, print "Normal".
+
+# ---- code start -----
+sleep_min = int(input())
+sleep_max = int(input())
+sleep_test = int(input())
+if sleep_test > sleep_max:
+    print('Excess')
+elif sleep_test > sleep_min:
+    print('Normal')
+else:
+    print('Deficiency')
+==============================================================================
+
+# Particles
+# Medium
+# 7947 users solved this problem. Latest completion was about 23 hours ago.
+# The world of elementary particles is rather complex. There are many
+# classes, and they can interact in a rather interesting way.
+# Two important characteristics of the elementary particles are the spin and
+# the electric charge. Here are some of the elementary particles:
+# Particle   Class   Spin    Electric charge
+# Strange    Quark   1/2     -1/3
+# Charm  Quark   1/2     2/3
+# Electron   Lepton  1/2     -1
+# Neutrino   Lepton  1/2     0
+# Photon     Boson   1   0
+# Write a program that returns the particle and its class based on its spin and
+# electric charge.
+# The input format:
+#  Two lines: first the spin of the particle, then its charge. You do NOT have
+#  to convert these values to floats.
+# The output format:
+#  The particle and its class separated by a space.
+
+# ---- code start -----
+spin = input()
+charge = input()
+if spin == '1/2':
+    if charge == '-1/3':
+        print('Strange Quark')
+    elif charge == '2/3':
+        print('Charm Quark')
+    elif charge == '-1':
+        print('Electron Lepton')
+    elif charge == '0':
+        print('Neutrino Lepton')
+else:
+    print('Photon Boson')
+==============================================================================
+
+# Menu
+# Hard
+# 6802 users solved this problem. Latest completion was about 11 hours ago.
+# Let's say you were asked to create a program for a restaurant: a visitor # #
+# enters what kind of food they would like to order and gets back the #
+# restaurant's offer.  # The restaurant has just opened so its menu contains
+# only a few options:
+# pizza: Margherita, Four Seasons, Neapolitan, Vegetarian, Spicy # salad:
+# Caesar salad, Green salad, Tuna salad, Fruit salad # soup: Chicken soup,
+# Ramen, Tomato soup, Mushroom cream soup
+# If the visitors ask for something that is not on the menu, the program should
+# write "Sorry, we don't have it on the menu".
+# Input: "pizza" # Output: "Margherita, Four Seasons, Neapolitan, Vegetarian,
+# Spicy" # Input: "burger" # Output: "Sorry, we don't have it on the menu"
+
+# ---- code start -----
+
+
+
+.\{78,\}
+
+/�kugql
+/.\{78,\}gql
+l
+==============================================================================
+
+ # Menu Hard 6802 users solved this problem. Latest completion was about 11
+ hours ago.  Let's say you were asked to create a program for a restaurant: a
+ visitor enters what kind of food they would like to order and gets back the
+ restaurant's offer.  The restaurant has just opened so its menu contains only
+ a few options: pizza: Margherita, Four Seasons, Neapolitan, Vegetarian, Spicy
+ salad: Caesar salad, Green salad, Tuna salad, Fruit salad soup: Chicken soup,
+ Ramen, Tomato soup, Mushroom cream soup If the visitors ask for something that
+ is not on the menu, the program should write "Sorry, we don't have it on the
+ menu".  Input: "pizza" Output: "Margherita, Four Seasons, Neapolitan,
+ Vegetarian, Spicy" Input: "burger" Output: "Sorry, we don't have it on the
+ menu"
+
+ # ---- code start -----
+
+
+
+
+
+==============================================================================
+
+ # Menu
+ # Hard
+ # 6802 users solved this problem. Latest completion was about 11 hours ago.
+ # Let's say you were asked to create a program for a restaurant: a visitor enters what kind of food they would like to order and gets back the restaurant's offer.
+ # The restaurant has just opened so its menu contains only a few options:
+ #         pizza: Margherita, Four Seasons, Neapolitan, Vegetarian, Spicy
+ #             salad: Caesar salad, Green salad, Tuna salad, Fruit salad
+ #                 soup: Chicken soup, Ramen, Tomato soup, Mushroom cream soup
+ #                 If the visitors ask for something that is not on the menu, the program should write "Sorry, we don't have it on the menu".
+ #                 Input: "pizza"
+ #                 Output: "Margherita, Four Seasons, Neapolitan, Vegetarian, Spicy"
+ #                 Input: "burger"
+ #                 Output: "Sorry, we don't have it on the menu"
+
+ # ---- code start -----
+
+
+
+
+
+==============================================================================
+
+# Menu
+# Hard
+# 6802 users solved this problem. Latest completion was about 11 hours ago.
+# Let's say you were asked to create a program for a restaurant: a visitor
+# enters what kind of food they would like to order and gets back the
+# restaurant's offer.
+# The restaurant has just opened so its menu contains only a few options:
+# pizza: Margherita, Four Seasons, Neapolitan, Vegetarian, Spicy
+# salad: Caesar salad, Green salad, Tuna salad, Fruit salad
+# soup: Chicken soup, Ramen, Tomato soup, Mushroom cream soup
+# If the visitors ask for something that is not on the menu, the program should
+# write "Sorry, we don't have it on the menu".
+# Input: "pizza"
+# Output: "Margherita, Four Seasons, Neapolitan, Vegetarian, Spicy"
+# Input: "burger"
+# Output: "Sorry, we don't have it on the menu"
+
+# ---- code start -----
+base_food = input()
+if base_food == "pizza":
+    print("Margherita, Four Seasons, Neapolitan, Vegetarian, Spicy")
+elif base_food == "salad":
+    print("Caesar salad, Green salad, Tuna salad, Fruit salad")
+elif base_food == "soup":
+    print("Chicken soup, Ramen, Tomato soup, Mushroom cream soup")
+else:
+    print("Sorry, we don't have it on the menu")
+==============================================================================
+
+#  Through the doorway
+#  Medium
+#  959 users solved this problem. Latest completion was 1 day ago.
+#  Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+#  The input format:
+#      The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+#      The output format:
+#          If the box can be carried through the doorway, output "The box can be carried".
+#          If it cannot be carried, output "The box cannot be carried".
+#          Report a typo
+#          Sample Input 1:
+#              24
+#              21
+#              11
+#              36
+#              80
+#              Sample Output 1:
+#                  The box can be carried
+#                  Sample Input 2:
+#                      80
+#                      50
+#                      80
+#                      33
+#                      78
+#                      Sample Output 2:
+#                          The box cannot be carried
+#                          Write a program
+#                              Code Editor
+#                                  IDE
+#                                      100 
+#                                      1
+#                                      2
+#                                      3
+#                                      4
+#                                      5
+# 
+
+# ---- code start -----
+
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# Suppose you want to carry a box with dimensions A × B × C (length × width ×
+# height) through the doorway with dimensions X × Y (width × height). Write a
+# program to check whether it is possible.
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B,
+# C, X, Y. If the size of the doorway is greater than or equal to any two
+# dimensions of the box, it is considered that the box can be carried.
+# The output format:
+# If the box can be carried through the doorway, output "The box can be
+# carried".
+# If it cannot be carried, output "The box cannot be carried".
+
+# ---- code start -----
+
+
+==============================================================================
+
+#  Through the doorway
+#  Medium
+#  959 users solved this problem. Latest completion was 1 day ago.
+#  Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+#  The input format:
+#      The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+#      The output format:
+#          If the box can be carried through the doorway, output "The box can be carried".
+#          If it cannot be carried, output "The box cannot be carried".
+#          Report a typo
+#          Sample Input 1:
+#              24
+#              21
+#              11
+#              36
+#              80
+#              Sample Output 1:
+#                  The box can be carried
+#                  Sample Input 2:
+#                      80
+#                      50
+#                      80
+#                      33
+#                      78
+#                      Sample Output 2:
+#                          The box cannot be carried
+#                          Write a program
+#                              Code Editor
+#                                  IDE
+#                                      100 
+#                                      1
+#                                      2
+#                                      3
+#                                      4
+#                                      5
+# 
+
+# ---- code start -----
+
+
+==============================================================================
+
+# Through the doorway
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+#cs
+
+==============================================================================
+
+# Through the doorway
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+#cs
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+# Report a typo
+# 
+# Sample Input 1:
+# 
+# 24
+# 21
+# 11
+# 36
+# 80
+# 
+# Sample Output 1:
+# 
+# The box can be carried
+# 
+# Sample Input 2:
+# 
+# 80
+# 50
+# 80
+# 33
+# 78
+# 
+# Sample Output 2:
+# 
+# The box cannot be carried
+# 
+# Write a program
+# 
+# Code Editor
+# IDE
+# 
+# 100 
+# 
+# 1
+# 2
+# 3
+# 4
+# 5
+^# \d\n# \(\n\|\D\)
+# 
+# 
+# # line3
+# 
+# 
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+# Report a typo
+# 
+# Sample Input 1:
+# 
+# 24
+# 21
+# 11
+# 36
+# 80
+# 
+# Sample Output 1:
+# 
+# The box can be carried
+# 
+# Sample Input 2:
+# 
+# 80
+# 50
+# 80
+# 33
+# 78
+# 
+# Sample Output 2:
+# 
+# The box cannot be carried
+# 
+# Write a program
+# 
+# Code Editor
+# IDE
+# 
+# 100 
+# 
+# 1
+# 2
+# 3
+# 4
+# 5
+# 
+# 
+# # line3
+# 
+# 
+# 
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+# Report a typo
+# 
+# Sample Input 1:
+# 
+# 24
+# 21
+# 11
+# 36
+# 80
+# 
+# Sample Output 1:
+# 
+# The box can be carried
+# 
+# Sample Input 2:
+# 
+# 80
+# 50
+# 80
+# 33
+# 78
+# 
+# Sample Output 2:
+# 
+# The box cannot be carried
+# 
+# Write a program
+# 
+# Code Editor
+# IDE
+# 
+# 100 
+# 
+# 1
+# 2
+# 3
+# 4
+# 5
+# 
+# 
+# # line3
+# 
+# 
+# 
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+# Report a typo
+# 
+# Sample Input 1:
+# 
+# 24
+# 21
+# 11
+# 36
+# 80
+# 
+# Sample Output 1:
+# 
+# The box can be carried
+# 
+# Sample Input 2:
+# 
+# 80
+# 50
+# 80
+# 33
+# 78
+# 
+# Sample Output 2:
+# 
+# The box cannot be carried
+# 
+# Write a program
+# 
+# Code Editor
+# IDE
+# 
+# 100 
+# 
+# 1
+# 2
+# 3
+# 4
+# 5
+
+
+# line3
+
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+# Report a typo
+# 
+# Sample Input 1:
+# 
+# 24
+# 21
+# 11
+# 36
+# 80
+# 
+# Sample Output 1:
+# 
+# The box can be carried
+# 
+# Sample Input 2:
+# 
+# 80
+# 50
+# 80
+# 33
+# 78
+# 
+# Sample Output 2:
+# 
+# The box cannot be carried
+# 
+# Write a program
+# 
+# Code Editor
+# IDE
+# 
+# 100 
+# 
+# 1
+# 2
+# 3
+# 4
+# 5
+
+
+# line3
+
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+
+# ---- code start ----
+# line3
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width ×
+# height) through the doorway with dimensions X × Y (width × height). Write a
+# program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B,
+# C, X, Y. If the size of the doorway is greater than or equal to any two
+# dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be
+# carried".
+# If it cannot be carried, output "The box cannot be carried".
+
+# ---- code start ----
+# line3
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width ×
+# height) through the doorway with dimensions X × Y (width × height). Write a
+# program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B,
+# C, X, Y. If the size of the doorway is greater than or equal to any two
+# dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be
+# carried".
+# If it cannot be carried, output "The box cannot be carried".
+
+# ---- code start ----
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width ×
+# height) through the doorway with dimensions X × Y (width × height). Write a
+# program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B,
+# C, X, Y. If the size of the doorway is greater than or equal to any two
+# dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be
+# carried".
+# If it cannot be carried, output "The box cannot be carried".
+
+# ---- code start ----
+# line3
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be carried".
+# If it cannot be carried, output "The box cannot be carried".
+# Report a typo
+# 
+# Sample Input 1:
+# 
+# 24
+# 21
+# 11
+# 36
+# 80
+# 
+# Sample Output 1:
+# 
+# The box can be carried
+# 
+# Sample Input 2:
+# 
+# 80
+# 50
+# 80
+# 33
+# 78
+# 
+# Sample Output 2:
+# 
+# The box cannot be carried
+# 
+# Write a program
+# 
+# Code Editor
+# IDE
+# 
+# 100 
+ 
+ 1
+ 2
+ 3
+ 4
+ 5
+1
+1
+1
+1
+1
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width ×
+# height) through the doorway with dimensions X × Y (width × height). Write a
+# program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B,
+# C, X, Y. If the size of the doorway is greater than or equal to any two
+# dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be
+# carried".
+# If it cannot be carried, output "The box cannot be carried".
+
+# ---- code start ----
+ # line3
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width ×
+# height) through the doorway with dimensions X × Y (width × height). Write a
+# program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B,
+# C, X, Y. If the size of the doorway is greater than or equal to any two
+# dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be
+# carried".
+# If it cannot be carried, output "The box cannot be carried".
+
+# ---- code start ----
+# line3
+
+==============================================================================
+
+# Through the doorway
+# Medium
+# 959 users solved this problem. Latest completion was 1 day ago.
+# 
+# Suppose you want to carry a box with dimensions A × B × C (length × width ×
+# height) through the doorway with dimensions X × Y (width × height). Write a
+# program to check whether it is possible.
+# 
+# The input format:
+# The input comprises five strings with numbers in the following order: A, B,
+# C, X, Y. If the size of the doorway is greater than or equal to any two
+# dimensions of the box, it is considered that the box can be carried.
+# 
+# The output format:
+# If the box can be carried through the doorway, output "The box can be
+# carried".
+# If it cannot be carried, output "The box cannot be carried".
+
+# ---- code start ----
+box_length = int(input())
+box_width = int(input())
+box_height = int(input())
+door_width = int(input())
+door_height = int(input())
+if box_height <= door_height and box_width <= door_width:
+    print("The box can be carried")
+elif box_height <= door_height and box_length <= door_width:
+    print("The box can be carried")
+elif box_width <= door_height and box_length <= door_width:
+    print("The box can be carried")
+elif box_width <= door_height and box_height <= door_width:
+    print("The box can be carried")
+elif box_length <= door_height and box_width <= door_width:
+    print("The box can be carried")
+elif box_length <= door_height and box_height <= door_width:
+    print("The box can be carried")
+else:
+    print("The box cannot be carried")
+==============================================================================
+
+# Coordinates
+# Medium
+# 7271 users solved this problem. Latest completion was about 13 hours ago.
+# 
+# Locate a point on the Cartesian coordinate plane: which of the four quadrants
+# does a point belong to?
+# 
+# Read two numbers from the input, not necessarily integers, the first number
+# will indicate a position on the X-axis, the second one — on the Y-axis. Let's
+# keep referring to the quadrants by Roman numerals, as shown in the picture.
+# 
+# If the point is the origin (0, 0), print It's the origin! If a point lies on
+# the axes, with either x = 0 or y = 0, print One of the coordinates is equal
+# to zero!
+
+# ---- code start ----
+x = float(input())
+y = float(input())
+if x * y == 0:
+    if x + y == 0:
+        print("It's the origin!")
+    else:
+        print("One of the coordinates is equal to zero!")
+elif x * y < 0:
+    if x < 0:
+        print("II")
+    else:
+        print("IV")
+else:
+    if x < 0:
+        print("III")
+    else:
+        print("I")
+==============================================================================
+
+# Long live the king
+# Medium
+# 6237 users solved this problem. Latest completion was 3 days ago.
+# 
+# Let's imagine a chessboard, the squares on which are marked with coordinates.
+# The coordinates are numbers between 1 and 8 inclusively. The first number
+# indicates a column, the second one indicates a row.
+# 
+# The chess king can stand on any square and can move one step horizontally,
+# vertically, or diagonally in any direction within the board.
+# 
+# The input will contain the coordinates on which the king is located. You
+# should figure out and print how many moves the figure can make: for example,
+# from the position (1, 8), the king can make only 3 moves (right, down,
+# diagonally).
+
+# ---- code start ----
+col = int(input())
+row = int(input())
+moves = 8
+if col in [1, 8]:
+    if row in [1, 8]:
+        print(3)
+    else:
+        print(5)
+elif row in [1, 8]:
+    print(5)
+else:
+    print(8)
+==============================================================================
+
+# Recommender system
+# Medium
+# 8331 users solved this problem. Latest completion was about 6 hours ago.
+# 
+# Write a program that recommends one of the following movies based on the age
+# of a user:
+# 
+# <=16<= 16<=16 "Lion King"
+# 
+# 17−2517 - 2517−25 "Trainspotting"
+# 
+# 26−4026 - 4026−40 "Matrix"
+# 
+# 41−6041 - 6041−60 "Pulp Fiction"
+# 
+# >60> 60>60 "Breakfast at Tiffany's"
+# 
+# The user enters their age and the program outputs one title.
+
+# ---- code start ----
+age = int(input())
+if age <= 16:
+    print("Lion King")
+elif 16 < age <= 25:
+    print("Trainspotting")
+elif 25 < age <= 40:
+    print("Matrix")
+elif 40 < age <= 60:
+    print("Pulp Fiction")
+else:
+    print("Breakfast at Tiffany's")
+==============================================================================
+
+# Positive, Negative or Zero
+# Medium
+# 12429 users solved this problem. Latest completion was about 6 hours ago.
+# 
+# Write a program that reads an integer number and prints:
+# 
+# "negative" if the number is less than 0;
+# "positive" if the number is greater than 0;
+# "zero" if the number equals 0.
+# 
+# Do not output double quotes.
+
+# ---- code start ----
+num = int(input())
+if num < 0:
+    print("negative")
+elif num > 0:
+    print("positive")
+else:
+    print("zero")
+==============================================================================
+
+# Calculator
+# Hard
+# 8622 users solved this problem. Latest completion was about 11 hours ago.
+# 
+# Let's write a simple calculator!
+# 
+# It will read 3 lines:
+# 
+# the first number
+# the second number
+# the arithmetic operation.
+# 
+# Numbers are floats!
+# 
+# The output is the result of the following: first_number operation
+# second_number.
+# 
+# Operations are: +, -, /, *, mod, pow, div.
+# mod — modulo operation, i.e. the remainder of the division first_number %
+# second_number,
+# pow — exponentiation, the first number will be the base and the second — the
+# power: first_number ** second_number,
+# div — integer division first_number // second_number.
+# 
+# Note that if the second number is 0 and you want to perform any of the
+# operations /, mod, or div, the calculator should say "Division by 0!"
+# 
+# If you have too many elif branches, you may consider another approach, for
+# example, break the code into smaller functions. Since you don't know how to
+# do it yet, ignore the code style error about the number of elif branches.
+# 
+
+# ---- code start ----
+number_1 = float(input())
+number_2 = float(input())
+no_div_0_ops = ['+', '-', '*', 'pow']
+op = input()
+if op in no_div_0_ops:
+    if op == '+':
+        print(number_1 + number_2)
+    elif op == '-':
+        print(number_1 - number_2)
+    elif op == '*':
+        print(number_1 * number_2)
+    else:
+        print(number_1**number_2)
+else:
+    if number_2 == 0:
+        print("Division by 0!")
+    else:
+        if op == '/':
+            print(number_1 / number_2)
+        elif op == 'mod':
+            print(number_1 % number_2)
+        elif op == 'div':
+            print(number_1 // number_2)
+==============================================================================
+
+# The farm
+# Medium
+# 7686 users solved this problem. Latest completion was 3 days ago.
+# 
+# In a farming game, you can buy certain animals for a specific price. As a
+# player, you want to buy the most useful (i.e. the most expensive) animal.
+# Here are the animals and their prices:
+# 
+# Item: Price
+# 
+# Chicken: 23
+# 
+# Goat: 678
+# 
+# Pig: 1296
+# 
+# Cow: 3848
+# 
+# Sheep: 6769
+# 
+# Write a program that determines what is the most expensive animal that the
+# user can buy with their money and how many of them they can buy.
+# 
+# Note that you should only find one kind of animal to buy (the most expensive
+# one). You don't need to mention any alternative options. For example, if the
+# user has 710 coins, your program should output 1 goat, but not 1 goat\n30
+# chickens or anything like that.
+# 
+# The input format:
+# 
+# The money that the user has.
+# 
+# The output format:
+# 
+# How many animals the user can afford, for example, 20 chickens. If the user
+# cannot afford any animal, write None.
+# 
+# Pay attention to the number of nouns. Also, keep in mind that the word
+# "sheep" has the irregular plural form "sheep".
+# 
+
+# ---- code start ----
+money = int(input())
+CHIC = 23
+GOAT = 678
+PIG = 1296
+COW = 3848
+SHEEP = 6769
+if GOAT <= money < SHEEP:
+    if money < PIG:
+        print('1 goat')
+    elif money < COW:
+        if money < 2 * PIG:
+            print('1 pig')
+        else:
+            print(str(money // PIG), 'pigs')
+    else:
+        print('1 cow')
+elif money >= SHEEP:
+    print(str(money // SHEEP), 'sheep')
+elif money >= CHIC:
+    if money < 2 * CHIC:
+        print('1 chicken')
+    else:
+        print(str(money // CHIC), 'chickens')
+else:
+    print('None')
+==============================================================================
+
+# What day is it?
+# Medium
+# 6654 users solved this problem. Latest completion was about 22 hours ago.
+# 
+# Today the whole world uses the Coordinated Universal Time (UTC) to
+# distinguish between the time zones. The UTC is considered to be the 0, and
+# the rest of the time zones are expressed using positive or negative offsets
+# from the UTC. For instance, London is in the zone UTC+00:00 (or GMT) and
+# Moscow is in the zone UTC+3:00.
+# 
+# There are 14 positive offsets (from UTC+1:00 to UTC+14:00) and 12 negative
+# offsets (from UTC-12:00 to UTC-1:00). This also means that at a particular
+# hour, three calendar days are observed on the planet. For example, if now
+# it's Sunday, 11:30 in the morning in London, then in the time zone with
+# +14:00 offset people are already living in the "next day", Monday, because
+# their time is 14 hours ahead of London.
+# 
+# Your task is stated as follows:
+# 
+# the reference time point is Tuesday, 10:30 in the morning in London
+# (UTC+00:00)
+# read the input string containing the number and the sign of this number (for
+# example, +4, -10). Note, however, that there will be no sign if the number is
+# 0. The number is always an integer.
+# this number is the offset for some time zone.
+# your program should calculate the day of the week in the time zone for which
+# you were given the offset. The reference time point for your calculations is
+# mentioned above.
+# output the day of the week in the given time zone.
+# 
+# For example, if the input is -11, then, relatively to London, it's "the day
+# before" in this time zone, that is, it's still Monday, but if the input is
+# +3, then it's Tuesday, the same as in London.
+# 
+# The input format:
+# 
+# The value of offset with the sign (e.g. +3 or -9).
+# 
+# The output format:
+# 
+# The day of the week in that timezone.
+
+# ---- code start ----
+time_offset = int(input())
+PLUS_DAY_OFFSET = 14
+MINUS_DAY_OFFSET = -11
+if time_offset >= PLUS_DAY_OFFSET:
+    print('Wednesday')
+elif time_offset <= MINUS_DAY_OFFSET:
+    print('Monday')
+else:
+    print('Tuesday')
+==============================================================================
+
+# Computer hours
+# Medium
+# 7806 users solved this problem. Latest completion was about 14 hours ago.
+# 
+# Write a program that asks a user how long, on average, they spend on a
+# computer per day. If it's less than 2 hours, the program should output
+# "That's rare nowadays!". If it is 2 hours or more, but less than 4 hours per
+# day it should output"This seems reasonable". In any other case, output "Don't
+# forget to take breaks!"
+
+# ---- code start ----
+pc_time = int(input())
+if pc_time < 2:
+    print("That's rare nowadays!")
+elif pc_time < 4:
+    print("This seems reasonable")
+else:
+    print("Don't forget to take breaks!")
+==============================================================================
+
+# Grade
+# Medium
+# 7264 users solved this problem. Latest completion was about 7 hours ago.
+# 
+# There are a number of grades you can get in a test: A, B, C, D, F. The
+# percentages are as follows:
+# 
+# A: 90-100%
+# 
+# B: 80-90%
+# 
+# C: 70-80%
+# 
+# D: 60-70%
+# 
+# F: <60%
+# 
+# Determine the grade that a student will get based on the student's score and
+# the maximum score.
+# 
+# Note that the upper limit is not included in the range, except for the A
+# grade. For example, a student with 60% will get D, with 70% or 79.9% — C, but
+# the top score 100% is just A.
+# 
+# The input format:
+# 
+# Two lines: the first with a student's score and the second with the maximum.
+# 
+# The output format:
+# 
+# The grade of the student.
+
+# ---- code start ----
+student_grade = float(input())
+max_grade = float(input())
+relative_grade = student_grade / max_grade * 100
+if relative_grade < 60:
+    print("F")
+elif relative_grade < 70:
+    print("D")
+elif relative_grade < 80:
+    print("C")
+elif relative_grade < 90:
+    print("B")
+else:
+    print("A")
+==============================================================================
+
+# The army of units
+# Medium
+# 7964 users solved this problem. Latest completion was about 8 hours ago.
+# 
+# In a computer game, each gamer has an army of units.
+# 
+# Write a program that will classify the army of your enemies corresponding to
+# the following rules:
+# 
+# Units: Category
+# 
+# less than 1: no army
+# 
+# from 1 to 9: few
+# 
+# from 10 to 49: pack
+# 
+# from 50 to 499: horde
+# 
+# from 500 to 999: swarm
+# 
+# 1000 and more: legion
+# 
+# The program should read the number of units and output the corresponding
+# category.
+
+# ---- code start ----
+num_units = int(input())
+FEW = 1
+PACK = 10
+HORDE = 50
+SWARM = 500
+LEGION = 1000
+if num_units >= LEGION:
+    print('legion')
+elif num_units >= SWARM:
+    print('swarm')
+elif num_units >= HORDE:
+    print('horde')
+elif num_units >= PACK:
+    print('pack')
+elif num_units >= FEW:
+    print('few')
+else:
+    print('no army')
+==============================================================================
+
+# Latin equivalents
+# Medium
+# 2820 users solved this problem. Latest completion was about 5 hours ago.
+# 
+# Imagine you have a text-processing program that doesn't work with the ASCII
+# characters. Still, you need to use it and don't have time to correct that
+# issue. You've decided to write another program that will replace all the
+# letters with ligatures and diacritic marks with their equivalents from the
+# Latin alphabet. The list of replacements is the following:
+# 
+# é -> e
+# ë -> e
+# á -> a
+# å -> aa
+# œ -> oe
+# æ -> ae
+# 
+# Complete the code below so that the function normalize (def is a keyword used
+# to declare functions) would take a string with diacritics and return the one
+# where all of them have been replaced with the equivalents.
+
+# ---- code start ----
+name = input()
+
+
+def normalize(_name: str):
+    replacement_map = [
+        ["é", "e"], ["ë", "e"], ["á", "a"],
+        ["å", "aa"], ["œ", "oe"], ["æ", "ae"]]
+    new_name = _name
+    for replacement in replacement_map:
+        new_name = new_name.replace(replacement[0], replacement[1])
+    return new_name
+
+
+print(normalize(name))
+==============================================================================
+
+# Preprocessing
+# Medium
+# 11914 users solved this problem. Latest completion was about 6 hours ago.
+# 
+# Preprocess an input text:
+# 
+# delete punctuation symbols (commas, periods, exclamation and question marks
+# ,.!?),
+# convert all symbols to lowercase.
+# 
+# Then print your text.
+# 
+# Punctuation marks appear not only at the end of the input string. You can use
+# the following way to remove the punctuation marks: str.replace("!", "").
+# Replacing a symbol with an empty string is the same as removing it.
+
+# ---- code start ----
+text = input()
+invalid_symbols = ",.!?"
+for symbol in invalid_symbols:
+    text = text.replace(symbol, "")
+print(text.lower())
+==============================================================================
+
+# Markdown parsing
+# Medium
+# 10896 users solved this problem. Latest completion was about 7 hours ago.
+# 
+# Markdown is a special syntax used for text formatting. There are several ways
+# to emphasize words using Markdown:
+# Typeface   Example
+# Italic text    *italics*, _same italics_
+# Bold text  **bold**, __same bold__
+# Strikethrough text     ~~crossed out~~
+# Code snippet   `code`
+# 
+# Read an input and parse the text so that it doesn't include special symbols
+# mentioned in the table ("*_~`") at its beginning and its end.
+# Pay attention to the `code` example, ` is not the same as '!
+# 
+# Do not forget to print the result.
+
+# ---- code start ----
+text = input()
+INVALID_SYMBOLS = "*_~`"
+print(text.strip(INVALID_SYMBOLS))
+==============================================================================
+
+# Poster artist
+# Medium
+# 16318 users solved this problem. Latest completion was about 12 hours ago.
+# 
+# Imagine that you design film posters for a living. Write a program that
+# prints each film title in all caps.
+
+# ---- code start ----
+print(input().upper())
+==============================================================================
+
+# Exactly 100 times
+# Medium
+# 9880 users solved this problem. Latest completion was 1 day ago.
+# 
+# Jane knows that the variable n stores some integer number (for example,
+# 12345) and wants to print it exactly 100 times in one line. Help her and
+# write down a single line of code that will print number n exactly 100 times.
+# 
+
+# ---- code start ----
+n = 12345
+print(str(n) * 100)
+==============================================================================
+
+# Lexical reduplication
+# Easy
+# 17672 users solved this problem. Latest completion was about 2 hours ago.
+# 
+# The languages of the world are amazing! Programming languages too, but now we
+# will talk about the human ones. In linguistics, repeating a word or part of
+# it is called reduplication. This morphological phenomenon is found in
+# different languages. Think for a second, and you will definitely come up with
+# a couple of examples. Just to name a few: knock-knock, so-so, bye-bye.
+# 
+# We have a full reduplication here since the entire word is repeated. That's
+# the mechanism we want you to implement. Print a word exactly 2 times. The
+# spelling rules vary across the globe, so do not separate the halves (that
+# will be easy!).
+# 
+
+# ---- code start ----
+word = input()
+print(str(word) * 2)
+==============================================================================
+
+# Triangle
+# Hard
+# 3429 users solved this problem. Latest completion was about 10 hours ago.
+# 
+# Draw a triangle of a given height, as in the example.
+# 
+
+# ---- code start ----
+height = int(input())
+for num_layer in range(height):
+    blocks = num_layer * 2 + 1
+    spaces = height - num_layer - 1
+    print(''.join([' ' * spaces, '#' * blocks]))
+==============================================================================
+
+# Flip
+# Hard
+# 3976 users solved this problem. Latest completion was about 11 hours ago.
+# 
+# Let's try to reverse a numeric sequence. Read it from the input and print its
+# numbers in reverse order separated by spaces.
+# 
+
+# ---- code start ----
+print(' '.join(reversed(input().split())))
+==============================================================================
+
+# mixedCase
+# Hard
+# 3579 users solved this problem. Latest completion was about 23 hours ago.
+# 
+# Convert a text into lowerCamelCase, or mixedCase.
+# 
+# The input format:
+# 
+# A lower-cased word or several words separated by spaces.
+# 
+# The output format:
+# 
+# Print this text stylized as mixedCase, that is, the first word should be in
+# lowercase and all other words – capitalized.
+
+# ---- code start ----
+text = input().title()
+text = ''.join([text[0].lower(), text[1:]]).replace(' ', '')
+print(text.replace(' ', ''))
+==============================================================================
+
+# CapWords
+# Hard
+# 3787 users solved this problem. Latest completion was 1 day ago.
+# 
+# In Python, the names of classes (you'll learn about them in detail later)
+# follow the CapWords convention. Let's convert the input phrase accordingly by
+# capitalizing all words and spelling them without underscores in-between.
+# 
+# The input format:
+# 
+# A word or phrase, with words separated by underscores, like function and
+# variable names in Python.
+# 
+# You might want to change the case of letters since they are not necessarily
+# lowercased.
+# 
+# The output format:
+# 
+# The name written in the CapWords fashion.
+# 
+
+# ---- code start ----
+print(input().replace('_', ' ').lower().title().replace(' ', ''))
+==============================================================================
+
+# Find words
+# Hard
+# 4767 users solved this problem. Latest completion was 1 day ago.
+# 
+# Find all words that end in "s" and print them together separated by an
+# underscore.
+# 
+# After such words there will be no punctuation marks, you do not need to worry
+# about that.
+
+# ---- code start ----
+text = input().split()
+new_text = []
+for word in text:
+    if word.endswith('s'):
+        new_text.append(word)
+print('_'.join(new_text))
+==============================================================================
+
+# Spellchecker
+# Hard
+# 4391 users solved this problem. Latest completion was 1 day ago.
+# 
+# Write a spellchecker that tells you which words in the sentence are spelled
+# incorrectly. Use the dictionary in the code below.
+# 
+# The input format:
+# 
+# A sentence. All words are in the lowercase.
+# 
+# The output format:
+# 
+# All incorrectly spelled words in the order of their appearance in the
+# sentence. If all words are spelled correctly, print OK.
+
+# ---- code start ----
+dictionary = ['all', 'an', 'and', 'as', 'closely', 'correct', 'equivocal',
+              'examine', 'indication', 'is', 'means', 'minutely', 'or',
+              'scrutinize', 'sign', 'the', 'to', 'uncertain']
+text = input()
+no_bad_words = True
+for word in text.split():
+    if word not in dictionary:
+        no_bad_words = False
+        print(word)
+if no_bad_words:
+    print('OK')
+==============================================================================
+
+# Find positions
+# Hard
+# 4246 users solved this problem. Latest completion was 1 day ago.
+# 
+# Write a program that reads a sequence of numbers from the first line and the
+# number x from the second line. Then it should output all positions of x in
+# the numerical sequence.
+# 
+# The test_item count starts from 0. In case x is not in the sequence, print the
+# line "not found" (quotes omitted, lowercased).
+# 
+# Positions should be displayed in one line, in ascending order of the value.
+# 
+
+# ---- code start ----
+numbers = input().split()
+test_number = input()
+positions = []
+for test_item in enumerate(numbers):
+    if test_item[1] == test_number:
+        positions.append(str(test_item[0]))
+if positions:
+    print(" ".join(positions))
+else:
+    print("not found")
+==============================================================================
+
+# Straight A's
+# Medium
+# 5448 users solved this problem. Latest completion was about 12 hours ago.
+# 
+# Write a program that calculates the proportion of students who received grade
+# A.
+# 
+# A five-point rating system with grades A, B, C, D, F is used.
+# 
+# Input format:
+# A string with students' marks separated by space. At least one mark will be
+# present.
+# 
+# Output format:
+# A fractional number with exactly two decimal places.
+# 
+# To format the decimal places use the round(number, places) function.
+# 
+
+# ---- code start ----
+marks = input()
+print(round((marks.count('A') / len(marks.replace(' ', ''))), 2))
+==============================================================================
+
+# What day is it?
+# Medium
+# 6366 users solved this problem. Latest completion was about 6 hours ago.
+# 
+# Read a date from the input given in one of the following formats: YYYY-MM-DD
+# or YYY-MM-DD. Print the year, month and day on separate lines.
+
+# ---- code start ----
+print(*input().split('-'), sep='\n')
+==============================================================================
+
+# String tricks
+# Medium
+# 8826 users solved this problem. Latest completion was about 4 hours ago.
+# 
+# Examine the code and fix the mistakes so that the join() method works.
+
+# ---- code start ----
+random_numbers = [1, 22, 333, 4444, 55555]
+random_numbers = [str(num) for num in random_numbers]
+print("\n".join(random_numbers))
+==============================================================================
+
+# Split and join
+# Fix the mistakes
+# Medium
+# 4115 users solved this problem. Latest completion was 2 days ago.
+#
+# The code below is supposed to find all website addresses (https://, http://,
+# www.) in the input text. However, it is not finished. Complete the code and
+# print all the addresses in the order in which they appear in the text, each
+# on a new line. Mind that str.lower() can help you to convert all characters
+# of the string to the lower case.
+
+# ---- code start ----
+text = input()
+words = text.split()
+search_terms = ["https://", "http://", "www."]
+for word in words:
+    for search_term in search_terms:
+        if word.lower().count(search_term):
+            print(word)
+==============================================================================
+
+
+# One of the exceptions
+# Medium
+# 3066 users solved this problem. Latest completion was 1 day ago.
+# 
+# There is also one interesting feature of the built-in exceptions to be
+# mentioned. If you print dir(locals()['__builtins__']), you obtain a list of
+# all built-in exceptions and functions that exist in Python. Your task is to
+# use the index given in the input and print the name of the exception that
+# has this index. Each index in the input corresponds to an exception.
+
+# ---- code start ----
+error_num = int(input())
+print(dir(locals()['__builtins__'])[error_num])
+==============================================================================
+
+# Implementing logic
+# Medium
+# 4119 users solved this problem. Latest completion was 30 minutes ago.
+# 
+# Advanced input() handling is used to read input directly into several
+# variables, e. g.,
+# 
+# name, surname = input().split(), but a user still can enter more or fewer
+# words.
+# 
+# In this task, you have to make sure that the user entered the necessary
+# amount of words and...
+# 
+# If there are more or fewer words in the input, print an error: "You need to
+# enter exactly 2 words. Try again!"
+# If everything's good, greet the user personally.
+# 
+
+# ---- code start ----
+try:
+    name, surname = input().split()
+except ValueError:
+    print('You need to enter exactly 2 words. Try again!')
+else:
+    print(' '.join(['Welcome to our party,', name, surname]))
+==============================================================================
+
+# Implementing logic
+# Medium
+# 4119 users solved this problem. Latest completion was 30 minutes ago.
+# 
+# Advanced input() handling is used to read input directly into several
+# variables, e. g.,
+# 
+# name, surname = input().split(), but a user still can enter more or fewer
+# words.
+# 
+# In this task, you have to make sure that the user entered the necessary
+# amount of words and...
+# 
+# If there are more or fewer words in the input, print an error: "You need to
+# enter exactly 2 words. Try again!"
+# If everything's good, greet the user personally.
+# 
+
+# ---- code start ----
+try:
+    name, surname = input().split()
+except ValueError:
+    print('You need to enter exactly 2 words. Try again!')
+else:
+    print(' '.join(['Welcome to our party,', name, surname]))
+==============================================================================
+
+# Modeling situation
+# Hard
+# 4231 users solved this problem. Latest completion was 1 day ago.
+# 
+# Your program will have access to the exception_test() function, which can
+# throw exceptions.
+# 
+# You need to write code that runs this function, then catches
+# ArithmeticError, AssertionError, ZeroDivisionError exceptions and prints
+# the name of the caught exception. Mind the hierarchy of exceptions.
+# 
+# An example solution that you should send for review:
+# 
+# try:
+# exception_test()
+# except Exception:
+# print("Exception")
+# except BaseException:
+# print("BaseException")
+# 
+
+# ---- code start ----
+try:
+    exception_test()
+except ZeroDivisionError:
+    print('ZeroDivisionError')
+except ArithmeticError:
+    print('ArithmeticError')
+except AssertionError:
+    print('AssertionError')
+==============================================================================
+
+# Catching built-in exceptions Problem of the day
+# Next problem in: 7h 45m 57s
+# Medium
+# 2663 users solved this problem. Latest completion was 32 minutes ago.
+# 
+# You know how to catch the built-in exceptions. Right now, try to read two
+# numbers (a, b) and find the result of their division. Your main task it to
+# catch the ZeroDivisionError. If there's an error, print the following
+# message: The Error!. Otherwise, print the result of the division.
+
+# ---- code start ----
+a = int(input())
+b = int(input())
+try:
+    result = a / b
+except ZeroDivisionError:
+    print("The Error!")
+else:
+    print(result)
