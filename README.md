@@ -1,0 +1,1 @@
+Jet Brains Academy "python core" track projects and topic question solutions.
