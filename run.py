@@ -6,6 +6,7 @@
 Description
 """
 
+
 # --------------------
 # Imports
 # --------------------
@@ -14,12 +15,15 @@ Description
 # Third party modules:
 
 # Local scripts and modules:
-import honest_calculator.run
 # --------------------
 
 
+def run_honest_calculator():
+    import honest_calculator.run
+
+
 def run():
-    honest_calculator.run.run()
+    run_honest_calculator()
     pass
 
 
