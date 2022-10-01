@@ -162,3 +162,81 @@
         * If the answer is "y", return to step (2).
         * If the answer is invalid, return to step (10).
       * (12) Finish stage 4.
+
+#### Stage 5 - Saving memory:
+* [Copy of stage assignment from Jet Brains Academy.](source_copy/stage_4.html)
+* Stage assignment key steps:
+    * (1) Initialize memory variable.
+    * (2) Print welcome message.
+        * The welcome message is:  
+          _"Enter an equation"_
+    * (2) Read a string from input that should represent a simple arithmetic operation.
+        * String should be in the format "x operation y".
+        * Operands "x" and "y" should be integers, floats or the one character string "M".
+        * Operator "operation" should be a single character string that is one of the arithmetic symbols "+,-,*,/".
+    * (3) Assign value from memory variable to operands if required.
+        * If the input for operand "x" is "M", assign the value of the memory variable to operand "x".
+        * If the input for operand "y" is "M", assign the value of the memory variable to operand "y".
+        * The above options are not exclusive, both operands can be assigned to simultaneously.
+    * (4) Handle input validation.
+        * If either of the "x" and "y" operands is not an integer or a float,
+            *  print the error message:  
+               _"Do you even know what numbers are? Stay focused!"_
+        * If the operator is not valid:
+            * print the error message:  
+              _"Yes ... an interesting math operation. You've slept through all classes, haven't you?"_
+        * In either of the above two cases of invalid input, return to step (2) after printing the error message.
+    * (5) Perform "laziness" tests and build the appropriate "laziness" message (order is the messages construction is important).
+        * Start with an empty message.
+        * If both operands are single digit integers,
+            * Append to the message the sub-message:  
+              _" ... lazy"_
+        * If either of the operands is "1" and the operator is "*",
+            * Append to the message the sub-message:  
+              _" ... very lazy"_
+        * If either of the operands is "0" and the operator is one of "-+*",
+            * Append to the message the sub-message:  
+              _" ... very, very lazy"_
+        * If the message is not empty at this point:
+            * prefix the message with the sub-message:
+              _"You are"_
+            * print the message.
+    * (6) Calculate the expression "x operation y" and store the result, also, handle division by zero if relevant.
+        * Do not use builtin function's (e.g. eval) to calculate the input string directly.
+        * The result should be stored as a float.
+        * In case of division by zero,
+            * print the error message:  
+              _"Yeah... division by zero. Smart move..."_
+            * Return to step (2) after printing the error message.
+    * (7) Print the result.
+    * (8) Query the user if they want to store the result to memory.
+        * The Query message is:  
+          _"Do you want to store the result? (y / n):"_
+    * __(9) Read and process the users answer.__
+        * __Valid answers are the single character strings "y" or "n".__
+        * __If the answer is "y", proceed to step (10).__
+        * __If the answer is "n", proceed to step (12).__
+        * __If the answer is invalid, return to step (8).__
+    * __(10) If the result is a single digit, triple check that the user really wants to save it.__
+        * __If the result is not a single digit, proceed to step (11).__
+        * __If the result is a single digit, query the user with the following messages.__
+        * __The Query messages are:__  
+          _"Are you sure? It is only one digit! (y / n)"_  
+          _"Don't be silly! It's just one number! Add to the memory? (y / n)"_  
+          _"Last chance! Do you really want to embarrass yourself? (y / n)"_  
+        * __Valid answers are the single character strings "y" or "n".__
+        * __Each time the user input's a "y", move to the next string.__
+        * __If a user's input is a "n" proceed to step (12) without saving the result.__
+        * __If the users input is invalid, query the user again with the same message.__
+        * __Once the final message is reached,__  
+        * __if the user inputs "y" again,__  
+           __proceed to step (11) to actually save the result.__
+    * __(11) Assign the value of the result variable to the memory variable.__
+    * (12) Query the user if they want to do more calculations.
+        * The Query message is:  
+          _"Do you want to continue calculations? (y / n):"_
+    * (13) Read and process the users answer.
+        * Valid answers are the single character strings "y" or "n".
+        * If the answer is "y", return to step (2).
+        * If the answer is invalid, return to step (10).
+    * (14) Finish stage 5.

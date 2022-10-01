@@ -12,6 +12,7 @@ The things for which you'll get criticised are:
   * Doing a calculation with only single digit integers.
   * Multiplying by 1.
   * Adding, subtracting or multiplying by 0.
+  * Storing to memory a single digit result.
 USAGE NOTE:
   Like common simple calculators, the "Honest Calculator" lets you
   store the result of a calculation into memory, to access the stored
@@ -43,6 +44,11 @@ MESSAGE_LAZY_1 = " ... lazy"
 MESSAGE_LAZY_2 = " ... very lazy"
 MESSAGE_LAZY_3 = " ... very, very lazy"
 MESSAGE_GREET = "Enter an equation\n"
+MESSAGES_SINGLE_DIGIT = [
+    "Are you sure? It is only one digit! (y / n)",
+    "Don't be silly! It's just one number! Add to the memory? (y / n)",
+    "Last chance! Do you really want to embarrass yourself? (y / n)",
+]
 MESSAGE_STORE_MEMORY = "Do you want to store the result? (y / n):"
 MESSAGE_ZERO_DIVISION = "Yeah... division by zero. Smart move..."
 TOKENS_NUM = 3
@@ -77,8 +83,8 @@ def _get_operands(memory: float, tokens: list) -> list:
     """
     Validate and cast or read from memory the operands.
 
-    If either of the string operand tokens equals "M" read the value
-    of that operand from memory, otherwise try to cast that operands
+    If either of the string number tokens equals "M" read the value
+    of that number from memory, otherwise try to cast that operands
     string token value into a float.
     :param tokens: A list containing the string tokens.
     :return: A list containing the float operands for the expression
@@ -141,11 +147,18 @@ def _is_single_digits(operands: list) -> bool:
               False otherwise.
     """
 
-    def _is_single_digit(operand: float) -> bool:
-        return operand.is_integer() and (-10.0 < operand < 10.0)
-
     return _is_single_digit(operands[0]) and _is_single_digit(operands[1])
     pass
+
+
+def _is_single_digit(number: float) -> bool:
+    """
+    Check if number is a single digit integer number.
+
+    :param number: The number to check.
+    :return: True if number is a single digit integer number, False otherwise.
+    """
+    return number.is_integer() and (-10.0 < number < 10.0)
 
 
 def _is_multiply_1(operands: list, operator: str) -> bool:
@@ -215,6 +228,33 @@ def _ask_store_memory() -> bool:
             continue
 
 
+def _ask_store_digit(result: float) -> bool:
+    """
+    Ask the user if they want to store a single digit number.
+
+    Persistently and repeatedly ask the user to triple verify
+    that they really want to store a single digit result to memory.
+    until they reply 3 times with a "y" or a single time with a "n".
+    If the user gives an invalid answer, ask them the same question again.
+    :type result: float that is the result of the calculations with which
+            the function was called.
+    :return: True if result is not a single digit number
+            or the user choose "y"  3 times and false otherwise.
+    """
+    if not _is_single_digit(result):
+        return True
+    for message in MESSAGES_SINGLE_DIGIT:
+        while True:
+            user_choice = input(message)
+            if user_choice == "y":
+                break  # inner while
+            elif user_choice == "n":
+                return False
+            else:
+                continue
+    return True
+
+
 def _ask_continue() -> bool:
     """
     Ask the user if they want to do more calculations.
@@ -268,8 +308,10 @@ def run():
             print(result)
 
         # Ask the user if they want to store the result to memory
-        # and act accordingly.
-        if _ask_store_memory():
+        # in case the result is a single digit, pester the user
+        # to change their mind, but, in the end,
+        # act according to the users wishes.
+        if _ask_store_memory() and _ask_store_digit(result):
             memory = result
         # Ask the user if they want to do more calculations
         # and act accordingly.
