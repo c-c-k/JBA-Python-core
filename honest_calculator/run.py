@@ -27,12 +27,15 @@ MESSAGE_BAD_OPERAND = "Do you even know what numbers are? Stay focused!"
 MESSAGE_BAD_OPERATOR = ("Yes ... an interesting math operation."
                         " You've slept through all classes, haven't you?")
 MESSAGE_ZERO_DIVISION = "Yeah... division by zero. Smart move..."
+MESSAGE_STORE_MEMORY = "Do you want to store the result? (y / n):"
+MESSAGE_CONTINUE = "Do you want to continue calculations? (y / n):"
 
 # --------------------
 
 # --------------------
 # Program code
 # --------------------
+memory = 0
 while True:  # main run loop
     # Read test expression from input and split it into tokens.
     tokens = input(MESSAGE_GREET).split()
@@ -49,7 +52,7 @@ while True:  # main run loop
     #       special handling for integer input since it seems
     #       it would not be necessary.
     try:
-        operands = [float(tokens[i]) for i in [0, 2]]
+        operands = [(memory if tokens[i] == "M" else float(tokens[i])) for i in [0, 2]]
     except ValueError:
         operands = None
     if not operands:
@@ -88,4 +91,32 @@ while True:  # main run loop
     # Print the result
     print(result)
 
-    break  # main run loop
+    # Query the user if they want to store the result to memory
+    # and act accordingly.
+    while True:  # Store to memory query loop
+        user_choice = input(MESSAGE_STORE_MEMORY)
+        if user_choice == "y":
+            memory = result
+            break  # Store to memory query loop
+        elif user_choice == "n":
+            break  # Store to memory query loop
+        else:
+            continue  # Store to memory query loop
+
+    # Query the user if they want to do more calculations
+    # and act accordingly.
+    continue_calculating = False
+    while True:  # Continue calculating query loop
+        user_choice = input(MESSAGE_CONTINUE)
+        if user_choice == "y":
+            continue_calculating = True
+            break  # Continue calculating query loop
+        elif user_choice == "n":
+            break  # Continue calculating query loop
+        else:
+            continue  # Continue calculating query loop
+
+    if continue_calculating:
+        continue  # main run loop
+    else:
+        break  # main run loop

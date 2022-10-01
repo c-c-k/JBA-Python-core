@@ -10,18 +10,22 @@
 # solutions_dump.
 # 
 
-# Zero
+# Cities
 # Medium
-# 5707 users solved this problem. Latest completion was 40 minutes ago.
+# 13798 users solved this problem. Latest completion was about 7 hours ago.
 # 
-# Prevent ZeroDivisionError in the code below. When denominator is 0, print
-# the message "Division by zero is not supported". In other cases, print n
-# divided by denominator.
+# Imagine you've created a program that plays the cities game with a user.
+# For the game to work, you need to remember the user's city and be able to
+# change it. Below is the code that does that, but if you run it as is,
+# you'll get an error: you won't be able to access the variable user_city
+# outside of the function. Fix this problem by adding one line. Please, don't
+# change the rest of the code.
 
 # ---- code start ----
-n = int(input())
-denominator = int(input())
-try:
-    print(n // denominator)
-except ZeroDivisionError:
-    print("Division by zero is not supported")
+def change_city(new_user_city):
+    global user_city
+    user_city = new_user_city
+
+
+change_city("Paris")
+print(user_city)

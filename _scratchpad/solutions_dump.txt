@@ -2090,3 +2090,201 @@ except ZeroDivisionError:
     print("The Error!")
 else:
     print(result)
+==============================================================================
+
+# Zero
+# Medium
+# 5707 users solved this problem. Latest completion was 40 minutes ago.
+# 
+# Prevent ZeroDivisionError in the code below. When denominator is 0, print
+# the message "Division by zero is not supported". In other cases, print n
+# divided by denominator.
+
+# ---- code start ----
+n = int(input())
+denominator = int(input())
+try:
+    print(n // denominator)
+except ZeroDivisionError:
+    print("Division by zero is not supported")
+==============================================================================
+
+# Miles away
+# Medium
+# 15904 users solved this problem. Latest completion was about 1 hour ago.
+# 
+# Let's take your skill of converting miles to kilometers to the next level!
+# Define a function that accepts the number of miles and returns this
+# distance in kilometers.
+# 
+# Assume that one mile is approximately equal to 1.609 kilometers.
+# 
+# You don't have to handle input, just implement the function.
+
+# ---- code start ----
+def mi_to_km(miles: float):
+    return miles * 1.609
+==============================================================================
+
+# Fahrenheit
+# Medium
+# 14192 users solved this problem. Latest completion was 39 minutes ago.
+# 
+# Convert the temperature from Fahrenheit to Celsius in the function below.
+# You can use this formula:
+# 
+# C=(F-32) * 5/9
+# 
+# Round the returned result to 3 decimal places.
+# 
+# You don't have to handle input, just implement the function below.
+# 
+# Also, make sure your function returns the value. Please do NOT print
+# anything.
+# 
+
+# ---- code start ----
+def fahrenheit_to_celsius(fahrenheit):
+    return round((fahrenheit - 32) * 5 / 9, 3)
+==============================================================================
+
+# The Sum of 2
+# Medium
+# 15515 users solved this problem. Latest completion was about 1 hour ago.
+# 
+# Implement a function get_sum(a, b) that will return the sum of two numbers.
+# 
+# Don't bother about input/output. You just have to implement the function
+# which will return a value. Please, do not rename the function.
+
+# ---- code start ----
+# implement the function below
+def get_sum(a, b):
+    return a + b
+==============================================================================
+
+# Prevent cheating
+# Hard
+# 2931 users solved this problem. Latest completion was about 1 hour ago.
+# 
+# On Hyperskill, we sometimes need to check that the student's code doesn't
+# use a particular method. For instance, when the task is to manually
+# implement the factorial computation instead of using the factorial()
+# function from the math module. How could we do that?
+# 
+# It is straightforward. We can override math.factorial() to do something
+# else - raise an error or print a message to the student. To do so, first,
+# we define a function that does what we want (for example, prints a message)
+# with the same arguments (since we want to disguise our new function as the
+# original one). Then, outside this new function body, we need to assign it
+# to math.factorial this way: math.factorial = new_math_factorial (pay
+# attention to the absence of parentheses). Now, if the student tries to use
+# math.factorial, our custom function will be raised. It happens because when
+# multiple functions with the same name exist, the later one always overrides
+# the prior.
+# 
+# In this task, you are a content creator at Hyperskill. Implement the
+# example with the factorial yourself. Your program should override
+# math.factorial() and make it print the message Don't cheat! instead of
+# calculating a factorial.
+
+# ---- code start ----
+import math
+
+
+def new_math_factorial(__x):
+    print("Don't cheat!")
+
+
+math.factorial = new_math_factorial
+# don't delete this line, please
+math.factorial(23)
+==============================================================================
+
+# Captain
+# Medium
+# 14859 users solved this problem. Latest completion was about 1 hour ago.
+# 
+# Define a function that will add the word "captain" before the name of a
+# person. The function should be named captain_adder, take one argument name,
+# and print the string, i.e. it doesn't have to return anything. You don't
+# need to call your function, only implement it. Also, you don't need to take
+# input, use only the name variable that should be an argument of the
+# function.
+# 
+# Sample Input:
+# 
+# Jack Sparrow
+# 
+# Sample Output:
+# 
+# captain Jack Sparrow
+
+# ---- code start ----
+def captain_adder(name):
+    print(" ".join(["captain", name]))
+==============================================================================
+
+# Make the function work
+# Medium
+# 13180 users solved this problem. Latest completion was about 1 hour ago.
+# 
+# Wow! This problem is kind of tricky. If you're ready to put your thinking
+# cap on, brace yourself and good luck! Otherwise, you can skip it for now
+# and return any time later!
+# 
+# The function closest_higher_mod_5 takes exactly one integer argument x and
+# returns the smallest integer y such that:
+# 
+# y is greater than or equal to x,
+# y is divisible by 5.
+# 
+# Correct the last line of the code below to make the function work.
+# 
+
+# ---- code start ----
+def closest_higher_mod_5(x):
+    remainder = x % 5
+    if remainder == 0:
+        return x
+    return x + (5 - remainder)
+==============================================================================
+
+# Hero damage
+# Medium
+# 8502 users solved this problem. Latest completion was about 4 hours ago.
+# Let's now take a look at how global variables can help us to save
+# information between different function calls.
+# 
+# Imagine you're writing a program for some video game: you need to calculate
+# the damage that the main hero deals to the enemies in one hit. The current
+# damage is stored in the global variable hero_damage. Use the power of this
+# global and write three functions that change its value:
+# 
+# double_damage() doubles the damage of the hero
+# disarmed() makes the damage equal to 10% of the current value
+# power_potion() adds 100 damage points
+# 
+# The functions are already declared. You only need to replace the pass
+# keyword with some code of yours.
+# 
+# Don't output or return anything, just write the body of the functions.
+# Remember how we can change the value of a global variable.
+
+# ---- code start ----
+hero_damage = 100
+
+
+def double_damage():
+    global hero_damage
+    hero_damage *= 2
+
+
+def disarmed():
+    global hero_damage
+    hero_damage *= 0.1
+
+
+def power_potion():
+    global hero_damage
+    hero_damage += 100
