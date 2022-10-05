@@ -10,32 +10,29 @@
 # solutions_dump.
 # 
 
-# The Law of Sines
-# Hard
-# 355 users solved this problem. Latest completion was 32 minutes ago.
+# Beautify both output and code
+# Medium
+# 10759 users solved this problem. Latest completion was about 3 hours ago.
 # 
-# There is a triangle on the picture below with the following parameters:
+# The output should be user-friendly, but the code part is also important.
+# Well-structured and readable code is very important for being a good
+# programmer. Now it's up to you to decide, which formatting method to
+# choose.
 # 
-# - angle A and sides a and c are unknown;
+# Imagine you need to compose a dynamic URL for every certain user with
+# user-specific details. Suppose, you want to send different URLs for every
+# user, depending on their name and profession. The base would be something
+# like
 # 
-# - angle B = 35°, angle C = 105°, side b = 7.
+# "http://example.com/*nickname*/desirable/*profession*/profile", where
+# nickname and profession are prompts from a user and are dynamic.
 # 
-# Find the side c using the math module. Print the answer rounded to 1
-# decimal place.
-# 
+# Read the nickname and profession of the user from the input and print a
+# user-specific URL. Don't bother about any rules of composing the URLs and
+# just use raw input to accomplish the task.
 
 # ---- code start ----
-import math
-
-angle_b = 35
-angle_c = 105
-# sum of angles in triangle: A = 180 - B - C
-angle_a = 180 - angle_b - angle_c
-
-side_b = 7
-# law of sines: b/sin(B) = c/sin(C)
-#               c = (b*sin(C))/sin(B)
-angle_c = math.radians(angle_c)
-angle_b = math.radians(angle_b)
-side_c = round((side_b * math.sin(angle_c)) / math.sin(angle_b), 1)
-print(side_c)
+URL_FORMAT = "http://example.com/{NICKNAME}/desirable/{PROFESSION}/profile"
+nickname = input()
+profession = input()
+print(URL_FORMAT.format(NICKNAME=nickname, PROFESSION=profession))
