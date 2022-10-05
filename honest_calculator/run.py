@@ -321,4 +321,5 @@ def run():
             break  # main run loop
 
 
-run()
+if __name__ == "__main__":
+    run()
