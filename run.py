@@ -25,7 +25,7 @@ def run_honest_calculator():
 
 def run_loan_calculator():
     import loan_calculator.run
-    loan_calculator.run.run()
+    # loan_calculator.run.run()
 
 
 def run():

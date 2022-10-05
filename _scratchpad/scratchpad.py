@@ -10,22 +10,32 @@
 # solutions_dump.
 # 
 
-# Cities
-# Medium
-# 13798 users solved this problem. Latest completion was about 7 hours ago.
+# The Law of Sines
+# Hard
+# 355 users solved this problem. Latest completion was 32 minutes ago.
 # 
-# Imagine you've created a program that plays the cities game with a user.
-# For the game to work, you need to remember the user's city and be able to
-# change it. Below is the code that does that, but if you run it as is,
-# you'll get an error: you won't be able to access the variable user_city
-# outside of the function. Fix this problem by adding one line. Please, don't
-# change the rest of the code.
+# There is a triangle on the picture below with the following parameters:
+# 
+# - angle A and sides a and c are unknown;
+# 
+# - angle B = 35°, angle C = 105°, side b = 7.
+# 
+# Find the side c using the math module. Print the answer rounded to 1
+# decimal place.
+# 
 
 # ---- code start ----
-def change_city(new_user_city):
-    global user_city
-    user_city = new_user_city
+import math
 
+angle_b = 35
+angle_c = 105
+# sum of angles in triangle: A = 180 - B - C
+angle_a = 180 - angle_b - angle_c
 
-change_city("Paris")
-print(user_city)
+side_b = 7
+# law of sines: b/sin(B) = c/sin(C)
+#               c = (b*sin(C))/sin(B)
+angle_c = math.radians(angle_c)
+angle_b = math.radians(angle_b)
+side_c = round((side_b * math.sin(angle_c)) / math.sin(angle_b), 1)
+print(side_c)
