@@ -2361,3 +2361,84 @@ movie_name = input()
 movie_director = input()
 movie_year = input()
 print(f"{movie_name} (dir. {movie_director}) came out in {movie_year}")
+==============================================================================
+
+# Beautify both output and code
+# Medium
+# 10759 users solved this problem. Latest completion was about 3 hours ago.
+# 
+# The output should be user-friendly, but the code part is also important.
+# Well-structured and readable code is very important for being a good
+# programmer. Now it's up to you to decide, which formatting method to
+# choose.
+# 
+# Imagine you need to compose a dynamic URL for every certain user with
+# user-specific details. Suppose, you want to send different URLs for every
+# user, depending on their name and profession. The base would be something
+# like
+# 
+# "http://example.com/*nickname*/desirable/*profession*/profile", where
+# nickname and profession are prompts from a user and are dynamic.
+# 
+# Read the nickname and profession of the user from the input and print a
+# user-specific URL. Don't bother about any rules of composing the URLs and
+# just use raw input to accomplish the task.
+
+# ---- code start ----
+URL_FORMAT = "http://example.com/{NICKNAME}/desirable/{PROFESSION}/profile"
+nickname = input()
+profession = input()
+print(URL_FORMAT.format(NICKNAME=nickname, PROFESSION=profession))
+==============================================================================
+
+# Lucky ticket
+# Hard
+# 21351 users solved this problem. Latest completion was about 1 hour ago.
+# Lucky tickets are a kind of mathematical entertainment. A ticket is
+# considered lucky if the sum of the first 3 digits equals the sum of the last
+# 3 digits of the ticket number.
+# 
+# You are supposed to write a program that checks whether the two sums are
+# equal. The code snippet below displays "Lucky" if they are and "Ordinary" if
+# they are not.
+# 
+# However, some parts of the code are missing. Fill in the blanks to make it
+# work!
+# 
+# Input: a string of 6 digits.
+# 
+# Output: either "Lucky" or "Ordinary" (without quotes).
+# 
+# Make sure that you are NOT concatenating strings. To do this, convert each
+# digit in the ticket number to an integer. Don't forget to use proper indices.
+
+# ---- code start ----
+# Save the input in this variable
+ticket = input()
+# Add up the digits for each half_
+half_1 = sum(map(int, [ticket[0], ticket[1], ticket[2]]))
+half_2 = sum(map(int, [ticket[3], ticket[4], ticket[5]]))
+# Thanks to you, this code will work
+if half_1 == half_2:
+    print("Lucky")
+else:
+    print("Ordinary")
+==============================================================================
+
+# Modifying data
+# Medium
+# 28556 users solved this problem. Latest completion was about 4 hours ago.
+# 
+# Lists, unlike strings, are mutable. We can use that to modify their data with
+# indexes.
+# 
+# There is a list planets with the names of the Solar system planets. However,
+# instead of the 5th planet, there's an X. Replace it with the real name of the
+# 5th planet. Do not forget, the first letter must be a capital one!
+# 
+# Note that the list planets has already been defined, you just need to change
+# one element. Mind its index!
+# 
+
+# ---- code start ----
+planets[4] = " "

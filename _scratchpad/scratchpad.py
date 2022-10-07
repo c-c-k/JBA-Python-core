@@ -10,29 +10,16 @@
 # solutions_dump.
 # 
 
-# Beautify both output and code
+# Simple program
 # Medium
-# 10759 users solved this problem. Latest completion was about 3 hours ago.
+# 3846 users solved this problem. Latest completion was about 2 hours ago.
 # 
-# The output should be user-friendly, but the code part is also important.
-# Well-structured and readable code is very important for being a good
-# programmer. Now it's up to you to decide, which formatting method to
-# choose.
+# Create an argument parser using the argparse module, and name it parser.
+# Then, add an argument --number.
 # 
-# Imagine you need to compose a dynamic URL for every certain user with
-# user-specific details. Suppose, you want to send different URLs for every
-# user, depending on their name and profession. The base would be something
-# like
-# 
-# "http://example.com/*nickname*/desirable/*profession*/profile", where
-# nickname and profession are prompts from a user and are dynamic.
-# 
-# Read the nickname and profession of the user from the input and print a
-# user-specific URL. Don't bother about any rules of composing the URLs and
-# just use raw input to accomplish the task.
+# Your program should NOT print anything.
 
 # ---- code start ----
-URL_FORMAT = "http://example.com/{NICKNAME}/desirable/{PROFESSION}/profile"
-nickname = input()
-profession = input()
-print(URL_FORMAT.format(NICKNAME=nickname, PROFESSION=profession))
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--number')
