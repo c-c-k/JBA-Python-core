@@ -13,6 +13,7 @@
   - Redo the README.md file.
 - ### 02 - LOAN CALCULATOR project:
     - Add proper documentation to the intermediate project stages.
+    - Add project README.md file.
     - Improve the project beyond the final stage requirements:
       - Implement proper arguments error handling via argparse.
       - Add option to run the script interactively.
