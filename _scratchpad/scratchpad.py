@@ -10,16 +10,30 @@
 # solutions_dump.
 # 
 
-# Write a program that reads a user's name from input and prints the
-# following message: Dear <username>! It was really nice to meet you.
-# Hopefully, you have a nice day! See you soon, <username>!. Change the word
-# <username> with the word that is provided in the input. We recommend using
-# string templates from the string module to complete the task.
+# Yoda style
+# Medium
+# 9583 users solved this problem. Latest completion was about 18 hours ago.
+# 
+# Everybody wants to speak like master Yoda sometimes. Let's try to
+# implement a program that will help us with it.
+# 
+# First, we turn the string of words into a list using the string.split()
+# method.
+# 
+# Then use the function random.seed(43) and rearrange the obtained sequence.
+# 
+# To turn the list back into a string, use ' '.join(list).
+# 
+# Print the message in the end.
+# 
+# Note: you have to use random.seed(43) in this task!
 
 # ---- code start ----
-import string
-template = string.Template(
-    "Dear $username! It was really nice to meet you. "
-    "Hopefully, you have a nice day! See you soon, $username!")
-username = input()
-print(template.substitute(username=username))
+import random
+# your sentence is assigned to the variable
+sentence = input().split()
+# write your python code below
+random.seed(43)
+random.shuffle(sentence)
+# shows the message
+print(' '.join(sentence))
