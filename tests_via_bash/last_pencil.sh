@@ -22,8 +22,8 @@ function test_stage_02() {
 function test_stage_03() {
     TEST_SCRIPT_PATH="$TEST_SCRIPT_PREFIX""3.py"
     print_test_info
-    test_via_args
-    test_via_stdin
+    test_via_stdin 5 Player1 2 1 2
+    test_via_stdin 15 Player1 8 7
 }
 
 function test_stage_04() {
@@ -41,7 +41,7 @@ function test_stage_05() {
 }
 
 #test_stage_01
-test_stage_02
-#test_stage_03
+#test_stage_02
+test_stage_03
 #test_stage_04
 #test_stage_05
