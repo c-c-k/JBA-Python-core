@@ -10,16 +10,16 @@
 # solutions_dump.
 # 
 
-# Simple program
-# Medium
-# 3846 users solved this problem. Latest completion was about 2 hours ago.
-# 
-# Create an argument parser using the argparse module, and name it parser.
-# Then, add an argument --number.
-# 
-# Your program should NOT print anything.
+# Write a program that reads a user's name from input and prints the
+# following message: Dear <username>! It was really nice to meet you.
+# Hopefully, you have a nice day! See you soon, <username>!. Change the word
+# <username> with the word that is provided in the input. We recommend using
+# string templates from the string module to complete the task.
 
 # ---- code start ----
-import argparse
-parser = argparse.ArgumentParser()
-parser.add_argument('--number')
+import string
+template = string.Template(
+    "Dear $username! It was really nice to meet you. "
+    "Hopefully, you have a nice day! See you soon, $username!")
+username = input()
+print(template.substitute(username=username))

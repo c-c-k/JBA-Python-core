@@ -2442,3 +2442,51 @@ else:
 
 # ---- code start ----
 planets[4] = " "
+==============================================================================
+
+# Simple program
+# Medium
+# 3846 users solved this problem. Latest completion was about 2 hours ago.
+# 
+# Create an argument parser using the argparse module, and name it parser.
+# Then, add an argument --number.
+# 
+# Your program should NOT print anything.
+
+# ---- code start ----
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--number')
+==============================================================================
+
+# Capitalize 2.0
+# Medium
+# 817 users solved this problem. Latest completion was about 15 hours ago.
+# 
+# Read input twice. Capitalize only the first word in the first string. After
+# this, capitalize each word in the second one. Print the resulting strings
+# each on a new line.
+
+# ---- code start ----
+import string
+print(input().capitalize())
+print(input().title())
+==============================================================================
+
+# Help a friend
+# Medium
+# 533 users solved this problem. Latest completion was about 23 hours ago.
+# 
+# You decided to study Python on Hyperskill with your friend. However, they
+# couldn't read this topic due to family matters and asked you to brief them.
+# You did your best with the theory, but now, it's time to practice. Correct
+# the code your friend wrote so it would print a compliment.
+
+# ---- code start ----
+import string
+template = string.Template(
+    "Hi, $name! You look $adjective today! You're doing great!")
+name = input()
+adjective = input()
+compliment = template.substitute(name=name, adjective=adjective)
+print(compliment)
