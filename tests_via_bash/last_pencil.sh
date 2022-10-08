@@ -4,7 +4,7 @@
 #
 
 source ./_shared_functions.sh
-TEST_SCRIPT_PREFIX="$PROJECTS_ROOT""/last_pencil/stage_"
+TEST_SCRIPT_PREFIX="$PROJECTS_ROOT""last_pencil/stage_"
 
 function test_stage_01() {
     TEST_SCRIPT_PATH="$TEST_SCRIPT_PREFIX""1.py"
@@ -15,8 +15,8 @@ function test_stage_01() {
 function test_stage_02() {
     TEST_SCRIPT_PATH="$TEST_SCRIPT_PREFIX""2.py"
     print_test_info
-    test_via_args
-    test_via_stdin
+    test_via_stdin 5 player1
+    test_via_stdin 20 player2
 }
 
 function test_stage_03() {
@@ -40,8 +40,8 @@ function test_stage_05() {
     test_via_stdin
 }
 
-test_stage_01
-#test_stage_02
+#test_stage_01
+test_stage_02
 #test_stage_03
 #test_stage_04
 #test_stage_05
