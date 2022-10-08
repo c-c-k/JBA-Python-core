@@ -40,12 +40,12 @@ function test_stage_04() {
 function test_stage_05() {
     TEST_SCRIPT_PATH="$TEST_SCRIPT_PREFIX""5.py"
     print_test_info
-    test_via_args
-    test_via_stdin
+    test_via_stdin 10 Bot 2 1 1
+    test_via_stdin 6 Player 1 2
 }
 
 #test_stage_01
 #test_stage_02
 #test_stage_03
-test_stage_04
-#test_stage_05
+#test_stage_04
+test_stage_05
