@@ -4,14 +4,13 @@
 #
 
 source ./_shared_functions.sh
+TEST_SCRIPT_PREFIX="$PROJECTS_ROOT""$PROJECT_NAME/stage_"
 
-function test_stage_0() {
-  TEST_SCRIPT_PATH="$PROJECTS_ROOT""tests_via_bash/test_via_args.py"
+function test_stage_01() {
+  TEST_SCRIPT_PATH="$TEST_SCRIPT_PREFIX""1.py"
   print_test_info
-  test_via_args arg1 arg2
-  TEST_SCRIPT_PATH="$PROJECTS_ROOT""tests_via_bash/test_via_input.py"
-  print_test_info
-  test_via_stdin line1 line2 line3
+  test_via_args
+  test_via_stdin
 }
 
-test_stage_0
+test_stage_01
