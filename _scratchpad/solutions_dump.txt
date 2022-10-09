@@ -21,19 +21,19 @@ else:
         check_num += 1
 print('This number is prime' if is_prime else 'This number is not prime')
 ==============================================================================
-# Cat cafés
+# Cat cafÃ©s
 # Hard
 # 4756 users solved this problem. Latest completion was 42 minutes ago.
-# Kitty wants to visit a cat café! Help her find the one with the largest
-# number of cats. It is guaranteed that all cafés have a different number of
+# Kitty wants to visit a cat cafÃ©! Help her find the one with the largest
+# number of cats. It is guaranteed that all cafÃ©s have a different number of
 # cats.
 # Input format
-# Each string contains a café's cafe_name followed by a space and the number of
+# Each string contains a cafÃ©'s cafe_name followed by a space and the number of
 # cats in it, e.g. Paws 11, Kittens 9.
 # The names would be one-word only. Read input lines until you get a string
 # MEOW (without any number).
 # Output format
-# The café with the maximum number of cats.
+# The cafÃ© with the maximum number of cats.
 
 # ---- code start -----
 max_cats = 0
@@ -327,10 +327,10 @@ print("""'
 # that reflects the average number of morphemes in a word. The values vary
 # between 1 and 4 and there are 3 types of languages according to that system.
 # Here they are:
-# Type — Index
-# Analytic — less than 2
-# Synthetic — from 2 to 3 (inclusively)
-# Polysynthetic — more than 3
+# Type â Index
+# Analytic â less than 2
+# Synthetic â from 2 to 3 (inclusively)
+# Polysynthetic â more than 3
 # Write a program that given the index of synthesis determines the type of the language.
 # The input format:
 #  The value of the index of synthesis.
@@ -478,7 +478,7 @@ else:
 
 .\{78,\}
 
-/�kugql
+/kugql
 /.\{78,\}gql
 l
 ==============================================================================
@@ -557,7 +557,7 @@ else:
 #  Through the doorway
 #  Medium
 #  959 users solved this problem. Latest completion was 1 day ago.
-#  Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+#  Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 #  The input format:
 #      The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
 #      The output format:
@@ -599,8 +599,8 @@ else:
 # Through the doorway
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
-# Suppose you want to carry a box with dimensions A × B × C (length × width ×
-# height) through the doorway with dimensions X × Y (width × height). Write a
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã
+# height) through the doorway with dimensions X Ã Y (width Ã height). Write a
 # program to check whether it is possible.
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B,
@@ -619,7 +619,7 @@ else:
 #  Through the doorway
 #  Medium
 #  959 users solved this problem. Latest completion was 1 day ago.
-#  Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+#  Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 #  The input format:
 #      The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
 #      The output format:
@@ -660,7 +660,7 @@ else:
 
 # Through the doorway
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -674,7 +674,7 @@ else:
 
 # Through the doorway
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -690,7 +690,7 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -748,7 +748,7 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -806,7 +806,7 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -864,7 +864,7 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -921,7 +921,7 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -978,7 +978,7 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -996,8 +996,8 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width ×
-# height) through the doorway with dimensions X × Y (width × height). Write a
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã
+# height) through the doorway with dimensions X Ã Y (width Ã height). Write a
 # program to check whether it is possible.
 # 
 # The input format:
@@ -1019,8 +1019,8 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width ×
-# height) through the doorway with dimensions X × Y (width × height). Write a
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã
+# height) through the doorway with dimensions X Ã Y (width Ã height). Write a
 # program to check whether it is possible.
 # 
 # The input format:
@@ -1041,8 +1041,8 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width ×
-# height) through the doorway with dimensions X × Y (width × height). Write a
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã
+# height) through the doorway with dimensions X Ã Y (width Ã height). Write a
 # program to check whether it is possible.
 # 
 # The input format:
@@ -1064,7 +1064,7 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width × height) through the doorway with dimensions X × Y (width × height). Write a program to check whether it is possible.
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã height) through the doorway with dimensions X Ã Y (width Ã height). Write a program to check whether it is possible.
 # 
 # The input format:
 # The input comprises five strings with numbers in the following order: A, B, C, X, Y. If the size of the doorway is greater than or equal to any two dimensions of the box, it is considered that the box can be carried.
@@ -1121,8 +1121,8 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width ×
-# height) through the doorway with dimensions X × Y (width × height). Write a
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã
+# height) through the doorway with dimensions X Ã Y (width Ã height). Write a
 # program to check whether it is possible.
 # 
 # The input format:
@@ -1144,8 +1144,8 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width ×
-# height) through the doorway with dimensions X × Y (width × height). Write a
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã
+# height) through the doorway with dimensions X Ã Y (width Ã height). Write a
 # program to check whether it is possible.
 # 
 # The input format:
@@ -1167,8 +1167,8 @@ else:
 # Medium
 # 959 users solved this problem. Latest completion was 1 day ago.
 # 
-# Suppose you want to carry a box with dimensions A × B × C (length × width ×
-# height) through the doorway with dimensions X × Y (width × height). Write a
+# Suppose you want to carry a box with dimensions A Ã B Ã C (length Ã width Ã
+# height) through the doorway with dimensions X Ã Y (width Ã height). Write a
 # program to check whether it is possible.
 # 
 # The input format:
@@ -1211,7 +1211,7 @@ else:
 # does a point belong to?
 # 
 # Read two numbers from the input, not necessarily integers, the first number
-# will indicate a position on the X-axis, the second one — on the Y-axis. Let's
+# will indicate a position on the X-axis, the second one â on the Y-axis. Let's
 # keep referring to the quadrants by Roman numerals, as shown in the picture.
 # 
 # If the point is the origin (0, 0), print It's the origin! If a point lies on
@@ -1278,11 +1278,11 @@ else:
 # 
 # <=16<= 16<=16 "Lion King"
 # 
-# 17−2517 - 2517−25 "Trainspotting"
+# 17â2517 - 2517â25 "Trainspotting"
 # 
-# 26−4026 - 4026−40 "Matrix"
+# 26â4026 - 4026â40 "Matrix"
 # 
-# 41−6041 - 6041−60 "Pulp Fiction"
+# 41â6041 - 6041â60 "Pulp Fiction"
 # 
 # >60> 60>60 "Breakfast at Tiffany's"
 # 
@@ -1342,11 +1342,11 @@ else:
 # second_number.
 # 
 # Operations are: +, -, /, *, mod, pow, div.
-# mod — modulo operation, i.e. the remainder of the division first_number %
+# mod â modulo operation, i.e. the remainder of the division first_number %
 # second_number,
-# pow — exponentiation, the first number will be the base and the second — the
+# pow â exponentiation, the first number will be the base and the second â the
 # power: first_number ** second_number,
-# div — integer division first_number // second_number.
+# div â integer division first_number // second_number.
 # 
 # Note that if the second number is 0 and you want to perform any of the
 # operations /, mod, or div, the calculator should say "Division by 0!"
@@ -1546,7 +1546,7 @@ else:
 # the maximum score.
 # 
 # Note that the upper limit is not included in the range, except for the A
-# grade. For example, a student with 60% will get D, with 70% or 79.9% — C, but
+# grade. For example, a student with 60% will get D, with 70% or 79.9% â C, but
 # the top score 100% is just A.
 # 
 # The input format:
@@ -1630,12 +1630,12 @@ else:
 # letters with ligatures and diacritic marks with their equivalents from the
 # Latin alphabet. The list of replacements is the following:
 # 
-# é -> e
-# ë -> e
-# á -> a
-# å -> aa
-# œ -> oe
-# æ -> ae
+# Ã© -> e
+# Ã« -> e
+# Ã¡ -> a
+# Ã¥ -> aa
+# Å -> oe
+# Ã¦ -> ae
 # 
 # Complete the code below so that the function normalize (def is a keyword used
 # to declare functions) would take a string with diacritics and return the one
@@ -1647,8 +1647,8 @@ name = input()
 
 def normalize(_name: str):
     replacement_map = [
-        ["é", "e"], ["ë", "e"], ["á", "a"],
-        ["å", "aa"], ["œ", "oe"], ["æ", "ae"]]
+        ["Ã©", "e"], ["Ã«", "e"], ["Ã¡", "a"],
+        ["Ã¥", "aa"], ["Å", "oe"], ["Ã¦", "ae"]]
     new_name = _name
     for replacement in replacement_map:
         new_name = new_name.replace(replacement[0], replacement[1])
@@ -1792,7 +1792,7 @@ print(' '.join(reversed(input().split())))
 # The output format:
 # 
 # Print this text stylized as mixedCase, that is, the first word should be in
-# lowercase and all other words – capitalized.
+# lowercase and all other words â capitalized.
 
 # ---- code start ----
 text = input().title()
@@ -2319,7 +2319,7 @@ print(user_city)
 # 
 # - angle A and sides a and c are unknown;
 # 
-# - angle B = 35�, angle C = 105�, side b = 7.
+# - angle B = 35°, angle C = 105°, side b = 7.
 # 
 # Find the side c using the math module. Print the answer rounded to 1
 # decimal place.
@@ -2524,3 +2524,341 @@ import random
 n = int(input())
 random.seed(n)
 print(random.choice("Voldemort"))
+==============================================================================
+
+# Yoda style
+# Medium
+# 9583 users solved this problem. Latest completion was about 18 hours ago.
+# 
+# Everybody wants to speak like master Yoda sometimes. Let's try to
+# implement a program that will help us with it.
+# 
+# First, we turn the string of words into a list using the string.split()
+# method.
+# 
+# Then use the function random.seed(43) and rearrange the obtained sequence.
+# 
+# To turn the list back into a string, use ' '.join(list).
+# 
+# Print the message in the end.
+# 
+# Note: you have to use random.seed(43) in this task!
+
+# ---- code start ----
+import random
+# your sentence is assigned to the variable
+sentence = input().split()
+# write your python code below
+random.seed(43)
+random.shuffle(sentence)
+# shows the message
+print(' '.join(sentence))
+==============================================================================
+
+# Heron's formula
+# Medium
+# 5947 users solved this problem. Latest completion was 1 day ago.
+# 
+# Many years ago, when Paul went to school, he did not like using Heron's
+# formula to calculate the area of a triangle, because he considered it
+# to be very complex. One day he decided to help all the students in his
+# school by writing a program that calculated the area of a triangle by
+# its three sides.
+# 
+# However, there was a problem: as Paul did not like the formula, he did
+# not memorize it. Help him finish this act of kindness and write the
+# program following Heron's formula:
+# 
+# S=p(p−a)(p−b)(p−c) S=\sqrt{p(p - a)(p - b)(p - c)}
+# S=p(p−a)(p−b)(p−c)
+# 
+# ​ where p=a+b+c2 p=\dfrac{a + b + c}2 p=2a+b+c​ is a
+# half-perimeter of the triangle. On the input, the program has integers,
+# and the output should be a real number corresponding to the area of the
+# triangle.
+# 
+# Do NOT round the result.
+
+# ---- code start ----
+# put your python code here
+import math
+a = int(input())
+b = int(input())
+c = int(input())
+p = (a + b + c) / 2
+s = math.sqrt(p * (p - a) * (p - b) * (p - c))
+print(s)
+==============================================================================
+
+# Round pi
+# Medium
+# 12259 users solved this problem. Latest completion was about 7 hours ago.
+# 
+# Write a code that rounds the number pi to 5 decimal places and prints
+# it out.
+# 
+# We've defined the variable pi for you.
+
+# ---- code start ----
+from math import pi
+# pi = 3.141592653589793
+# put your python code here
+precision = 5
+print(f"{pi:.{precision}f}")
+==============================================================================
+
+# Find beautiful identity
+# Medium
+# 3748 users solved this problem. Latest completion was 1 day ago.
+# 
+# Write a function that returns an object whose identity ends with 888.
+# 
+# Iterate numbers from 0 to 10 000 and check their identity via id() to
+# find a value ending with ...888.
+# 
+
+# ---- code start ----
+def object_with_beautiful_identity():
+    for i in range(10_000):
+        # Change the next line
+        if id(i) % 1000 == 888:
+            return i
+==============================================================================
+
+# Check the truth
+# Medium
+# 2423 users solved this problem. Latest completion was 1 day ago.
+# 
+# Write a function check_values that accepts two values (for example, 0
+# and 1, or "string" and []) and checks if both of them are True. To
+# achieve this, convert the values via the built-in bool() function.
+# 
+# If both values are True, then your function should return True,
+# otherwise False. Note that you are NOT supposed to call the function,
+# just implement it.
+
+# ---- code start ----
+def check_values(first_value, second_value):
+    return bool(first_value) is True and bool(second_value) is True
+==============================================================================
+
+# URL
+# Easy
+# 4883 users solved this problem. Latest completion was about 9 hours ago.
+# 
+# Declare a function called create_url(). It should take two arguments host and
+# port and return URL in the format "https://{host}:{port}" (without quotation
+# marks).
+# 
+# Set default values for both parameters: a string "localhost" and an integer
+# 443 respectively. Called without arguments, the function would return
+# "https://localhost:443" (without quotations marks).
+
+# ---- code start ----
+def create_url(host="localhost", port=443):
+    return f"https://{host}:{port}"
+
+==============================================================================
+
+# Markdown level
+# Medium
+# 3742 users solved this problem. Latest completion was about 9 hours ago.
+# 
+# Whoa! This problem is much more complex than the usual one and requires
+# knowledge of if statement. If you're feeling up to the challenge, brace
+# yourself and good luck! Otherwise, you can skip it for now and return any
+# time later
+# 
+# Markdown syntax is used to format a text. To create a level, you should add
+# # in front of a word or phrase. The number of hash signs # corresponds to the
+# level level, ranging from 1 to 6:
+# 
+# # Heading level 1
+# ## Heading level 2
+# ### Heading level 3
+# #### Heading level 4
+# ##### Heading level 5
+# ###### Heading level 6
+# 
+# Define a function level() that turns a string into a markdown level. By
+# default, it will be a first-level level, but there should be a chance to
+# change it to the desired value. However, if the specified level is less than
+# 1, return a first-level level. Similarly, if the level is greater than 6,
+# think of it as a sixth-level level. Look at these examples:
+# 
+# level("A")      # Returns "# A"
+# level("A", 3)   # Returns "### A"
+# level("A", 1)   # Returns "# A"
+# level("A", 0)   # Returns "# A"
+# level("A", 10)  # Returns "###### A"
+# 
+# Don't call your function, just implement it!
+# 
+# NB: Your function should return the result, not print it.
+
+# ---- code start ----
+def heading(text, level=1):
+    if level < 1:
+        level = 1
+    elif level > 6:
+        level = 6
+    return f"{'':#>{level}s} {text}"
+==============================================================================
+
+# Tennis tournament
+# Medium
+# 4498 users solved this problem. Latest completion was 2 days ago.
+# 
+# Several warm-up matches have been played at the tennis tournament. You have
+# data on the victories and losses of some players. Save the names of the
+# winners to a list and calculate the total number of victories.
+# 
+# The input format:
+# 
+# On the first line, you'll receive the integer n specifying a number of lines.
+# 
+# The next n lines will look like either Name win or Name loss.
+# 
+# The output format:
+# 
+# On the first line, print out the list of all players that have won a match,
+# repeat the names if necessary.
+# 
+# Then output the total number of victories based on your list.
+# 
+
+# ---- code start ----
+# num_matches = int(input())
+# matches = []
+# for _ in range(num_matches):
+#     match = input().split()
+#     matches.append(match)
+matches = [input().split() for _ in range(int(input()))]
+# print(matches)
+# victories = []
+# for match in matches:
+#     if match[1] == 'win':
+#         victories.append(match[0])
+victories = [match[0] for match in matches if match[1] == 'win']
+print(victories)
+print(len(victories))
+==============================================================================
+
+# Conditions & nested lists
+# Medium
+# 5632 users solved this problem. Latest completion was 2 days ago.
+# 
+# Imagine you have a list of students and their grades for an exam:
+# 
+# students = [["Jane", "B"], ["Kate", "B"], ["Alex", "C"], ["Elsa", "A"],
+# ["Max", "B"], ["Chris", "A"]]
+# 
+# Select only students with the best grade ("A") and print their names in a
+# list. Do all this in one line. We have already created the students variable
+# with other names and grades.
+# 
+
+# ---- code start ----
+# the list "students" is already defined
+# students = [["Jane", "B"], ["Kate", "B"], ["Alex", "C"],
+#             ["Elsa", "A"], ["Max", "B"], ["Chris", "A"]]
+print([student[0] for student in students if student[1] == "A"])
+==============================================================================
+
+# Congratulatory letter
+# Medium
+# 3196 users solved this problem. Latest completion was 1 day ago.
+# 
+# Imagine that you were instructed to write a congratulatory letter, mentioning
+# all the employees of the IT department in it. You know for sure that the
+# department has one tester, one project manager, but you don't know exactly
+# how many developers are there.
+# 
+# Define a function congratulations() that lists the names of everyone in the
+# letter.
+# If the project manager is Alice, the tester is Mike, and the developers are
+# Roman and Victoria, then the printed congratulation should look like this:
+# 
+# Happy New Year! Take care of yourself and your loved ones!
+# For:
+# Alice
+# Mike
+# Roman
+# Victoria
+# 
+# Pay attention to the order of names. First mention a project manager, then a
+# tester, and then developers. Each name should be on a separate line!
+# 
+# Note that you do not need to call a function, just implement it.
+# 
+# You don't need to work with the input: the names of the employees are meant
+# to be passed to the function as arguments.
+
+# ---- code start ----
+def congratulations(manager, tester, *developers):
+    print("Happy New Year! Take care of yourself and your loved ones!\nFor:")
+    print(manager, tester, *developers, sep="\n")
+==============================================================================
+
+# Test average
+# Medium
+# 2946 users solved this problem. Latest completion was 3 days ago.
+# 
+# Imagine that you are a teacher whose students recently wrote a test. However,
+# you do not know exactly how many students were in the class at the time of
+# writing. Based on the marks you have, you should calculate the average mark
+# for this test.
+# 
+# Define the average_mark() function that returns the average value. The
+# function should take a varying number of integers as positional arguments.
+# 
+# Round the result to one decimal place.
+# 
+# You are not supposed to call the function, just implement it.
+# 
+
+# ---- code start ----
+def average_mark(*grades):
+    return round(sum(grades) / len(grades), 1)
+==============================================================================
+
+# You've got mail!
+# Medium
+# 4168 users solved this problem. Latest completion was 1 day ago.
+# 
+# Email addresses usually have the same structure: someone@somewhere.com (or
+# any other domain).
+# 
+# You are working with a database of email addresses from an imaginary email
+# service yougotmail.com. Create a program that would separate the local-part
+# that precedes the @ sign from the rest of the address.
+# 
+# The input format:
+# 
+# The email address. It is stored in the variable email, you do not need to
+# work directly with input.
+# 
+# The output format:
+# 
+# The local-part of the address.
+
+# ---- code start ----
+# write your code here
+# remember: the variable email is already defined
+# email = "someone@somewhere.com"
+print(email[:email.index("@")])
+==============================================================================
+
+# Reverse
+# Medium
+# 5705 users solved this problem. Latest completion was 1 day ago.
+# 
+# In this task, we have a list numbers = [2, 4, 6, ...] and a line that is
+# supposed to choose elements with indices from 4 to 16 inclusively in reverse
+# order, but a mistake has been made. Find and fix it.
+# 
+
+# ---- code start ----
+# the following line reads the list from the input; do not modify it, please
+numbers = [int(num) for num in input().split()]
+print(numbers[16:3:-1])  # the line with an error

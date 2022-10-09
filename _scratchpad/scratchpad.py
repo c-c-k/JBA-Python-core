@@ -10,30 +10,16 @@
 # solutions_dump.
 # 
 
-# Yoda style
+# Reverse
 # Medium
-# 9583 users solved this problem. Latest completion was about 18 hours ago.
+# 5705 users solved this problem. Latest completion was 1 day ago.
 # 
-# Everybody wants to speak like master Yoda sometimes. Let's try to
-# implement a program that will help us with it.
+# In this task, we have a list numbers = [2, 4, 6, ...] and a line that is
+# supposed to choose elements with indices from 4 to 16 inclusively in reverse
+# order, but a mistake has been made. Find and fix it.
 # 
-# First, we turn the string of words into a list using the string.split()
-# method.
-# 
-# Then use the function random.seed(43) and rearrange the obtained sequence.
-# 
-# To turn the list back into a string, use ' '.join(list).
-# 
-# Print the message in the end.
-# 
-# Note: you have to use random.seed(43) in this task!
 
 # ---- code start ----
-import random
-# your sentence is assigned to the variable
-sentence = input().split()
-# write your python code below
-random.seed(43)
-random.shuffle(sentence)
-# shows the message
-print(' '.join(sentence))
+# the following line reads the list from the input; do not modify it, please
+numbers = [int(num) for num in input().split()]
+print(numbers[16:3:-1])  # the line with an error
