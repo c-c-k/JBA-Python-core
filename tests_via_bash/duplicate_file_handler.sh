@@ -11,7 +11,7 @@ function test_stage_01() {
     TEST_SCRIPT_PATH="$TEST_SCRIPT_PREFIX""1/run.py"
     print_test_info
     test_via_args
-    test_via_stdin
+#    test_via_args /home/cck-su/.vim/
 }
 
 function test_stage_02() {
@@ -32,7 +32,6 @@ function test_stage_04() {
     TEST_SCRIPT_PATH="$TEST_SCRIPT_PREFIX""4/run.py"
     print_test_info
     test_via_args
-    test_via_stdin
 }
 
 test_stage_01
