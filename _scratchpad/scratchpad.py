@@ -10,16 +10,34 @@
 # solutions_dump.
 # 
 
-# Reverse
+# We Are What We Eat
 # Medium
-# 5705 users solved this problem. Latest completion was 1 day ago.
+# 4304 users solved this problem. Latest completion was about 17 hours ago.
 # 
-# In this task, we have a list numbers = [2, 4, 6, ...] and a line that is
-# supposed to choose elements with indices from 4 to 16 inclusively in reverse
-# order, but a mistake has been made. Find and fix it.
+# Anthony keeps track of what he eats: he writes down how many calories are in
+# his meals. Use the list of dictionaries to calculate the total amount of
+# calories per day and print it.
+# 
+# The sample input will look like:
+# 
+# meals = [
+# {"title": "Oatmeal pancakes with apple and cinnamon", "kcal": 370},
+# {"title": "Italian salad with fusilli and ham", "kcal": 320},
+# {"title": "Bulgur with vegetables", "kcal": 350},
+# {"title": "Curd souffle with lingonberries and ginger", "kcal": 225},
+# {"title": "Oatmeal with honey and peanuts", "kcal": 440}]
+# 
+# The output in this case should be 1705.
 # 
 
 # ---- code start ----
-# the following line reads the list from the input; do not modify it, please
-numbers = [int(num) for num in input().split()]
-print(numbers[16:3:-1])  # the line with an error
+# the list "meals" is already defined
+# your code here
+# meals = [
+#     {"title": "Oatmeal pancakes with apple and cinnamon", "kcal": 370},
+#     {"title": "Italian salad with fusilli and ham", "kcal": 320},
+#     {"title": "Bulgur with vegetables", "kcal": 350},
+#     {"title": "Curd souffle with lingonberries and ginger", "kcal": 225},
+#     {"title": "Oatmeal with honey and peanuts", "kcal": 440}]
+
+print(sum([meal["kcal"] for meal in meals]))
