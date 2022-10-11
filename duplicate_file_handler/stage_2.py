@@ -5,10 +5,17 @@
 
 Finds and handles duplicate files in the tree of a given root dir.
 Stage 2 assignment requirements:
+    - Read from system arguments the path to the root directory which is
+      to be checked for duplicate files.
+    - Ask the user for the file format (extension) of the files they wish
+      to check for duplicates. An empty string will indicate that the user
+      wishes to check all files.
     - Recursively scan the given root dir and it's subdirectories for files
       with the same size.
+    - Ask the user if they want to sort the files of the same size in ascending
+      or descending order.
     - For each group of same sized files, print their size and absolute
-      paths.
+      paths in the order chosen by the user.
 """
 
 # --------------------
