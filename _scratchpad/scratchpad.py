@@ -10,34 +10,14 @@
 # solutions_dump.
 # 
 
-# We Are What We Eat
+# Full name
 # Medium
-# 4304 users solved this problem. Latest completion was about 17 hours ago.
+# 5154 users solved this problem. Latest completion was about 4 hours ago.
 # 
-# Anthony keeps track of what he eats: he writes down how many calories are in
-# his meals. Use the list of dictionaries to calculate the total amount of
-# calories per day and print it.
+# Rewrite the code below using the with keyword.
 # 
-# The sample input will look like:
-# 
-# meals = [
-# {"title": "Oatmeal pancakes with apple and cinnamon", "kcal": 370},
-# {"title": "Italian salad with fusilli and ham", "kcal": 320},
-# {"title": "Bulgur with vegetables", "kcal": 350},
-# {"title": "Curd souffle with lingonberries and ginger", "kcal": 225},
-# {"title": "Oatmeal with honey and peanuts", "kcal": 440}]
-# 
-# The output in this case should be 1705.
-# 
+# Make sure to use the same variable names for file objects!
 
 # ---- code start ----
-# the list "meals" is already defined
-# your code here
-# meals = [
-#     {"title": "Oatmeal pancakes with apple and cinnamon", "kcal": 370},
-#     {"title": "Italian salad with fusilli and ham", "kcal": 320},
-#     {"title": "Bulgur with vegetables", "kcal": 350},
-#     {"title": "Curd souffle with lingonberries and ginger", "kcal": 225},
-#     {"title": "Oatmeal with honey and peanuts", "kcal": 440}]
-
-print(sum([meal["kcal"] for meal in meals]))
+with open('name.txt') as f1, open('surname.txt') as f2, open('full_name.txt', 'w') as f3:
+    f3.write(' '.join([f1.read(), f2.read()]))
