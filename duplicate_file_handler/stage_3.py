@@ -56,7 +56,44 @@ Stage 3 assignment requirements:
 import argparse
 import hashlib
 import os
+import typing
 
+# --------------------
+# TYPES
+# --------------------
+
+
+# --------------------
+# DATA TYPES
+# --------------------
+DatasetIndex = int
+FilePath = str
+FileHash = typing.Union[str, None]
+FileSize = typing.Union[int, None]
+FileMenuId = typing.Union[int, None]
+
+
+class FileData(object):
+    __slots__ = ("size", "path", "md5_hash", "file_menu_id")
+
+    def __init__(self, file_path: str):
+        self.path: FilePath = file_path
+        self.size: FileSize = os.path.getsize(file_path)
+        self.md5_hash: FileHash = None
+        self.file_menu_id: FileMenuId = None
+
+    def calculate_md5_hash(self):
+        hash_generator = hashlib.md5()
+        with open(self.path, 'br') as f:
+            hash_generator.update(f.read())
+        self.md5_hash = hash_generator.hexdigest()
+
+
+FilesDataset = typing.Dict[DatasetIndex, FileData]
+DatasetIndexList = typing.List[DatasetIndex]
+ByHashView = typing.Dict[FileHash, DatasetIndexList]
+BySizeView = typing.Dict[FileSize, ByHashView]
+FileMenuIds = typing.Dict[FileMenuId, DatasetIndex]
 
 # --------------------
 # CONSTANTS
@@ -117,55 +154,99 @@ def get_root(parser: argparse.ArgumentParser) -> str | None:
     return parser.parse_args().root_dir
 
 
-def get_filtered_files(root_dir: str, extension: str) -> dict:
-    """ Create a dictionary of filtered files grouped by size.
+def build_files_dataset(
+        root_dir: FilePath, file_extension: str) -> FilesDataset:
+    """ Create a dataset of files of a given format in a given root dir.
 
-    :param root_dir: A string representing the root path to the directory
-                     which is to be recursively scanned.
-    :param extension: The extension by which the files are to be filtered
-    :return: A dictionary of the format {filesize: [filepath, ..]}.
+    The files are recursively searched in the entire tree starting
+    from the root_dir.
+    :param root_dir: A string representing the path to the root
+                        directory which is to be recursively scanned.
+    :param file_extension: The extension by which the files are
+                            to be filtered
+    :return: A dictionary of the format {entry_id: file_entry_dict}.
     """
-    filtered_files = {}
-    for root, dirs, files in os.walk(root_dir):
+    files_dataset: FilesDataset = {}
+    for root, _, files in os.walk(root_dir):
         for file in files:
-            if file.endswith(extension):
-                filepath = os.path.join(root, file)
-                filesize = os.path.getsize(filepath)
-                if filesize in filtered_files:
-                    filtered_files[filesize].append(filepath)
-                else:
-                    filtered_files[filesize] = [filepath]
-    return filtered_files
+            if file.endswith(file_extension):
+                files_dataset[len(files_dataset)] = (
+                    FileData(os.path.join(root, file)))
+    return files_dataset
 
 
-def filter_same_size(files_dict: dict):
-    """ Filter the files dictionary for same sized files.
+def create_size_hash_view(
+        files_dataset: FilesDataset, sort_order: str) -> BySizeView:
+    unsorted_view = {}
+    for dataset_index, file_data in files_dataset.items():
+        file_size = file_data.size
+        file_hash = file_data.md5_hash
+        if file_size not in unsorted_view:
+            unsorted_view[file_size] = {file_hash: [dataset_index]}
+        else:
+            if file_hash not in unsorted_view[file_size]:
+                unsorted_view[file_size][file_hash] = [dataset_index]
+            else:
+                unsorted_view[file_size][file_hash].append(dataset_index)
+    if sort_order == SORT_CHOICE_ASCENDING:
+        sorted_view = {
+            file_size: unsorted_view[file_size]
+            for file_size
+            in sorted(unsorted_view.keys())}
+    else:
+        sorted_view = {
+            file_size: unsorted_view[file_size]
+            for file_size
+            in sorted(unsorted_view.keys(), reverse=True)}
+    return sorted_view
 
-    :param files_dict: A dictionary containing lists of file paths
-                        grouped by size.
-    :return: A filtered dictionary containing only those items that
-             have a filelist longer than 1.
-    """
-    for file_size, file_list in files_dict.items():
-        if len(file_list) == 1:
-            files_dict.pop(file_size)
+
+def filter_file_dataset(
+        files_dataset: FilesDataset, by_view_filter: BySizeView):
+    deleted_sizes = []
+    for file_size, by_hash_view in by_view_filter.items():
+        delete_hushes = []
+        for file_hash, dataset_indexes in by_hash_view.items():
+            if len(dataset_indexes) == 1:
+                del files_dataset[dataset_indexes[0]]
+                delete_hushes.append(file_hash)
+        for file_hash in delete_hushes:
+            del by_hash_view[file_hash]
+        if len(by_hash_view) == 0:
+            deleted_sizes.append(file_size)
+    for file_size in deleted_sizes:
+        del by_view_filter[file_size]
 
 
-def print_files_by_size(files: dict, sort_order: str):
-    """ Print the same sized files grouped by size.
+def update_file_menu_ids(
+        file_menu_ids: FileMenuIds, by_size_view: BySizeView,
+        files_dataset: FilesDataset):
+    file_menu_ids.clear()
+    menu_id: FileMenuId = 1
+    for by_hash_view in by_size_view.values():
+        for dataset_indexes in by_hash_view.values():
+            for dataset_index in dataset_indexes:
+                files_dataset[dataset_index].file_menu_id = menu_id
+                file_menu_ids[menu_id] = dataset_index
+                menu_id += 1
 
-    :param files: A dictionary containing same sized files
-                    grouped by size.
-    :param sort_order: A string representing the sort order.
-    :return: None.
-    """
-    sorted_by_size = sorted(files.items())
-    if sort_order == SORT_CHOICE_DESCENDING:
-        sorted_by_size.reverse()
-    for size, file_paths in sorted_by_size:
+
+def print_file_menu(
+        size_hash_view: BySizeView, files_dataset: FilesDataset,
+        print_hashes: bool = False, print_menu_ids: bool = False):
+    for size, by_hash_view in size_hash_view.items():
         print(MSG_FILE_SIZE_BYTES.format(SIZE=size))
-        for filepath in file_paths:
-            print(filepath)
+        for file_hash, dataset_index_list in by_hash_view.items():
+            if print_hashes:
+                print(MSG_FILE_HASH_HEX_DIGEST.format(HASH=file_hash))
+            for dataset_index in dataset_index_list:
+                file_data = files_dataset[dataset_index]
+                if print_menu_ids:
+                    print(MSG_FILE_CHOICE.format(
+                        FILE_ID=file_data.file_menu_id,
+                        FILE_PATH=file_data.path))
+                else:
+                    print(file_data.path)
 
 
 def query_file_format() -> str:
@@ -219,74 +300,9 @@ def query_check_duplicates() -> bool:
             return False
 
 
-def generate_md5_file_hash(file_path: str) -> str:
-    hash_generator = hashlib.md5()
-    with open(file_path, 'br') as f:
-        hash_generator.update(f.read())
-    return hash_generator.hexdigest()
-
-
-def add_to_hashes_dict(hashes_dict: dict, file_path: str):
-    """ Add a file path to a hash subgroup.
-
-    :param hashes_dict: A dictionary grouping files by their hashes.
-    :param file_path: The path of the file to be added into a hash group.
-    """
-    file_hash = generate_md5_file_hash(file_path)
-    if file_hash in hashes_dict:
-        hashes_dict[file_hash].append(file_path)
-    else:
-        hashes_dict[file_hash] = [file_path]
-
-
-def subgroup_by_hashes(files_dict: dict):
-    """ Regroup and subgroup by hashes.
-
-    For each file size entry in files_dict, replace the file paths list
-    with a dictionary grouping the files by their hashes.
-    :param files_dict: A dictionary of files grouped by size.
-    """
-    for file_size, file_paths in files_dict.items():
-        hashes_dict = {}
-        for file_path in file_paths:
-            add_to_hashes_dict(hashes_dict, file_path)
-        files_dict[file_size] = hashes_dict
-
-
-def prune_non_duplicates(files_dict: dict):
-    """ Remove size and hash entries that only have one file per hash.
-
-    :param files_dict: A dictionary of files grouped by size and
-                        subgrouped by their hashes.
-    """
-    for size, hashes_dict in files_dict.items():
-        for file_hash, file_paths in hashes_dict.items:
-            if len(file_paths) == 1:
-                hashes_dict.pop(file_hash)
-        if len(hashes_dict) == 0:
-            files_dict.pop(size)
-
-
-def filter_duplicates(files_dict: dict):
-    """ Filter and subgroup files_dict by duplicates.
-
-    Duplicates are determined by same sized files that also
-        have the same hash.
-    :param files_dict: A dictionary of files grouped by size.
-    """
-    subgroup_by_hashes(files_dict)
-    prune_non_duplicates(files_dict)
-
-
-def print_duplicates(files_dict: dict):
-    """ Print the duplicate files.
-
-    The output should be grouped by sizes and hashes and include
-    per file path id's that will be used in the next stage.
-    :param files_dict: A dictionary of files grouped by size and
-                        subgrouped by their hashes.
-    """
-    pass
+def calculate_md5_file_hashes(files_dataset: FilesDataset):
+    for file_data in files_dataset.values():
+        file_data.calculate_md5_hash()
 
 
 def main():
@@ -311,16 +327,24 @@ def main():
     sort_order = query_sort_order()
 
     # Walk the directory tree starting from the given root dir
-    # and record all files of the matching format into a dictionary
-    # keyed by file size.
-    files_dict = get_filtered_files(root_dir, file_format)
+    # and create an initial dataset of files of the matching format.
+    files_dataset = build_files_dataset(root_dir, file_format)
 
-    # Filter the dictionary for same sized files (entries containing
-    # more than a single file per file size).
-    filter_same_size(files_dict)
+    # Create a view of the data set grouping files by their sizes.
+    # To avoid creating nearly identical functions a single function
+    # is used both here and later for the size->hash grouping,
+    # this works because at this point all files have None as their
+    # hash and thus fall into a single hash group.
+    size_hash_view = create_size_hash_view(files_dataset, sort_order)
 
-    # Print the entries from the filtered dictionary.
-    print_files_by_size(files_dict, sort_order)
+    # Use the size_hash_view to filter the files data set
+    # for same sized files.
+    filter_file_dataset(files_dataset, by_view_filter=size_hash_view)
+
+    # Print the filtered (by size only) dataset.
+    # Again to avoid creating nearly identical functions a single
+    # function is used both here and later for the size->hash menu,
+    print_file_menu(size_hash_view, files_dataset)
 
     # Query user if they want to check for duplicates.
     check_duplicates = query_check_duplicates()
@@ -329,11 +353,27 @@ def main():
     if not check_duplicates:
         return
 
-    # Filter and subgroup the files dictionary by duplicates.
-    filter_duplicates(files_dict)
+    # Calculate hashes for all files in the dataset.
+    calculate_md5_file_hashes(files_dataset)
 
-    # Print the duplicates.
-    print_duplicates(files_dict)
+    # Re-create the size_hash_view to account
+    # for the newly calculated hashes.
+    size_hash_view = create_size_hash_view(files_dataset, sort_order)
+
+    # Re-filter the dataset for duplicates (files that have both
+    # the same size and the same hash).
+    filter_file_dataset(files_dataset, by_view_filter=size_hash_view)
+
+    # Create and Update the file menu identifiers (as they
+    # are None at this point).
+    file_menu_ids = {}
+    update_file_menu_ids(file_menu_ids, size_hash_view, files_dataset)
+
+    # Print the filtered (by size and hashes) dataset with
+    # file menu identifiers.
+    print_file_menu(
+        size_hash_view, files_dataset,
+        print_hashes=True, print_menu_ids=True)
 
 
 # --------------------

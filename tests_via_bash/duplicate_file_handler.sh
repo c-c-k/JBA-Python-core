@@ -24,8 +24,8 @@ function test_stage_02() {
 function test_stage_03() {
     TEST_SCRIPT_PATH="$TEST_SCRIPT_PREFIX""3.py"
     print_test_info
+    test_via_args /dev/shm/test
     test_via_args
-    test_via_stdin
 }
 
 function test_stage_04() {
@@ -35,6 +35,6 @@ function test_stage_04() {
 }
 
 #test_stage_01
-test_stage_02
-#test_stage_03
+#test_stage_02
+test_stage_03
 #test_stage_04
