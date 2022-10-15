@@ -2923,3 +2923,798 @@ children = {'Emily': {'profession': 'artist', 'age': 5},
 #     {"title": "Oatmeal with honey and peanuts", "kcal": 440}]
 
 print(sum([meal["kcal"] for meal in meals]))
+==============================================================================
+
+# Full name
+# Medium
+# 5154 users solved this problem. Latest completion was about 4 hours ago.
+# 
+# Rewrite the code below using the with keyword.
+# 
+# Make sure to use the same variable names for file objects!
+
+# ---- code start ----
+with open('name.txt') as f1, open('surname.txt') as f2, open('full_name.txt', 'w') as f3:
+    f3.write(' '.join([f1.read(), f2.read()]))
+==============================================================================
+
+# Find the password
+# Medium
+# 1773 users solved this problem. Latest completion was about 2 hours ago.
+# 
+# Imagine that you are a hacker and you have got access to a web server written
+# in Python. The problem is that it asks for a password that you do not know.
+# However, this server is open source so you know that there is the
+# wrong_password() function which takes a password and checks it against
+# real_password.
+# 
+# def wrong_password(password):
+# return (password == "" or (not password and real_password)) or password !=
+# real_password
+# 
+# You can not access the real_password variable but you can call the
+# wrong_password() function and exploit its vulnerability to obtain the
+# password. Write your code inside the solve() function. Think about an
+# argument that can be passed to the wrong_password() function so that the
+# function returns the real_password. Print the result of the wrong_password()
+# function.
+# 
+# Your program should not read any input or call the solve() function, your
+# task is to implement it.
+# 
+
+# ---- code start ----
+def solve():
+# Write your code here
+    print(wrong_password(False))
+
+==============================================================================
+
+# Merge sorted lists
+# Hard
+# 1833 users solved this problem. Latest completion was 30 minutes ago.
+# 
+# The merge_arrays(a, b) function, which is partly implemented below, takes two
+# sorted lists of integers, merges them into one sorted list, and returns the
+# result. The function should work in the following way: create an empty list c
+# which will store the result; keep finding the smallest remaining element in a
+# and b and moving it to the list c; stop when there are no elements left in a
+# and b.
+# 
+# Your task is to fill in the gaps so that the function works correctly. Note,
+# that during the execution any of the lists a and b can become empty, so
+# handle these cases carefully. Try to use non-boolean values in logical
+# expressions when possible.
+# 
+# Your program shouldn't read any input or call the function, just implement
+# it.
+# 
+
+# ---- code start ----
+def merge_arrays(a: list, b: list):
+    # "c" will contain the result of merging arrays "a" and "b"
+    c = []
+    # CHECK that "a" or "b" are not empty
+    while a or b:
+        # CHECK that "b" is empty, or that "a" and "b" are not empty and compare the
+        # elements
+        if not b or a and b[0] > a[0]:
+            # removing the first element from "a" and adding it to "c"
+            c.append(a[0])
+            a.pop(0)
+        else:
+            # removing the first element from "b" and adding it to "c"
+            c.append(b[0])
+            b.pop(0)
+    return c
+==============================================================================
+
+# Who is who
+# Medium
+# 11102 users solved this problem. Latest completion was less than a minute
+# ago.
+# 
+# Below are two classes: Angel and Demon.
+# 
+# They have certain characteristics that help tell them apart. These
+# characteristics are listed as attributes.
+# 
+# Create instances of these classes and print their attributes, first Angel,
+# then Demon. You should print the attributes in this order: color, feature,
+# home. Each should be on a separate line.
+
+# ---- code start ----
+class Angel:
+    color = "white"
+    feature = "wings"
+    home = "Heaven"
+
+    def __str__(self):
+        return "{}\n{}\n{}".format(self.color, self.feature, self.home)
+
+
+class Demon:
+    color = "red"
+    feature = "horns"
+    home = "Hell"
+
+    def __str__(self):
+        return "{}\n{}\n{}".format(self.color, self.feature, self.home)
+
+
+print(str(Angel()))
+print(str(Demon()))
+==============================================================================
+
+# Movie night
+# Medium
+# 9554 users solved this problem. Latest completion was about 5 hours ago.
+# 
+# Write the class Movie and define the class constructor with such parameters
+# as the title, director, and the year of release.
+# 
+# In the corresponding variables defined below, create such objects as
+# "Titanic" (James Cameron, 1997), "Star Wars" (George Lucas, 1977), and
+# "Fight Club" (David Fincher, 1999).
+
+# ---- code start ----
+class Movie:
+    def __init__(self, title, director, year):
+        self.title = title
+        self.director = director
+        self.year = year
+
+
+titanic = Movie("Titanic", "James Cameron", 1997)
+star_wars = Movie("Star Wars", "George Lucas", 1977)
+fight_club = Movie("Fight Club", "David Fincher", 1999)
+==============================================================================
+
+# Keep on sailing
+# Hard
+# 7414 users solved this problem. Latest completion was about 6 hours ago.
+# 
+# Redefine the method sail of our class Ship so that it would take the
+# destination and then tell where the ship is going. Call this method on the
+# black_pearl object that's defined in the code below and print the returned
+# message.
+# 
+# Note: you should read the destination from input!
+# 
+# The input format:
+# 
+# The name of the country or the city where the ship is going.
+# 
+# The output format:
+# 
+# The result of the updated sail method: a message structured like
+# "The {name of the ship} has sailed for {country/city}!"
+
+# ---- code start ----
+# our class Ship
+class Ship:
+    def __init__(self, name, capacity):
+        self.name = name
+        self.capacity = capacity
+        self.cargo = 0
+
+    # the old sail method that you need to rewrite
+    def sail(self, destination):
+        return "The {NAME} has sailed for {DESTINATION}!".format(NAME=self.name, DESTINATION=destination)
+
+
+black_pearl = Ship("Black Pearl", 800)
+print(black_pearl.sail(input()))
+==============================================================================
+
+# Point
+# Medium
+# 5380 users solved this problem. Latest completion was 1 day ago.
+# 
+# Create a class Point that will represent a point in space. Its constructor
+# needs two parameters xxx and yyy, the coordinates of a point on the plane.
+# The class should have a method dist that takes another instance of Point
+# and returns the Euclidean distance between these two points. For Point(x1,
+# y1) and Point(x2, y2), calculate the distance according to the formula:
+# 
+# d=(x1−x2)2+(y1−y2)2d = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}
+# d=(x1​−x2​)2+(y1​−y2​)2
+# 
+# ​Have a look at the following example:
+# 
+# p1 = Point(1.5, 1)
+# p2 = Point(1.5, 2)
+# 
+# print(p1.dist(p2))  # 1.0
+# 
+# Just create the class, you won't need to do anything else.
+
+# ---- code start ----
+import math
+
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def dist(self, point_2: "Point"):
+        return (
+            math.sqrt(pow(point_2.x - self.x, 2) + pow(point_2.y - self.y, 2))
+        )
+==============================================================================
+
+# Stack class
+# Medium
+# 4791 users solved this problem. Latest completion was about 7 hours ago.
+# 
+# Whoa! This problem is much more complex than the usual one and requires
+# knowledge of Stack (for example, the names of the methods are not random
+# but related to Stack terminology). If you're feeling up to the challenge,
+# brace yourself, and good luck! Otherwise, you can skip it for now and
+# return any time later.
+# 
+# Implement your own Stack class in Python.
+# 
+# It should wrap some built-in Python data structure and implement the
+# following methods:
+# 
+# push(el): push a new element el to the stack
+# pop(): remove and return the last element from the stack
+# peek(): return the last element without removing it
+# is_empty(): check if the stack is empty and return True or False
+# 
+# Upon initialization, the stack must be empty. You do NOT need to create an
+# instance of the class or print anything.
+# 
+
+# ---- code start ----
+class Stack:
+    def __init__(self):
+        self.values = []
+
+    def push(self, el):
+        self.values.append(el)
+
+    def pop(self):
+        if self.is_empty():
+            return None
+        else:
+            return self.values.pop()
+
+    def peek(self):
+        if self.is_empty():
+            return None
+        else:
+            return self.values[-1]
+
+    def is_empty(self):
+        return not self.values
+==============================================================================
+
+# 10 puppies
+# Medium
+# 7713 users solved this problem. Latest completion was about 3 hours ago.
+# 
+# You want your program to work in a way that at any given time there can be
+# no more than 10 puppies. Define __new__ method so that this restriction is
+# placed on the class.
+# 
+
+# ---- code start ----
+class Puppy:
+    n_puppies = 0  # number of created puppies
+
+    @staticmethod
+    def __new__(cls):
+        if Puppy.n_puppies < 10:
+            Puppy.n_puppies += 1
+            return super().__new__(cls)
+==============================================================================
+
+# Printing books
+# Medium
+# 6168 users solved this problem. Latest completion was about 4 hours ago.
+# 
+# Anne is writing a program that deals with the books in a bookstore. She
+# created a class Book and defined all the necessary attributes: author, title,
+# price, and book_id. She would like to print out information about books in a
+# concise and uniform way, but she doesn't know how to do that.
+# 
+# Help Anne by defining the right method so that she can easily print out
+# information about her books in the following format: {title} by {author}.
+# ${price}. [{book_id}].
+# 
+# For instance, if we have Book("George Orwell", "1984", 13.59, 1956789), the
+# method should return 1984 by George Orwell. $13.59. [1956789].
+# 
+# Note that you do NOT need to take the input or print anything.
+# 
+
+# ---- code start ----
+class Book:
+    def __init__(self, author, title, price, book_id):
+        self.author = author
+        self.title = title
+        self.price = price
+        self.book_id = book_id
+
+    def __str__(self):
+        return "{title} by {author}. ${price}. [{book_id}].".format(
+            title=self.title, author=self.author, price=self.price,
+            book_id=self.book_id
+        )
+==============================================================================
+
+# Patients
+# Medium
+# 6099 users solved this problem. Latest completion was about 4 hours ago.
+# 
+# The class Patient needs both an unambiguous representation for developers and
+# a readable string for users. Here's how they are supposed to look:
+# 
+# For developers: Object of the class Patient. name: {name}, last_name:
+# {last_name}, age: {age}
+# For users: {name} {last_name}. {age}
+# 
+# For example, for object john = Patient("John", "Doe", 50) these
+# representations would respectively look like this:
+# 
+# Object of the class Patient. name: John, last_name: Doe, age: 50
+# John Doe. 50
+# 
+# Create the necessary methods below. Pay attention to spaces and punctuation
+# in the strings.
+# 
+
+# ---- code start ----
+class Patient:
+    def __init__(self, name, last_name, age):
+        self.name = name
+        self.last_name = last_name
+        self.age = age
+
+    def __repr__(self):
+        return ("Object of the class Patient. "
+                "name: {name}, last_name: {last_name}, age: {age}".format(
+                    name=self.name, last_name=self.last_name, age=self.age))
+
+    def __str__(self):
+        return "For users: {name} {last_name}. {age}".format(
+                    name=self.name, last_name=self.last_name, age=self.age)
+
+print("a")
+==============================================================================
+
+# SuperRobot
+# Medium
+# 3593 users solved this problem. Latest completion was about 1 hour ago.
+# 
+# SuperRobot has been found at the local repair station! It can serve on a
+# spaceship, assist in surgery, destroy enemy forces and pilot a ship on its
+# own. At least technicians say so...
+# 
+# For those in doubt check whether this SuperRobot is really a subclass of
+# AstromechDroid, MedicalDroid, BattleDroid and PilotDroid (the order is
+# important!).
+# 
+# For each potential parent class print the answers in the True/False format on
+# separate lines.
+
+# ---- code start ----
+# check whether SuperRobot is a subclass of AstromechDroid,
+# MedicalDroid, BattleDroid, and PilotDroid
+# the order is IMPORTANT
+print(issubclass(SuperRobot, AstromechDroid))
+print(issubclass(SuperRobot, MedicalDroid))
+print(issubclass(SuperRobot, BattleDroid))
+print(issubclass(SuperRobot, PilotDroid))
+==============================================================================
+
+# Bittersweet occasion
+# Medium
+# 3778 users solved this problem. Latest completion was about 1 hour ago.
+# 
+# Mysterious things have happened on the Hogwarts Express! Someone enchanted a
+# food trolley and all the goodies got mixed up on the shelves. While the
+# trolley witch is looking for the culprit, you will place Drinks, Pastry and
+# Sweets on three respective shelves.
+# 
+# These three are base classes and have various unknown children: for example,
+# PumpkinJuice inherits from Drinks. Write a function that finds a parent class
+# for an unknown class (not an instance of a class) stored in the variable
+# child and prints out the parent's name.
+# 
+# Note: all these classes are already created, you don't need to do that
+# yourself. You only need to work with the child.
+# 
+
+# ---- code start ----
+# finish the function
+def find_the_parent(child):
+    print("Drinks" if issubclass(child, Drinks) else "", end="")
+    print("Pastry" if issubclass(child, Pastry) else "", end="")
+    print("Sweets" if issubclass(child, Sweets) else "", end="")
+==============================================================================
+
+# Exceptions and Comparisons
+# Medium
+# 1445 users solved this problem. Latest completion was 1 day ago.
+# 
+# Create a function check_w_letter(word) that checks if the given word contains
+# the "w" letter. If it does, raise an error called WordError that you should
+# define yourself. If not, return the word.
+# 
+
+# ---- code start ----
+class WordError(Exception):
+    slash = "slash"
+
+    def bang(self):
+        print(self.slash)
+
+
+def check_w_letter(word):
+    if "w" in word:
+        raise WordError
+    return word
+==============================================================================
+
+# Raising exceptions
+# Medium
+# 1380 users solved this problem. Latest completion was 1 day ago.
+# 
+# Create a function sum_with_exceptions(a, b) that will add two integers. If
+# the sum is negative, it should raise an error called NegativeSumError that
+# you should define by yourself. If the sum is positive or 0, the function
+# should return the sum.
+# 
+
+# ---- code start ----
+class NegativeSumError(Exception):
+    quality_control = "confusing"
+
+    def bang(self):
+        print(self.quality_control)
+
+
+def sum_with_exceptions(a, b):
+    sum_ = sum([a, b])
+    if sum_ < 0:
+        raise NegativeSumError
+    return sum_
+==============================================================================
+
+# The __str__ method in exceptions
+# Medium
+# 1461 users solved this problem. Latest completion was about 5 hours ago.
+# 
+# We have created the exception class called NotInBoundsError:
+# 
+# class NotInBoundsError(Exception):
+# def __str__(self):
+# return "There is an error!"
+# 
+# It prints an error message. The class is already defined in the code, so you
+# can use it.
+# 
+# First, create the function check_integer(num) that checks if the given
+# integer lies between 45 and 67. If it does, the function should return the
+# integer. If not, the NotInBoundsError should be raised.
+# 
+# Second, create a new function error_handling(num). It should call the
+# check_integer(num) function and use the try-except block to catch the
+# NotInBoundsError. If there is an error, print its error message. If there are
+# no errors, print the result of the check_integer(num) function.
+
+# ---- code start ----
+def check_integer(num):
+    if 45 < num < 67:
+        return num
+    raise NotInBoundsError
+
+
+def error_handling(num):
+    try:
+        check_integer(num)
+    except NotInBoundsError as err:
+        print(err)
+    else:
+        print(num)
+
+==============================================================================
+
+# ven numbers
+# Medium
+# 2007 users solved this problem. Latest completion was about 16 hours ago.
+# 
+# Create a function called even() that takes a number as an argument. If the
+# number is even, return it. Otherwise, use the assert keyword.
+# 
+# You do not need to take any input or call the function yourself.
+
+# ---- code start ----
+def even(x):
+    assert x % 2 == 0
+    return x
+==============================================================================
+
+# Checking the bounds
+# Medium
+# 1910 users solved this problem. Latest completion was about 16 hours ago.
+# 
+# Define a function bounds() that will take a number as an argument. Return the
+# number if it lies between 50 and 70 inclusively. If it lies beyond the range,
+# use the assert keyword with the message: "Your number is wrong!".
+# 
+# You do not need to take any input or call the function yourself.
+
+# ---- code start ----
+def bounds(x):
+    assert 50 <= x <= 70, "Your number is wrong!"
+    return x
+==============================================================================
+
+# Correct a mistake
+# Medium
+# 2941 users solved this problem. Latest completion was 2 days ago.
+# 
+# The code below solves the following problem — having the numerator and the
+# denominator of a fraction, check if the fraction equals 0.5. The program
+# should print True or False. If the denominator equals 0, the answer is
+# False.
+# 
+# def compare(numerator, denominator):
+# return denominator and numerator / denominator == 0.5
+# 
+# 
+# a = int(input())
+# b = int(input())
+# 
+# print(compare(a, b))
+# 
+# But this code works incorrectly. Find and correct the mistake, then run the
+# code.
+
+# ---- code start ----
+def compare(numerator, denominator):
+    return bool(denominator) and numerator / denominator == 0.5
+
+
+a = int(input())
+b = int(input())
+print(compare(a, b))
+==============================================================================
+
+# Octahedron
+# Medium
+# 4103 users solved this problem. Latest completion was about 22 hours ago.
+# 
+# A regular octahedron is a three-dimensional geometric shape, a polyhedron
+# with eight equal faces and twelve equal edges. Have you ever seen 8-sided
+# dice? That's a regular octahedron. In this task you need to calculate its
+# area and volume.
+# 
+# Write a program that reads a positive integer representing the edge length
+# of the regular octahedron and prints two values – its area and volume (in
+# that order), both rounded to 2 decimal places and split by one space.
+# 
+# Formula to calculate the area of an octahedron (a is edge length):
+# 
+# 2∗3∗a22*\sqrt{3} *a ^ 22∗3
+# 
+# ​∗a2
+# 
+# Formula to calculate the volume:
+# 
+# 13∗2∗a3\frac{1}{3}*\sqrt{2}*a ^ 331​∗2
+# 
+# ​∗a3
+
+# ---- code start ----
+from math import sqrt, pow
+
+
+a = float(input())
+area = 2 * sqrt(3) * pow(a, 2)
+volume = (sqrt(2) * pow(a, 3)) / 3
+print(round(area, 2), round(volume, 2))
+==============================================================================
+
+# How long is that word?
+# Medium
+# 9819 users solved this problem. Latest completion was about 2 hours ago.
+# 
+# Write a program that calculates the length of a word from the input and
+# prints it out together with the word in the format word has N letters.
+# There will always be more than one letter in the word.
+# 
+
+# ---- code start ----
+word = input()
+word_length = len(word)
+print("{WORD} has {LENGTH:d} letters".format(WORD=word, LENGTH=word_length))
+
+==============================================================================
+
+# Turn into a lambda function
+# Medium
+# 4225 users solved this problem. Latest completion was about 21 hours ago.
+# 
+# Re-write the following piece of code using the lambda keyword:
+# 
+# def func(x):
+# if x % 10 == 0:
+# return "x ends with 0"
+# else:
+# return "x doesn't end with 0"
+# 
+# You are not supposed to handle input or invoke this function. Just re-write
+# it!
+
+# ---- code start ----
+# Don't forget to make use of lambda functions in your solution
+# func = lambda x: "x ends with 0" if x % 10 == 0 else "x doesn't end with 0"  # noqa: E731
+def func(x): return "x ends with 0" if x % 10 == 0 else "x doesn't end with 0"
+==============================================================================
+
+# Calculating profit
+# Medium
+# 2495 users solved this problem. Latest completion was about 12 hours ago.
+# 
+# Imagine that you are doing analytics for some manufacturer.
+# 
+# You collected the data for the past several months. Production costs for each
+# month are stored in the costs list, while total revenues per month are
+# collected in a list called revenues. Finally, the names of the months the
+# data was collected in are stored in the months list.
+# 
+# Compute and print out the profit of the manufacturer for each month. The
+# output should look as follows:
+# 
+# Jan 1000
+# Feb 1500
+# etc.
+# 
+
+# ---- code start ----
+
+costs, revenues, months = [2000, 3000], [3000, 4500], ["Jan", "Feb"]
+profits = map(lambda data: data[0] - data[1], zip(revenues, costs))
+# profits = [revenue - cost for revenue, cost in zip(revenues, costs)]
+# print(*[" ".join((month, str(profit)))
+#         for month, profit
+#         in zip(months, profits)], sep="\n")
+for monthly_profit in zip(months, map(str, profits)):
+    print(" ".join(monthly_profit))
+==============================================================================
+
+# Given two equally-sized vectors v1 and v2, calculate their vector sum by
+# adding their coordinates element-wise. The vectors will always be of the same
+# dimension. Print out each obtained coordinate on a new line, for example, for
+# v1 = (1, 5) and v2 = (2, 3), the result will be as follows:
+# 
+# 3
+# 8
+# 
+# Assume that the tuples v1 and v2 have been defined in advance and are ready
+# to use.
+
+# ---- code start ----
+# v1, v2 = (1, 5), (2, 3)
+print(*[coord_1 + coord_2 for coord_1, coord_2 in zip(v1, v2)], sep="\n")
+==============================================================================
+
+# Pass the password
+# Easy
+# 1274 users solved this problem. Latest completion was about 13 hours ago.
+# 
+# Tim chooses a password for social networks so that it be difficult to crack.
+# He wrote down the options in a list:
+# 
+# passwords = ['0vbno0re', 'ad12', 'fgghut', '4qp', 'qwerty']
+#
+# Now, he wants to determine the level of their security depending on the
+# length. A password that has a length of 1 is the most unsafe one, while a
+# password of length 10 is considered the best one.
+# 
+# Given a list of passwords, sort them from the least safe to the safest one.
+# As the output, print all passwords together with their length. For the
+# example above, you should print:
+# 
+# 4qp 3
+# ad12 4
+# fgghut 6
+# qwerty 6
+# 0vbno0re 8
+# 
+
+# ---- code start ----
+# the follwing line reads the list from the input, do not modify it, please
+passwords = input().split()
+# passwords = ['0vbno0re', 'ad12', 'fgghut', '4qp', 'qwerty']
+# your code below
+output = [{"pass": password, "len": len(password)} for password in passwords]
+output.sort(key=lambda entry: entry["len"])
+print(*[f"{entry['pass']} {entry['len']}" for entry in output], sep="\n")
+
+==============================================================================
+
+# Sort numbers by the remainder
+# Medium
+# 813 users solved this problem. Latest completion was about 13 hours ago.
+# 
+# You are given a list of numbers nums. Sort the list by the remainder of
+# dividing by three and print the result. Use a lambda function as key if
+# possible.
+
+# ---- code start ----
+nums = [int(num) for num in list(input())]
+# write your code here
+nums.sort(key=lambda num: num % 3)
+print(nums)
+==============================================================================
+
+# Creating a function
+# Medium
+# 2712 users solved this problem. Latest completion was about 15 hours ago.
+# 
+# Now, it's time to create your own function in the shell. Take the function
+# my_sqrt() from the theory part as an example and change it so that it returns
+# the result of math.sqrt() for integers and floats, the string "The string
+# should be converted into a numeric data type" if the passed argument was a
+# string, and None for other inputs.
+# 
+# You can test this function in the shell until it works fine, then copy it
+# into the field below, and we'll see if it is correct. Note that you shouldn't
+# PRINT anything, just RETURN the correct values.
+
+# ---- code start ----
+import math
+
+
+# Modify this function in the shell and copy the new version here
+def my_sqrt(value):
+    if type(value) is int or type(value) is float:
+        return math.sqrt(value)
+    elif type(value) is str:
+        return "The string should be converted into a numeric data type"
+    else:
+        return None
+==============================================================================
+
+# A simple interest calculation
+# Medium
+# 1207 users solved this problem. Latest completion was 1 day ago.
+# 
+# Below you can find a simple program that performs simple interest
+# calculation. The part that asks a user for the needed data has already been
+# written for you. Now you need to write the final parts that will do all the
+# heavy lifting:
+# 
+# calculate() should perform interest calculation and return the final interest
+# amount and the total sum.
+# print_result() should print out the final interest amount and the total sum,
+# as shown in the Sample Output below.
+# 
+# Here is the formula for calculating the interest:
+# interest=amount×interest  rate×time100 interest = \frac {amount \times
+# interest\;rate \times time}{100}interest=100amount×interestrate×time​
+# 
+# In the Sample Input below, the first number is the starting amount, followed
+# by the interest rate in % and the number of years.
+# 
+# You do NOT need to call the functions, just complete them!
+
+# ---- code start ----
+def calculate(amount, interest_rate, time):
+    # your code here
+    interest = (amount * interest_rate * time) / 100
+    total_amount = amount + interest
+    return interest, total_amount
+
+
+def print_result(interest, total_amount):
+    # your code here
+    print(f"The interest is: {interest:.1f}")
+    print(f"The total amount is: {total_amount:.1f}")
