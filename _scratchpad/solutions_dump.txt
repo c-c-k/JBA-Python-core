@@ -3718,3 +3718,108 @@ def print_result(interest, total_amount):
     # your code here
     print(f"The interest is: {interest:.1f}")
     print(f"The total amount is: {total_amount:.1f}")
+==============================================================================
+
+
+# Temperature
+# Hard
+# 8114 users solved this problem. Latest completion was 1 day ago.
+# 
+# Below you can see a draft of a program for a basic temperature converter from
+# Fahrenheit to Celsius and vice versa. You need to finish the program by
+# creating a sort of entry point for the program in the function main.
+# 
+# In this function, you should:
+# 
+# process the input. The input is a string containing a temperature value and a
+# unit of measurement which are separated by a whitespace character. We already
+# wrote the code that reads the input and creates the variables, but you still
+# need to figure out what the right type is for each of them and convert if
+# necessary;
+# call the appropriate function depending on what was given in the input;
+# print the converted temperature with the new unit.
+# 
+# Use the examples as a guide.
+# 
+# You do NOT need to call the function main.
+
+# ---- code start ----
+from typing import Callable
+
+
+def fahrenheit_to_celsius(temps_f: float) -> float:
+    temps_c = (temps_f - 32) * 5 / 9
+    return round(temps_c, 2)
+
+
+def celsius_to_fahrenheit(temps_c: float) -> float:
+    temps_f = temps_c * 9 / 5 + 32
+    return round(temps_f, 2)
+
+
+def select_converter_function_for_unit(unit: str) -> Callable[[float], float]:
+    if unit == 'f':
+        return fahrenheit_to_celsius
+    else:
+        return celsius_to_fahrenheit
+
+
+def switch_unit(unit: str) -> str:
+    if unit == 'f':
+        return 'c'
+    else:
+        return 'f'
+
+
+def print_temperature(temperature: float, unit: str):
+    temperature = round(temperature, 1)
+    print(" ".join([str(temperature), unit]))
+
+
+def main():
+    """Entry point of the program."""
+    temperature, unit = input().split()  # read the input
+    temperature = float(temperature)
+    unit_converter = select_converter_function_for_unit(unit)
+    temperature = unit_converter(temperature)
+    unit = switch_unit(unit)
+    print_temperature(temperature, unit)
+==============================================================================
+
+# Which type of copy?
+# Medium
+# 831 users solved this problem. Latest completion was 1 day ago.
+# 
+# You found a machine that can copy objects. It is a device that takes an
+# object and returns its copy. The problem is that you don't know if it creates
+# a shallow copy or a deep copy. You should solve this problem.
+# 
+# To do this, write a function detect_copy() which takes no arguments. From
+# this function, you should call the predefined function copying_machine(obj);
+# it takes the passed object obj and returns either its shallow copy or its
+# deep copy. The copying machine function makes only one type of copy, and your
+# function should find this out and return "shallow copy" or "deep copy".
+# 
+# You do NOT need to read anything from the input, define obj for yourself. For
+# example, it can be obj = [[1, 2], [3, 4]].
+# 
+# You can call copying_machine() in the following way: copy_obj =
+# copying_machine(obj).
+# 
+
+# ---- code start ----
+import copy
+
+# copying_machine = copy.copy
+obj = [1, [1, 2], [3, 4]]
+
+
+def detect_copy():
+    copy_obj = copying_machine(obj)
+    for element, copy_element in zip(obj, copy_obj):
+        if id(element) != id(copy_element):
+            return "deep copy"
+    return "shallow copy"
+
+
+# print(detect_copy())
