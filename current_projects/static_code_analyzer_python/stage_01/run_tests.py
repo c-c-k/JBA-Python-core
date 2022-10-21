@@ -80,7 +80,7 @@ class TestGetFilePath(Test):
         test_path = "/dev/shm/test"
         self.__original_argv = sys.argv[:]
         sys.argv = [sys.argv[0], test_path]
-        stage_path = stage_main._get_test_file_path()
+        stage_path = stage_main._get_test_dir_path()
         assert stage_path == test_path, ("Mismatch: "
                                          f"intended path : {test_path} ,"
                                          f" actual path: {stage_path}")
