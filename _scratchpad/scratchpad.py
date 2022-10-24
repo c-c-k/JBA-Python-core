@@ -10,23 +10,21 @@
 # solutions_dump.
 #
 
-# Mr. and Ms. Smith
-# Medium
-# 1191 users solved this problem. Latest completion was about 4 hours ago.
+# Nursery rhymes
+# Hard
+# 598 users solved this problem. Latest completion was about 12 hours ago.
 # 
-# Let's try to differentiate between some kinds of honorifics. Write a
-# regular expression in the variable template in such a way that it would
-# match the following strings:
+# Imagine you have to write a poem for kids about animals. You struggle with
+# finding appropriate rhymes for the word bunny. Write a regexp pattern that
+# will match the right words: they should be from 4 to 7 letters long and end
+# with -nny or -ney. Note that the pattern should only match strings containing
+# letters—for example, the string 123nny should not be considered a good
+# result.
 # 
-# Mr Smith
-# Mr. Smith
-# Ms Smith
-# Ms. Smith
-# 
-# Note that your template should not match any other strings (for example,
-# Dr. Smith).
+# Put your regexp in the template variable. You do NOT need to print any
+# results.
 
 # ---- code start ----
 import re
-# define regex template
-template = r'M[rs]\.? Smith'
+# put your regex in the variable template
+template = "[a-zA-Z]{1,4}n[en]y"
