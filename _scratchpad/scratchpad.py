@@ -10,21 +10,54 @@
 # solutions_dump.
 #
 
-# Nursery rhymes
-# Hard
-# 598 users solved this problem. Latest completion was about 12 hours ago.
+# Restaurant
+# Medium
+# 1932 users solved this problem. Latest completion was 3 days ago.
 # 
-# Imagine you have to write a poem for kids about animals. You struggle with
-# finding appropriate rhymes for the word bunny. Write a regexp pattern that
-# will match the right words: they should be from 4 to 7 letters long and end
-# with -nny or -ney. Note that the pattern should only match strings containing
-# letters—for example, the string 123nny should not be considered a good
-# result.
+# Imagine you are having dinner in a very fancy restaurant, but unfortunately
+# you don't have a lot of money with you. You want to have a main course, a
+# dessert and a drink, but all that together shouldn't cost more than $30.
 # 
-# Put your regexp in the template variable. You do NOT need to print any
-# results.
+# The names of the main courses, desserts and drinks are stored in the lists
+# main_courses, desserts and drinks respectively. The corresponding prices
+# can be found in the lists price_main_courses, price_desserts and
+# price_drinks.
+# 
+# Consider each possible combination of a main course, dessert and a drink
+# from those offered by the restaurant and print out only those meals that
+# satisfy your budget, along with their total costs.
+# 
+# For instance, imagine the dishes and prices are as defined below:
+# 
+# main_courses = ['beef stew', 'fried fish']
+# price_main_courses = [28, 23]
+# 
+# desserts = ['ice-cream', 'cake']
+# price_desserts = [2, 4]
+# 
+# drinks = ['cola', 'wine']
+# price_drinks = [3, 10]
+# 
+# Then, your output should be the following:
+# 
+# fried fish ice-cream cola 28
+# fried fish cake cola 30
+# 
 
 # ---- code start ----
-import re
-# put your regex in the variable template
-template = "[a-zA-Z]{1,4}n[en]y"
+import itertools
+MONEY = 30
+# main_courses = ['beef stew', 'fried fish']
+# price_main_courses = [28, 23]
+# desserts = ['ice-cream', 'cake']
+# price_desserts = [2, 4]
+# drinks = ['cola', 'wine']
+# price_drinks = [3, 10]
+
+for diner, diner_costs in zip(
+    itertools.product(main_courses, desserts, drinks),
+    itertools.product(price_main_courses, price_desserts, price_drinks)
+):
+    diner_total_cost = sum(diner_costs)
+    if diner_total_cost <= MONEY:
+        print(" ".join(diner), diner_total_cost)

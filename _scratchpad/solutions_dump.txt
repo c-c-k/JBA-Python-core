@@ -4014,3 +4014,201 @@ class House:
 import re
 # define regex template
 template = '20[01]\d'
+==============================================================================
+
+# Nursery rhymes
+# Hard
+# 598 users solved this problem. Latest completion was about 12 hours ago.
+# 
+# Imagine you have to write a poem for kids about animals. You struggle with
+# finding appropriate rhymes for the word bunny. Write a regexp pattern that
+# will match the right words: they should be from 4 to 7 letters long and end
+# with -nny or -ney. Note that the pattern should only match strings containing
+# letters—for example, the string 123nny should not be considered a good
+# result.
+# 
+# Put your regexp in the template variable. You do NOT need to print any
+# results.
+
+# ---- code start ----
+import re
+# put your regex in the variable template
+template = "[a-zA-Z]{1,4}n[en]y"
+==============================================================================
+
+# Letters of a word
+# Medium
+# 2725 users solved this problem. Latest completion was 2 days ago.
+# 
+# Define a generator letters that would generate letters from a given word one
+# by one.
+# 
+# You don't have to handle input or print anything.
+
+# ---- code start ----
+def letters(word):
+    i = 0
+    while i < len(word):
+        yield word[i]
+        i += 1
+==============================================================================
+
+# Squares
+# Hard
+# 1892 users solved this problem. Latest completion was 2 days ago.
+# 
+# Define a generator squares that produces an infinite sequence of the squares
+# of all natural numbers (1, 4, 9, 16, ...).
+# 
+# For a given number n, print out the first n elements each on a new line.
+
+# ---- code start ----
+def squares():
+    i = 1
+    while True:
+        yield i ** 2
+        i += 1
+
+
+# Don't forget to print out the first n numbers one by one here
+n = int(input())
+sq_it = squares()
+for _ in range(n):
+    print(next(sq_it))
+==============================================================================
+
+# Fibonacci sequence
+# Hard
+# 1862 users solved this problem. Latest completion was 2 days ago.
+# 
+# Fibonacci sequence is a sequence of numbers such that each element is a sum
+# of the previous two, and the first two elements are equal to 0 and 1. For
+# example, the first 10 numbers in the sequence will look as follows:
+# 
+# 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
+# 
+# Define a generator that produces the Fibonacci sequence of the given length
+# n.
+# 
+# You don't have to handle the input, just implement the generator function
+# called fibonacci.
+
+# ---- code start ----
+def fibonacci(n):
+    i = 1
+    if n <= 0:
+        return
+    num_1 = 0
+    yield num_1
+    num_2 = 1
+    while i < n:
+        yield num_2
+        num_sum = num_1 + num_2
+        num_1 = num_2
+        num_2 = num_sum
+        i += 1
+
+
+print(*fibonacci(10))
+==============================================================================
+
+# A list of nodes
+# Medium
+# 323 users solved this problem. Latest completion was about 8 hours ago.
+# 
+# Complete the code below. Build an AST of the expression, put all nodes in a
+# list, and print the list length.
+
+# ---- code start ----
+import ast
+expression = "(34 + 6) * (23**2 - 7 + 45**2)"
+# put your code here
+tree = ast.parse(expression)
+node_list = list(ast.walk(tree))
+print(len(node_list))
+==============================================================================
+
+# The imports
+# Hard
+# 192 users solved this problem. Latest completion was about 7 hours ago.
+# 
+# There is a predefined variable code that contains the source code. Write a
+# program that will traverse the tree and print the name of each Import. Each
+# name should be on a new line.
+# 
+
+# ---- code start ----
+import ast
+from typing import Any
+import pathlib
+
+test_path = pathlib.Path("./test.py")
+code = test_path.read_text()
+
+tree = ast.parse(code)
+
+
+# put your code here
+
+
+class ImportNamePrinter(ast.NodeVisitor):
+    def __init__(self):
+        super().__init__()
+        self.node = None
+
+    # def visit_Import(self, node: ast.Import) -> Any:
+    #     for alias in node.names:
+    #         print(alias.name)
+    #     self.generic_visit(node)
+
+    # def visit_ImportFrom(self, node: ast.Import) -> Any:
+    #     print(node.module)
+    #     self.generic_visit(node)
+
+    def generic_visit(self, node: ast.AST) -> Any:
+        self.node = node
+        if isinstance(node, ast.Import):
+            print(*(alias.name for alias in node.names), sep="\n")
+        elif isinstance(node, ast.ImportFrom):
+            print(node.module)
+        super().generic_visit(node)
+
+
+import_name_printer = ImportNamePrinter()
+import_name_printer.visit(tree)
+==============================================================================
+
+
+==============================================================================
+
+# Choosing a name
+# Medium
+# 2650 users solved this problem. Latest completion was about 11 hours ago.
+# 
+# Young parents are choosing a name for their newborn daughter. They made
+# lists of n first and m middle names they like, first_names and middle_names
+# respectively. Now they should consider all possible combinations of those
+# to find the one they like the most.
+# 
+# Considering both lists defined, print out the combinations of names the
+# parents will be choosing from.
+# 
+# For example, given first_names = ['Anna', 'Catarina'] and middle_names =
+# ['Luisa', 'Maria'], the output should look like
+# 
+# Anna Luisa
+# Anna Maria
+# Catarina Luisa
+# Catarina Maria
+# 
+# Use the functionality from the itertools module to solve this problem.
+# 
+
+# ---- code start ----
+import itertools
+# first_names = ['Anna', 'Catarina']
+# middle_names = ['Luisa', 'Maria']
+
+for name in itertools.product(first_names, middle_names):
+    print(" ".join(name))
+
