@@ -4212,3 +4212,205 @@ import itertools
 for name in itertools.product(first_names, middle_names):
     print(" ".join(name))
 
+==============================================================================
+
+# Restaurant
+# Medium
+# 1932 users solved this problem. Latest completion was 3 days ago.
+# 
+# Imagine you are having dinner in a very fancy restaurant, but unfortunately
+# you don't have a lot of money with you. You want to have a main course, a
+# dessert and a drink, but all that together shouldn't cost more than $30.
+# 
+# The names of the main courses, desserts and drinks are stored in the lists
+# main_courses, desserts and drinks respectively. The corresponding prices
+# can be found in the lists price_main_courses, price_desserts and
+# price_drinks.
+# 
+# Consider each possible combination of a main course, dessert and a drink
+# from those offered by the restaurant and print out only those meals that
+# satisfy your budget, along with their total costs.
+# 
+# For instance, imagine the dishes and prices are as defined below:
+# 
+# main_courses = ['beef stew', 'fried fish']
+# price_main_courses = [28, 23]
+# 
+# desserts = ['ice-cream', 'cake']
+# price_desserts = [2, 4]
+# 
+# drinks = ['cola', 'wine']
+# price_drinks = [3, 10]
+# 
+# Then, your output should be the following:
+# 
+# fried fish ice-cream cola 28
+# fried fish cake cola 30
+# 
+
+# ---- code start ----
+import itertools
+MONEY = 30
+# main_courses = ['beef stew', 'fried fish']
+# price_main_courses = [28, 23]
+# desserts = ['ice-cream', 'cake']
+# price_desserts = [2, 4]
+# drinks = ['cola', 'wine']
+# price_drinks = [3, 10]
+
+for diner, diner_costs in zip(
+    itertools.product(main_courses, desserts, drinks),
+    itertools.product(price_main_courses, price_desserts, price_drinks)
+):
+    diner_total_cost = sum(diner_costs)
+    if diner_total_cost <= MONEY:
+        print(" ".join(diner), diner_total_cost)
+==============================================================================
+
+# Football tournament
+# Medium
+# 1855 users solved this problem. Latest completion was 24 minutes ago.
+# 
+# You are organizing a local football tournament. At the initial state, each
+# team plays against every other one once.
+# 
+# The list teams contains the names of the participating teams. Which games
+# will be played? Print out all of them.
+# 
+# For example, if teams = ['Best-ever', 'Not-so-good', 'Amateurs'], your output
+# should look like as follows:
+# 
+# ('Best-ever', 'Not-so-good')
+# ('Best-ever', 'Amateurs')
+# ('Not-so-good', 'Amateurs')
+
+# ---- code start ----
+import itertools
+# teams = ['Best-ever', 'Not-so-good', 'Amateurs']
+# the variable 'teams' is already defined
+for game in itertools.combinations(teams, 2):
+    print(game)
+==============================================================================
+
+# Flower shop
+# Medium
+# 1794 users solved this problem. Latest completion was 30 minutes ago.
+# 
+# A flower shop has various flowers available, all listed in the flower_names
+# list. You can buy a bouquet containing one, two or three different kinds of
+# flowers.
+# 
+# Considering the list flower_names defined, print out all possible bouquets
+# you can get. Note that the length of flower_names is arbitrary, while
+# bouquets you are interested in should only contain from 1 to 3 flowers.
+# 
+# For example, if flower_names = ['rose', 'tulip', 'sunflower', 'daisy'], your
+# answer should look as follows:
+# 
+# ('rose',)
+# ('tulip',)
+# ('sunflower',)
+# ('daisy',)
+# ('rose', 'tulip')
+# ('rose', 'sunflower')
+# ('rose', 'daisy')
+# ('tulip', 'sunflower')
+# ('tulip', 'daisy')
+# ('sunflower', 'daisy')
+# ('rose', 'tulip', 'sunflower')
+# ('rose', 'tulip', 'daisy')
+# ('rose', 'sunflower', 'daisy')
+# ('tulip', 'sunflower', 'daisy')
+# 
+
+# ---- code start ----
+import itertools
+# flower_names = ['rose', 'tulip', 'sunflower', 'daisy']
+bouquets = itertools.chain(
+    *(itertools.combinations(flower_names, num_flower_types)
+        for num_flower_types in range(1, 4)))
+for bouquet in bouquets:
+    print(bouquet)
+==============================================================================
+
+# Translator
+# Medium
+# 611 users solved this problem. Latest completion was 2 days ago.
+# 
+# Correct the code below so it would print an English word with its Spanish
+# translation.
+
+# ---- code start ----
+def translate(**eng_span_dict):
+    for eng_word, span_word in eng_span_dict.items():
+        print(eng_word, ":", span_word)
+
+
+words = {
+    "mother": "madre",
+    "father": "padre",
+    "grandmother": "abuela",
+    "grandfather": "abuelo"
+}
+
+translate(**words)
+==============================================================================
+
+# Sort the flowers
+# Easy
+# 1408 users solved this problem. Latest completion was 5 days ago.
+# 
+# Mrs. Smith works in a flower shop. Here you can see a table with the flower
+# prices:
+# flower     price, $
+# rose   0.75
+# lily   1.3
+# tulip  1
+# hyacinth   0.70
+# 
+# Mrs. Smith needs to sort prices in the descending order. Write a program to
+# help her!
+# 
+# The input you will get is a list of numbers, e.g. [0.75, 1.3, 1, 0.70]. The
+# result should be this list sorted in the descending order, [1.3, 1, 0.75,
+# 0.7] for the example above. Please print the sorted list in the end.
+
+# ---- code start ----
+# the following line creates a list from the input, do not modify it, please
+prices = [float(price) for price in input().split()]
+# your code below
+prices.sort(reverse=True)
+print(prices)
+==============================================================================
+
+# Something in common
+# Easy
+# 7579 users solved this problem. Latest completion was about 14 hours ago.
+# 
+# In the code template below, you can see two functions that represent
+# different mathematical processes. However, there is a line of code repeated
+# in both of these functions. Since this part of code does the same thing in
+# both functions, it can be moved from these functions into another separate
+# function.
+# 
+# Find this line of code and create a function with it. Name this function
+# common_part. For now, you may leave the existing functions unchanged.
+# 
+# You do NOT need to work with the input or call any functions.
+# 
+
+# ---- code start ----
+def calculate_linear(k, b, x):
+    y = k * x + b
+    return common_part(y)
+
+
+def calculate_quadratic(a, b, c, x):
+    y = (a * x * x) + (b * x) + c
+    return common_part(y)
+
+
+# create function common_part
+def common_part(result):
+    print("Value of the function equals", result)
+    return result
