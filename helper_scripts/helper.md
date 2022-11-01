@@ -1,0 +1,105 @@
+## PROGRAM ABSTRACT
+ - ? Startup and initialise script for persistent background run.
+ - ? Get activation info from a pipe or stdin or something.
+ - Set up argparse:
+   - Set description to first line of module docstring.
+   - Required option "--file" containing either:
+     - The path to a question solution edit file.
+     - TODO: The path to one of the files of a currently worked on project.
+   - Required option "--action" with the choices: 
+     - "question_paste" to paste the X clipboard selection into the currently edited question solution file.
+     - "question_copy" to copy the currently edited question's solution code text to the X normal clipboard.
+     - TODO: project options.
+   - PENDING REMOVAL:
+     - _~~Required option "--track" with choices of actively studied JBA tracks (currently "py_core" or "fe_core").~~_
+ - Get invocation info from argparse:
+   - Get the relevant file path.
+     - planed variable name: current_file_path.
+   - Get the required action.
+     - planed variable name: current_action.
+   - PENDING REMOVAL:
+     - _~~Get the JBA track for which the question should be handled.~~_
+ - In case of a topic question related action: 
+   - Use the file path to deduce the question's programing language.
+   - Set work paths:
+     - planed variable names: 
+       - solutions_dir: Track's solved questions dir.
+       - question_template: track's question template.
+     - If the required action is "question_paste":
+       - Set the track's solved questions dir and question template according to the question's programming language.
+     - If the required action is "question_copy":
+       - Set the track's solved questions dir and question template to None.
+   - Execute requested action: 
+     - If the required action is "question_paste":
+       - Archive the previously edited question.
+         - Copy the currently edited question file to the solved questions' directory.
+           - If the question's docstring contains the topic name use it for the subdirectory name, otherwise, use "unknown_topic" subdirectory name.
+           - If the question's docstring contains the question's name use it for the filename, otherwise, use "question_xxx" with xxx replaced with an integer incrementing for each nameless question in the relevant subdirectory.
+           - For both subdirectory and file names, replace all spaces with underscores and remove all non-ascii characters, if the name remains empty or contains only underscores, treat it as if no name was present in the docstring.
+       - Read the X selection clipboard which should contain
+         the J.B.A topic question.
+         - TODO: decide on execution details after reading xclip
+                 and xsel man-pages.
+       - Extract the question's elements from the question's text:
+         - Start with a regex approach, if it proves troublesome switch to writing a specialized function.
+         - The question copied from JBA should have the following structure:
+           - NOTE: Don't forget to account for new line characters.
+           - TOPIC_CATEGORY_PATH:
+             - Single line.
+             - The topic nodes can be split using their initial title capital letters, regex would probably be the simplest way to implement the splitting.
+           - TOPIC_NAME:
+             - Single line.
+           - "Topic repetition":
+             - Optional single line which should be skipped if present.
+           - QUESTION_NAME:
+             - Single line.
+             - Also, "Problem of the day" suffix should be removed if present.
+           - "Next problem in...":
+             - Optional single line which should be skipped if present.
+           - QUESTION_RATING:
+             - Single line.
+           - QUESTION_BODY:
+             - Multi-line, terminates at start of next element.
+             - Start the replacement two lines after the question
+               rating and continue it until the line containing
+               "".
+           - "Report a typo":
+             - Single line which can be used as a terminator for the question body element.
+           - SAMPLE_IO:
+             - Optional Multi-line, terminates at start of next element.
+           - "Write a program":
+             - Multi-line block that can be used to terminate the sample io element and find the start of the question solution element.
+             - To find this block's end:
+               - After the blocks start find the first line that contains nothing other than the line number "1".
+               - After the above line, skip all lines that contain nothing other than incrementing line numbers.
+               - The first line of the question solution element should either be entirely empty or contain some text that isn't line numbers
+           - QUESTION_SOLUTION:
+             - Multi-line, last question element.
+       - Format the question's text.
+         - Read the question's template.
+         - Use template strings for formatting because it's safer.
+         - Substitute the following identifiers with the elements extracted from the question's text:
+           - TOPIC_CATEGORY_PATH
+           - TOPIC_NAME
+           - QUESTION_NAME
+           - QUESTION_RATING
+           - QUESTION_BODY
+           - SAMPLE_IO
+           - QUESTION_SOLUTION
+       - Rewrite or overwrite the currently edited question file
+         with the new question's text.
+         - Start with overwrite (mode="w") if it causes problems
+           change to rewrite (mode="a" and then seek(0)).
+       - Return or exit.
+         - For the time being simply let the script finish on its own.
+     - If the required action is "question_copy":
+       - Extract the solution's code text from the currently edited question file.
+         - Read lines until reaching the question solution code start marker and then copy all following text to a string variable.
+       - Remove test code blocks from the question solution string.
+         - TODO: This will probably be more headache than it's worth.
+       - Copy the extracted text to the X normal clipboard.
+         - TODO: decide on execution details after reading xclip
+                 and xsel man-pages.
+       - Return or exit.
+         - For the time being simply let the script finish on its own.
+ - TODO: Handle project related action execution.
