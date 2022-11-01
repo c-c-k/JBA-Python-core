@@ -7,18 +7,19 @@
      - The path to a question solution edit file.
      - TODO: The path to one of the files of a currently worked on project.
    - Required option "--action" with the choices: 
-     - "question_paste" to paste the X clipboard selection into the currently edited question solution file.
      - "question_copy" to copy the currently edited question's solution code text to the X normal clipboard.
+     - "question_paste" to paste the X clipboard selection into the currently edited question solution file.
      - TODO: project options.
    - PENDING REMOVAL:
      - _~~Required option "--track" with choices of actively studied JBA tracks (currently "py_core" or "fe_core").~~_
  - Get invocation info from argparse:
    - Get the relevant file path.
-     - planed variable name: current_file_path.
    - Get the required action.
-     - planed variable name: current_action.
    - PENDING REMOVAL:
      - _~~Get the JBA track for which the question should be handled.~~_
+ - Choose primary execution mode (question or project).
+   - question primary execution mode actions: question_copy, question_paste.
+   - TODO: project primary execution mode actions.
  - In case of a topic question related action: 
    - Use the file path to deduce the question's programing language.
    - Set work paths:
@@ -26,20 +27,19 @@
        - solutions_dir: Track's solved questions dir.
        - question_template: track's question template.
      - If the required action is "question_paste":
-       - Set the track's solved questions dir and question template according to the question's programming language.
      - If the required action is "question_copy":
        - Set the track's solved questions dir and question template to None.
    - Execute requested action: 
      - If the required action is "question_paste":
        - Archive the previously edited question.
+         - Choose the question's archive subdirectory according to the question's programming language.
          - Copy the currently edited question file to the solved questions' directory.
            - If the question's docstring contains the topic name use it for the subdirectory name, otherwise, use "unknown_topic" subdirectory name.
-           - If the question's docstring contains the question's name use it for the filename, otherwise, use "question_xxx" with xxx replaced with an integer incrementing for each nameless question in the relevant subdirectory.
+           - If the question's docstring contains the question's name use it for the filename, otherwise, use "question_xxx" with xxx replaced with the current numbber of "question_xxx" files in the relevant subdirectory.
            - For both subdirectory and file names, replace all spaces with underscores and remove all non-ascii characters, if the name remains empty or contains only underscores, treat it as if no name was present in the docstring.
        - Read the X selection clipboard which should contain
          the J.B.A topic question.
-         - TODO: decide on execution details after reading xclip
-                 and xsel man-pages.
+         - For the time being use xsel adjusted implementation based on the example at: https://stackoverflow.com/questions/43860227/python-getting-and-setting-clipboard-data-with-subprocesses .
        - Extract the question's elements from the question's text:
          - Start with a regex approach, if it proves troublesome switch to writing a specialized function.
          - The question copied from JBA should have the following structure:
@@ -76,7 +76,7 @@
            - QUESTION_SOLUTION:
              - Multi-line, last question element.
        - Format the question's text.
-         - Read the question's template.
+         - Read the question's template according to the question's programming language.
          - Use template strings for formatting because it's safer.
          - Substitute the following identifiers with the elements extracted from the question's text:
            - TOPIC_CATEGORY_PATH
@@ -98,8 +98,7 @@
        - Remove test code blocks from the question solution string.
          - TODO: This will probably be more headache than it's worth.
        - Copy the extracted text to the X normal clipboard.
-         - TODO: decide on execution details after reading xclip
-                 and xsel man-pages.
+         - For the time being use xsel adjusted implementation based on the example at: https://stackoverflow.com/questions/43860227/python-getting-and-setting-clipboard-data-with-subprocesses .
        - Return or exit.
          - For the time being simply let the script finish on its own.
  - TODO: Handle project related action execution.
