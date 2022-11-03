@@ -1,1 +1,3 @@
-### A mixed pasta dish of my exercise and project solutions for Jet Brain Academy's "PYTHON CORE" track.
+# JetBrains HyperSkill studies repository.
+
+This Repository contains a mixed pasta dish of my topic questions solutions and projects for my studies in the **JetBrains Academy**.
