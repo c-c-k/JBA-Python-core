@@ -79,7 +79,7 @@
          - Read the question's template according to the question's programming language.
          - Use template strings for formatting because it's safer.
          - Substitute the following identifiers with the elements extracted from the question's text:
-           - TOPIC_CATEGORY_PATH
+           - TOPIC_CATEGORY
            - TOPIC_NAME
            - QUESTION_NAME
            - QUESTION_RATING

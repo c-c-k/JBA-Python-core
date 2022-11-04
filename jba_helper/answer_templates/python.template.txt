@@ -9,6 +9,7 @@ Question name: ${QUESTION_NAME}
 Question rating: ${QUESTION_RATING}
 -=- QUESTION BODY -=-
 ${QUESTION_BODY}
+-=- QUESTION BODY -=-
 """
 
 

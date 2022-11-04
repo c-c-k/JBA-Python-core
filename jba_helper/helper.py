@@ -1,0 +1,456 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""Helper script for editing J.B.A topic questions and projects.
+
+This script executes a number of frequently used helper actions
+for solving J.B.A. topic questions and projects.
+It is meant to be invoked by an IDE shortcut that executes an external
+program on the currently edited file.
+The IDE should pass the file path and required action to this script.
+The currently implemented actions are:
+  - Paste question text copied from the J.B.A. site into the currently
+   edited action file (NOTE: The X selection used here is the PRIMARY
+   selection, that is highlighted text and not <C-V>).
+  - Copy the currently edited question's solution code to the clipboard
+   (NOTE: The X selection used here is the clipboard selection,
+   that is <C-C> and not highlighted text ).
+"""
+
+# --------------------
+# --IMPORTS
+# --------------------
+# Standard library modules:
+# import argparse
+import enum
+# import os
+import typing
+from pathlib import Path
+import re
+import string
+import subprocess
+import time
+
+
+# Third party modules:
+
+# Local scripts and modules:
+
+
+# --------------------
+# --EXCEPTIONS
+# --------------------
+class JBAHelperError(Exception):
+    pass
+
+
+# --------------------
+# --DATA TYPES
+# --------------------
+class LanguageInfo(typing.NamedTuple):
+    language: "Language"
+    action_file: Path
+    full_archive: Path
+    censored_archive: Path
+    file_suffix: str
+    template_file: Path
+    re_element_extractor: typing.Pattern
+
+
+# --------------------
+# --ENUMS AND CONSTANTS
+# --------------------
+# Supported actions.
+class Action(enum.Enum):
+    IMPORT_QUESTION = enum.auto()
+    EXPORT_ANSWER = enum.auto()
+
+
+# Supported programing languages.
+class Language(enum.Enum):
+    PYTHON = enum.auto()
+
+
+# --------------------
+# --PATHS
+# --------------------
+PATH_ACTIONS_REQUEST = Path("/dev/shm/jba_helper_action_request.tmp")
+PATH_JBA_ROOT = Path(__file__).resolve().parents[1]
+# Currently worked on questions' paths.
+PATH_TOPIC_QUESTIONS_BASE = Path(
+    PATH_JBA_ROOT, "topic_question_solutions/")
+PATH_QUESTIONS_CURRENT_PYTHON = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "current.py")
+# Full solution archives (This should not be uploaded to a public
+# GitHub repo out of licensing concerns).
+PATH_ARCHIVE_FULL_BASE = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "archive/full/")
+PATH_ARCHIVE_FULL_PYTHON = Path(
+    PATH_ARCHIVE_FULL_BASE, "python/")
+# Censored solution archives (The full question text is removed
+# out of licensing concerns).
+PATH_ARCHIVE_CENSORED_BASE = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "archive/censored/")
+PATH_ARCHIVE_CENSORED_PYTHON = Path(
+    PATH_ARCHIVE_CENSORED_BASE, "python/")
+# Per programing language solution template file.
+DIR_TEMPLATE_BASE = Path(
+    PATH_JBA_ROOT, "jba_helper/answer_templates/")
+PATH_TEMPLATE_PYTHON = Path(
+    DIR_TEMPLATE_BASE, "python.template.txt")
+
+# --------------------
+# --REGEX
+# --------------------
+re_question_name_archive = re.compile(r"^Question name: (.+)\n", re.MULTILINE)
+re_question_topic_archive = re.compile(r"^Topic name: (.+)\n", re.MULTILINE)
+re_archive_censor = re.compile(
+    r"(-=- QUESTION BODY -=-\n).*(\n-=- QUESTION BODY -=-)",
+    re.MULTILINE | re.DOTALL)
+re_topic_category_spliter = re.compile("[A-Z][a-z0-9 ]*")
+re_question_elements_head = re.compile(
+    (
+        r"(?P<TOPIC_CATEGORY>.+)\n"
+        r"(?P<TOPIC_NAME>.+)\n"
+        r"(?:Topic repetition\n)?"
+        r"(?P<QUESTION_NAME>.+?)(?: Problem of the day)?\n"
+        r"(?:Next problem in.+\n)?"
+        r"(?P<QUESTION_RATING>Easy|Medium|Hard)\n"
+        r"\d+ user.+\n"
+        r"(?P<QUESTION_BODY>(?:.*\n)+?)"
+        r"Report a typo\n"
+        r"(?P<SAMPLE_IO>(?:.*\n)*?)"
+    ), re.MULTILINE)
+re_question_elements_tail_normal = re.compile(
+    (
+        r"Write a program\n"
+        r"(?:.*\n)+?"
+        r"^1\n(?:^\d+\n)*"
+        r"(?P<QUESTION_SOLUTION>(?s:.*))"
+    ), re.MULTILINE)
+re_question_elements_tail_html_css = re.compile(
+    (
+        r"Write HTML and CSS code\n"
+        r"(?:.*\n)+?"
+        r"^HTML\n"
+        r"^1\n(?:^\d+\n)*"
+        r"(?P<HTML>(?s:.*?))"
+        r"^CSS\n"
+        r"^1\n(?:^\d+\n)*"
+        r"(?P<CSS>(?s:.*?))"
+        r"^Checklist\n"
+    ), re.MULTILINE)
+re_question_elements_extractor_normal = re.compile(
+    re_question_elements_head + re_question_elements_tail_normal, re.MULTILINE
+)
+re_question_elements_extractor_html_css = re.compile(
+    re_question_elements_head + re_question_elements_tail_html_css, re.MULTILINE
+)
+
+# --------------------
+# --MAPPINGS
+# --------------------
+dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
+    # Topic action file to programing language info mapping.
+    PATH_QUESTIONS_CURRENT_PYTHON: LanguageInfo(
+        language=Language.PYTHON,
+        action_file=PATH_QUESTIONS_CURRENT_PYTHON,
+        full_archive=PATH_ARCHIVE_FULL_PYTHON,
+        censored_archive=PATH_ARCHIVE_CENSORED_PYTHON,
+        file_suffix=".py",
+        template_file=PATH_TEMPLATE_PYTHON,
+        re_element_extractor=re_question_elements_extractor_normal,
+    ),
+}
+
+
+# --------------------
+# --CLASSES
+# --------------------
+
+
+# --------------------
+# --FUNCTIONS
+# --------------------
+# == Initialize script ==
+def main():
+    # perform helper initialization procedures (currently there are none).
+    init_helper()
+    while True:
+        # Wait for an action request.
+        if no_action_request():
+            time.sleep(1)
+            continue
+        # Process action request.
+        action_file, action = process_action()
+        # Execute requested action.
+        exec_action(action_file, action)
+
+
+def init_helper():
+    pass  # PLACEHOLDER STUB
+
+
+# == Start action request handling ==
+def exec_action(action_file: Path, action: Action):
+    if action is Action.IMPORT_QUESTION:
+        exec_import_question(action_file)
+    elif action is Action.EXPORT_ANSWER:
+        exec_export_answer(action_file)
+
+
+def no_action_request() -> bool:
+    return not PATH_ACTIONS_REQUEST.exists()
+
+
+def process_action() -> tuple[Path, Action]:
+    action_request = PATH_ACTIONS_REQUEST.read_text().split(";")
+    action_file = Path(action_request[0].strip()).resolve()
+    requested_action = action_request[1].strip().upper()
+    for action in Action:
+        if action.name == requested_action:
+            return action_file, action
+    raise JBAHelperError(f"Not a supported JBA helper action: {requested_action}")
+
+
+# == Get language info ==
+def get_language_info(action_file: Path) -> LanguageInfo:
+    try:
+        return dict_action_file_to_language_info[action_file]
+    except KeyError:
+        raise JBAHelperError(f"File path '{action_file.as_posix()}' doesn't match "
+                             "any of the question solution editing file paths.")
+
+
+# == Handle topic question archiving ==
+def get_archive_names_from_text(
+        question_text: str) -> tuple[str | None, str | None]:
+    name_match = re_question_name_archive.search(question_text)
+    topic_match = re_question_topic_archive.search(question_text)
+    name = (name_match.group(1) if name_match else None)
+    topic_name = (topic_match.group(1) if name_match else None)
+    return name, topic_name
+
+
+def normalize_name(name: str | None) -> str | None:
+    """Change all non ascii alphanumeric characters to underscores."""
+    if name is None:
+        return None
+    valid_chars = string.ascii_letters + string.digits
+    name = "".join((char if char in valid_chars else "_" for char in name))
+    if name.strip("_") == "":
+        return None
+    return name
+
+
+def build_archive_dir(
+        base_archive_dir: Path, topic_name: str | None) -> Path:
+    topic_name = normalize_name(topic_name)
+    if topic_name is None:
+        topic_name = "unknown_topic"
+    archive_dir = Path(base_archive_dir, topic_name)
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    return archive_dir
+
+
+def build_archive_file_path(
+        archive_dir: Path, file_name: str | None, language_info: LanguageInfo
+) -> Path:
+    file_name = normalize_name(file_name)
+    if file_name is None:
+        next_nameless_question_id = 1 + len(
+            [file.name for file in archive_dir.glob("question_*")])
+        file_name = (
+            f"question_{next_nameless_question_id:0>4}"
+        )
+    return archive_dir.joinpath(file_name + language_info.file_suffix)
+
+
+def censor_question_text(question_text: str) -> str:
+    return re_archive_censor.sub(r"\1Question text censored.\2", question_text)
+
+
+def archive_previous_question(language_info: LanguageInfo):
+    file_to_archive = language_info.action_file
+    full_archive = language_info.full_archive
+    censored_archive = language_info.censored_archive
+    # Read the questions text from the action file to deduce from it
+    # the name and topic subdirectory for the question's archive file.
+    question_text = file_to_archive.read_text()
+    # Handle edge case where the file was manually emptied
+    # or is otherwise empty.
+    if question_text.strip() == "":
+        return
+    # extract question and topic names from the question's text.
+    name, topic_name = get_archive_names_from_text(question_text)
+    # construct full archive path from question and topic names.
+    full_archive = build_archive_dir(full_archive, topic_name)
+    censored_archive = build_archive_dir(censored_archive, topic_name)
+    full_archive = build_archive_file_path(full_archive, name, language_info)
+    censored_archive = build_archive_file_path(censored_archive, name, language_info)
+    # Archive full question.
+    full_archive.write_text(question_text)
+    # Censor and archive censored question.
+    question_text = censor_question_text(question_text)
+    censored_archive.write_text(question_text)
+
+
+# == Communicate with X selection clipboard ==
+def get_primary_x_selection_text() -> str:
+    x_selection_pipe = subprocess.Popen(
+        ["xsel", "--primary", "--output"], stdout=subprocess.PIPE)
+    question_text = x_selection_pipe.stdout.read()
+    # exit_status = x_selection_pipe.wait()
+    x_selection_pipe.stdout.close()
+    return question_text.decode()
+
+
+def set_clipboard_x_selection_text(text: str):
+    x_selection_pipe = subprocess.Popen(
+        ["xsel", "--clipboard", "--input"], stdin=subprocess.PIPE)
+    x_selection_pipe.stdin.write(text.encode())
+    x_selection_pipe.stdin.close()
+    # exit_status = x_selection_pipe.wait()
+
+
+# == Handle import question action ==
+def format_topic_category(substitution_dict: dict[str, str]) -> dict[str, str]:
+    topic_category = substitution_dict["TOPIC_CATEGORY"]
+    topic_category = re_topic_category_spliter.findall(topic_category)
+    topic_category = " -> ".join(topic_category)
+    substitution_dict["TOPIC_CATEGORY"] = topic_category
+    return substitution_dict
+
+
+def get_substitution_elements(language_info: LanguageInfo) -> dict[str, str]:
+    # Read the new question's text from the X primary selection.
+    question_text = get_primary_x_selection_text()
+    # Get the language's regex element extractor and use it
+    # to extract the question elements.
+    re_element_extractor = language_info.re_element_extractor
+    match = re_element_extractor.match(question_text)
+    # Fail in case the X primary selection didn't contain a question for import.
+    if not match:
+        raise JBAHelperError("Can't get base question elements "
+                             "from primary X selection.")
+    # Turn the regex match object into a dictionary and fix the category string.
+    substitution_dict = match.groupdict()
+    format_topic_category(substitution_dict)
+    return substitution_dict
+
+
+def get_answer_base_text(language_info: LanguageInfo) -> str:
+    return language_info.template_file.read_text()
+
+
+def exec_import_question(action_file: Path):
+    language_info = get_language_info(action_file)
+# def exec_import_question_python(language_info: LanguageInfo):
+    # Archive the previously edited question.
+    archive_previous_question(language_info)
+    # Extract the question's elements from the question's text:
+    substitution_dict = get_substitution_elements(language_info)
+    # Get base question text from the answer template
+    # for the given programing language.
+    question_text = get_answer_base_text(language_info)
+    # Format the question's text.
+    question_text = string.Template(
+        question_text).safe_substitute(substitution_dict)
+    # overwrite the old questions text in the current action file
+    # with the formatted text of the new question.
+    language_info.action_file.write_text(question_text)
+
+
+# == Handle export answer action ==
+def exec_export_answer(action_file: Path):
+    pass  # TODO
+
+
+# --------------------
+# --PROGRAM CODE
+# --------------------
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit("0: Normal exit by Interrupt.")
+
+# --------------------
+# --UNUSED
+# --------------------
+
+# === unused start: arg parse code ===
+
+# I initially planned to call an instance of this script
+# for each action invocation but then decided to start the script
+# for persistent running and communicate with it via a temp file or a pipe.
+
+# def main():
+#     # Set up argparse.
+#     parser = init_parser()
+#     # Get invocation info from argparse.
+#     action_file, action = parse_args(parser)
+
+
+# def init_parser() -> argparse.ArgumentParser:
+#     parser = argparse.ArgumentParser(description=__doc__)
+#     parser.add_argument(
+#         "--file", required=True,
+#         help="The path to the source/target file for the required action",
+#     )
+#     parser.add_argument(
+#         "--action", required=True, choices=ACTION_CHOICES,
+#         help="The required action.",
+#     )
+#     return parser
+
+
+# def parse_args(parser: argparse.ArgumentParser) -> tuple[str, str]:
+#     args = parser.parse_args()
+#     return args.file, args.action
+
+
+# === unused end: arg parse code ===
+
+# === unused start: primary modes ===
+# def execute_topic_mode(action_file: str, action: str):
+#     # Use the file path to deduce the question's programing language.
+#     language = get_language(action_file)
+#     # Execute the selected action:
+#     if action == ACTION_ANSWER_EXPORT:
+#         pass
+#     if action == ACTION_QUESTION_IMPORT:
+#         execute_question_import(action_file, language)
+#     else:
+#         raise ValueError(f"Unsupported action '{action}'")
+
+
+# def get_primary_execution_mode(action: str) -> str:
+#     if action in PRIMARY_MODE_QUESTION_ACTIONS:
+#         return PRIMARY_MODE_TOPIC
+#     elif action in PRIMARY_MODE_PROJECT_ACTIONS:
+#         return PRIMARY_MODE_PROJECT
+#     else:
+#         raise ValueError(f"Requested action '{action}' doesn't match "
+#                          "any primary execution mode.")
+#
+
+
+# === unused end: primary modes ===
+
+# === unused start: misc ===
+# def get_question_archive_base_dir(language: str) -> str:
+#     if language == LANGUAGE_PYTHON:
+#         return PATH_ARCHIVE_FULL_PYTHON
+#     else:
+#         raise ValueError(f"Language '{language}' doesn't have "
+#                          "a question archive directory.")
+
+
+# def exec_import_question(action_file: Path):
+#     language_info = get_language_info(action_file)
+#     if language_info.language is Language.PYTHON:
+#         exec_import_question_python(language_info)
+
+
+# === unused end: misc ===
