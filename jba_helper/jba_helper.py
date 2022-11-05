@@ -146,11 +146,11 @@ re_question_elements_tail_html_css = re.compile(
         r"Write HTML and CSS code\n"
         r"(?:.*\n)+?"
         r"^HTML\n"
-        r"(?:.*\n)+?"
+        r"(?:.*\n)*?"
         r"^1\n(?:^\d+\n)*"
         r"(?P<HTML>(?s:.*?\n)*)"
         r"^CSS\n"
-        r"(?:.*\n)+?"
+        r"(?:.*\n)*?"
         r"^1\n(?:^\d+\n)*"
         r"(?P<CSS>(?s:.*?\n)*)"
         r"^Checklist\n"
@@ -173,9 +173,9 @@ re_answer_code_python = re.compile(
     re.MULTILINE | re.DOTALL)
 re_answer_code_html_css = re.compile(
     r"(?P<HTML>.*?)"
-    r"^<-- -=- HTML END -=- -->\n"
+    r"^<!-- -=- HTML END -=- -->\n"
     r"(?P<CSS>.*?)"
-    r"^<-- -=- CSS END -=- -->\n",
+    r"^<!-- -=- CSS END -=- -->\n",
     re.MULTILINE | re.DOTALL)
 
 # --------------------
@@ -481,7 +481,7 @@ def export_answer_html_css(language_info: LanguageInfo):
     # Copy the answer code to the X clipboard selection.
     # For the time being I'm just gluing together the html and css code,
     # might do something better latter on.
-    combined_text = html_text + "\n<--CSS-->\n" + css_text
+    combined_text = html_text + "\n<!--CSS-->\n" + css_text
     set_clipboard_x_selection_text(combined_text)
     # set_clipboard_x_selection_text(css_text)
     # set_clipboard_x_selection_text(html_text)

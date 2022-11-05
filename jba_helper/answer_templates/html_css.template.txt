@@ -1,9 +1,9 @@
 ${HTML}
-<-- -=- HTML END -=- -->
+<!-- -=- HTML END -=- -->
 ${CSS}
-<-- -=- CSS END -=- -->
+<!-- -=- CSS END -=- -->
 
-<-- Jet Brains Academy topic question solution.
+<!-- Jet Brains Academy topic question solution.
 -=- CHECK LIST -=-
 ${CHECK_LIST}
 -=- CHECK LIST -=-
