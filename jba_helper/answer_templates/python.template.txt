@@ -7,16 +7,26 @@ Topic category: ${TOPIC_CATEGORY}
 Topic name: ${TOPIC_NAME}
 Question name: ${QUESTION_NAME}
 Question rating: ${QUESTION_RATING}
+
 -=- QUESTION BODY -=-
 ${QUESTION_BODY}
 -=- QUESTION BODY -=-
 """
-
-
 # -=- QUESTION SOLUTION -=-
-${QUESTION_SOLUTION}
+import io
+import sys
 
 
+def main():
+    # -=- ANSWER CODE START -=-
+${ANSWER_CODE}
+    # -=- ANSWER CODE END -=-
+
+
+input_ = []
+sys.argv = ["arg_0"].extend(input_)
+sys.stdin = io.StringIO("\n".join(input_))
+main()
 # -=- SAMPLE IO -=-
 SAMPLE_IO = """
 ${SAMPLE_IO}

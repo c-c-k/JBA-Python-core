@@ -23,7 +23,7 @@ The currently implemented actions are:
 # Standard library modules:
 # import argparse
 import enum
-# import os
+import os
 import typing
 from pathlib import Path
 import re
@@ -40,7 +40,7 @@ import time
 # --------------------
 # --EXCEPTIONS
 # --------------------
-class JBAHelperError(Exception):
+class JBAHelperNonFatalError(Exception):
     pass
 
 
@@ -55,6 +55,7 @@ class LanguageInfo(typing.NamedTuple):
     file_suffix: str
     template_file: Path
     re_element_extractor: typing.Pattern
+    re_answer_extractor: typing.Pattern
 
 
 # --------------------
@@ -74,7 +75,10 @@ class Language(enum.Enum):
 # --------------------
 # --PATHS
 # --------------------
-PATH_ACTIONS_REQUEST = Path("/dev/shm/jba_helper_action_request.tmp")
+PATH_ACTIONS_REQUEST = Path(
+    "/dev/shm/jba_helper_action_request")
+PATH_ACTIONS_REQUEST_READING = Path(
+    "/dev/shm/jba_helper_action_request.reading")
 PATH_JBA_ROOT = Path(__file__).resolve().parents[1]
 # Currently worked on questions' paths.
 PATH_TOPIC_QUESTIONS_BASE = Path(
@@ -116,7 +120,7 @@ re_question_elements_head = re.compile(
         r"(?P<QUESTION_NAME>.+?)(?: Problem of the day)?\n"
         r"(?:Next problem in.+\n)?"
         r"(?P<QUESTION_RATING>Easy|Medium|Hard)\n"
-        r"\d+ user.+\n"
+        r"\d+ users solved...+\n"
         r"(?P<QUESTION_BODY>(?:.*\n)+?)"
         r"Report a typo\n"
         r"(?P<SAMPLE_IO>(?:.*\n)*?)"
@@ -126,7 +130,7 @@ re_question_elements_tail_normal = re.compile(
         r"Write a program\n"
         r"(?:.*\n)+?"
         r"^1\n(?:^\d+\n)*"
-        r"(?P<QUESTION_SOLUTION>(?s:.*))"
+        r"(?P<ANSWER_CODE>(?s:.*))"
     ), re.MULTILINE)
 re_question_elements_tail_html_css = re.compile(
     (
@@ -141,11 +145,20 @@ re_question_elements_tail_html_css = re.compile(
         r"^Checklist\n"
     ), re.MULTILINE)
 re_question_elements_extractor_normal = re.compile(
-    re_question_elements_head + re_question_elements_tail_normal, re.MULTILINE
+    re_question_elements_head.pattern
+    + re_question_elements_tail_normal.pattern,
+    re.MULTILINE
 )
 re_question_elements_extractor_html_css = re.compile(
-    re_question_elements_head + re_question_elements_tail_html_css, re.MULTILINE
+    re_question_elements_head.pattern
+    + re_question_elements_tail_html_css.pattern,
+    re.MULTILINE
 )
+re_answer_code_python = re.compile(
+    r"^\s*# -=- ANSWER CODE START -=-\n"
+    r"(?P<ANSWER_CODE>.*?)"
+    r"# -=- ANSWER CODE END -=-\n",
+    re.MULTILINE | re.DOTALL)
 
 # --------------------
 # --MAPPINGS
@@ -160,6 +173,7 @@ dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
         file_suffix=".py",
         template_file=PATH_TEMPLATE_PYTHON,
         re_element_extractor=re_question_elements_extractor_normal,
+        re_answer_extractor=re_answer_code_python,
     ),
 }
 
@@ -174,21 +188,29 @@ dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
 # --------------------
 # == Initialize script ==
 def main():
-    # perform helper initialization procedures (currently there are none).
+    # perform helper initialization procedures.
     init_helper()
     while True:
+        time_0 = time.time()
         # Wait for an action request.
         if no_action_request():
-            time.sleep(1)
+            time.sleep(0.05)
             continue
-        # Process action request.
-        action_file, action = process_action()
-        # Execute requested action.
-        exec_action(action_file, action)
+        try:
+            # Process action request.
+            action_file, action = process_action()
+            # Execute requested action.
+            exec_action(action_file, action)
+        except JBAHelperNonFatalError as error:
+            print("JBA helper error occurred:", *error.args)
+            continue
+        else:
+            print("Executed: {} in: {:.3f}sec on: {}".format(
+                action.name, time.time() - time_0, action_file.as_posix()))
 
 
 def init_helper():
-    pass  # PLACEHOLDER STUB
+    os.chdir(PATH_JBA_ROOT)
 
 
 # == Start action request handling ==
@@ -204,13 +226,15 @@ def no_action_request() -> bool:
 
 
 def process_action() -> tuple[Path, Action]:
-    action_request = PATH_ACTIONS_REQUEST.read_text().split(";")
-    action_file = Path(action_request[0].strip()).resolve()
-    requested_action = action_request[1].strip().upper()
+    PATH_ACTIONS_REQUEST.rename(PATH_ACTIONS_REQUEST_READING)
+    action_request_text = PATH_ACTIONS_REQUEST_READING.read_text().split(";")
+    PATH_ACTIONS_REQUEST_READING.unlink(missing_ok=True)
+    action_file = Path(action_request_text[0].strip()).resolve()
+    requested_action = action_request_text[1].strip().upper()
     for action in Action:
         if action.name == requested_action:
             return action_file, action
-    raise JBAHelperError(f"Not a supported JBA helper action: {requested_action}")
+    raise JBAHelperNonFatalError(f"Not a supported JBA helper action: {requested_action}")
 
 
 # == Get language info ==
@@ -218,8 +242,8 @@ def get_language_info(action_file: Path) -> LanguageInfo:
     try:
         return dict_action_file_to_language_info[action_file]
     except KeyError:
-        raise JBAHelperError(f"File path '{action_file.as_posix()}' doesn't match "
-                             "any of the question solution editing file paths.")
+        raise JBAHelperNonFatalError(f"File path '{action_file.as_posix()}' doesn't match "
+                                     "any of the question solution editing file paths.")
 
 
 # == Handle topic question archiving ==
@@ -322,7 +346,7 @@ def format_topic_category(substitution_dict: dict[str, str]) -> dict[str, str]:
     return substitution_dict
 
 
-def get_substitution_elements(language_info: LanguageInfo) -> dict[str, str]:
+def get_sub_dict(language_info: LanguageInfo) -> dict[str, str]:
     # Read the new question's text from the X primary selection.
     question_text = get_primary_x_selection_text()
     # Get the language's regex element extractor and use it
@@ -331,28 +355,78 @@ def get_substitution_elements(language_info: LanguageInfo) -> dict[str, str]:
     match = re_element_extractor.match(question_text)
     # Fail in case the X primary selection didn't contain a question for import.
     if not match:
-        raise JBAHelperError("Can't get base question elements "
-                             "from primary X selection.")
+        raise JBAHelperNonFatalError("Can't get base question elements "
+                                     "from primary X selection.")
     # Turn the regex match object into a dictionary and fix the category string.
-    substitution_dict = match.groupdict()
-    format_topic_category(substitution_dict)
-    return substitution_dict
+    sub_dict = match.groupdict()
+    post_proc_sub_dict(language_info, sub_dict)
+    return sub_dict
 
 
-def get_answer_base_text(language_info: LanguageInfo) -> str:
+def post_proc_sub_dict_python(sub_dict: dict[str, str]):
+    indent = " " * 4
+    sub_dict["ANSWER_CODE"] = "\n".join(
+        (indent + line for line in sub_dict["ANSWER_CODE"].splitlines()))
+
+
+def post_proc_sub_dict(language_info: LanguageInfo, sub_dict: dict[str, str]):
+    # Reformat the topic category because it's path elements get all
+    # glued up during import.
+    format_topic_category(sub_dict)
+    # Remove lots of extra empty lines.
+    for element in sub_dict:
+        sub_dict[element] = sub_dict[element].strip()
+    # Hard wrap question body lines to be no longer than
+    # 72 characters as per PEP-8.
+    sub_dict["QUESTION_BODY"] = hard_wrap_question_body(
+        sub_dict["QUESTION_BODY"])
+    if language_info.language is Language.PYTHON:
+        post_proc_sub_dict_python(sub_dict)
+
+
+def hard_wrap_question_body(question_body: str) -> str:
+    question_lines_raw = question_body.splitlines()
+    question_lines_raw.reverse()
+    question_lines_wrapped = []
+    while question_lines_raw:
+        raw_line = question_lines_raw.pop()
+        if len(raw_line) <= 72:
+            wrapped_line = raw_line
+        else:
+            raw_line_words = raw_line.split()
+            raw_line_words.reverse()
+            wrapped_line_words = []
+            line_len = 0
+            word = raw_line_words.pop()
+            while raw_line_words:
+                line_len += len(word) + 1
+                if line_len > 72:
+                    wrapped_line_words.append("\n")
+                    line_len = 0
+                else:
+                    wrapped_line_words.append(word)
+                    word = raw_line_words.pop()
+            wrapped_line_words.append(word)
+            wrapped_line = " ".join(wrapped_line_words)
+            wrapped_line.replace(" \n ", "\n")
+        question_lines_wrapped.append(wrapped_line)
+    return "\n".join(question_lines_wrapped)
+
+
+def get_question_template_text(language_info: LanguageInfo) -> str:
     return language_info.template_file.read_text()
 
 
 def exec_import_question(action_file: Path):
     language_info = get_language_info(action_file)
-# def exec_import_question_python(language_info: LanguageInfo):
+    # def exec_import_question_python(language_info: LanguageInfo):
     # Archive the previously edited question.
     archive_previous_question(language_info)
     # Extract the question's elements from the question's text:
-    substitution_dict = get_substitution_elements(language_info)
+    substitution_dict = get_sub_dict(language_info)
     # Get base question text from the answer template
     # for the given programing language.
-    question_text = get_answer_base_text(language_info)
+    question_text = get_question_template_text(language_info)
     # Format the question's text.
     question_text = string.Template(
         question_text).safe_substitute(substitution_dict)
@@ -363,7 +437,24 @@ def exec_import_question(action_file: Path):
 
 # == Handle export answer action ==
 def exec_export_answer(action_file: Path):
-    pass  # TODO
+    language_info = get_language_info(action_file)
+    if language_info.language == Language.PYTHON:
+        export_answer_python(language_info)
+
+
+def export_answer_python(language_info: LanguageInfo):
+    # Get base answer text from the current solution file.
+    answer_text = language_info.re_answer_extractor.search(
+        language_info.action_file.read_text()).group("ANSWER_CODE")
+    # Remove the extra indent added due to the solution being placed
+    # inside a function in the solution file.
+    indent = " " * 4
+    answer_lines = answer_text.splitlines()
+    for i in range(len(answer_lines)):
+        answer_lines[i] = answer_lines[i].removeprefix(indent)
+    answer_text = "\n".join(answer_lines)
+    # Copy the unindented answer code to the X clipboard selection.
+    set_clipboard_x_selection_text(answer_text)
 
 
 # --------------------
