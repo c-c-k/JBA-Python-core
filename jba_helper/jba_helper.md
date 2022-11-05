@@ -1,3 +1,4 @@
+#### NOTE: this readme has not been updated.
 ## PROGRAM ABSTRACT
  - ? Startup and initialise script for persistent background run.
  - ? Get activation info from a pipe or stdin or something.

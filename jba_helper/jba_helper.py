@@ -70,6 +70,7 @@ class Action(enum.Enum):
 # Supported programing languages.
 class Language(enum.Enum):
     PYTHON = enum.auto()
+    HTML_CSS = enum.auto()
 
 
 # --------------------
@@ -85,23 +86,31 @@ PATH_TOPIC_QUESTIONS_BASE = Path(
     PATH_JBA_ROOT, "topic_question_solutions/")
 PATH_QUESTIONS_CURRENT_PYTHON = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.py")
+PATH_QUESTIONS_CURRENT_HTML_CSS = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "current.html")
 # Full solution archives (This should not be uploaded to a public
 # GitHub repo out of licensing concerns).
 PATH_ARCHIVE_FULL_BASE = Path(
     PATH_TOPIC_QUESTIONS_BASE, "archive/full/")
 PATH_ARCHIVE_FULL_PYTHON = Path(
     PATH_ARCHIVE_FULL_BASE, "python/")
+PATH_ARCHIVE_FULL_HTML_CSS = Path(
+    PATH_ARCHIVE_FULL_BASE, "html_css/")
 # Censored solution archives (The full question text is removed
 # out of licensing concerns).
 PATH_ARCHIVE_CENSORED_BASE = Path(
     PATH_TOPIC_QUESTIONS_BASE, "archive/censored/")
 PATH_ARCHIVE_CENSORED_PYTHON = Path(
     PATH_ARCHIVE_CENSORED_BASE, "python/")
+PATH_ARCHIVE_CENSORED_HTML_CSS = Path(
+    PATH_ARCHIVE_CENSORED_BASE, "html_css/")
 # Per programing language solution template file.
 DIR_TEMPLATE_BASE = Path(
     PATH_JBA_ROOT, "jba_helper/answer_templates/")
 PATH_TEMPLATE_PYTHON = Path(
     DIR_TEMPLATE_BASE, "python.template.txt")
+PATH_TEMPLATE_HTML_CSS = Path(
+    DIR_TEMPLATE_BASE, "html_css.template.txt")
 
 # --------------------
 # --REGEX
@@ -111,7 +120,7 @@ re_question_topic_archive = re.compile(r"^Topic name: (.+)\n", re.MULTILINE)
 re_archive_censor = re.compile(
     r"(-=- QUESTION BODY -=-\n).*(\n-=- QUESTION BODY -=-)",
     re.MULTILINE | re.DOTALL)
-re_topic_category_spliter = re.compile("[A-Z][a-z0-9 ]*")
+re_topic_category_spliter = re.compile("[A-Z]+[a-z0-9 ]*")
 re_question_elements_head = re.compile(
     (
         r"(?P<TOPIC_CATEGORY>.+)\n"
@@ -123,10 +132,10 @@ re_question_elements_head = re.compile(
         r"\d+ users solved...+\n"
         r"(?P<QUESTION_BODY>(?:.*\n)+?)"
         r"Report a typo\n"
-        r"(?P<SAMPLE_IO>(?:.*\n)*?)"
     ), re.MULTILINE)
 re_question_elements_tail_normal = re.compile(
     (
+        r"(?P<SAMPLE_IO>(?:.*\n)*?)"
         r"Write a program\n"
         r"(?:.*\n)+?"
         r"^1\n(?:^\d+\n)*"
@@ -137,12 +146,15 @@ re_question_elements_tail_html_css = re.compile(
         r"Write HTML and CSS code\n"
         r"(?:.*\n)+?"
         r"^HTML\n"
+        r"(?:.*\n)+?"
         r"^1\n(?:^\d+\n)*"
-        r"(?P<HTML>(?s:.*?))"
+        r"(?P<HTML>(?s:.*?\n)*)"
         r"^CSS\n"
+        r"(?:.*\n)+?"
         r"^1\n(?:^\d+\n)*"
-        r"(?P<CSS>(?s:.*?))"
+        r"(?P<CSS>(?s:.*?\n)*)"
         r"^Checklist\n"
+        r"(?P<CHECK_LIST>(?s:.*?\n)*)"
     ), re.MULTILINE)
 re_question_elements_extractor_normal = re.compile(
     re_question_elements_head.pattern
@@ -159,6 +171,12 @@ re_answer_code_python = re.compile(
     r"(?P<ANSWER_CODE>.*?)"
     r"# -=- ANSWER CODE END -=-\n",
     re.MULTILINE | re.DOTALL)
+re_answer_code_html_css = re.compile(
+    r"(?P<HTML>.*?)"
+    r"^<-- -=- HTML END -=- -->\n"
+    r"(?P<CSS>.*?)"
+    r"^<-- -=- CSS END -=- -->\n",
+    re.MULTILINE | re.DOTALL)
 
 # --------------------
 # --MAPPINGS
@@ -174,6 +192,16 @@ dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
         template_file=PATH_TEMPLATE_PYTHON,
         re_element_extractor=re_question_elements_extractor_normal,
         re_answer_extractor=re_answer_code_python,
+    ),
+    PATH_QUESTIONS_CURRENT_HTML_CSS: LanguageInfo(
+        language=Language.HTML_CSS,
+        action_file=PATH_QUESTIONS_CURRENT_HTML_CSS,
+        full_archive=PATH_ARCHIVE_FULL_HTML_CSS,
+        censored_archive=PATH_ARCHIVE_CENSORED_HTML_CSS,
+        file_suffix=".html",
+        template_file=PATH_TEMPLATE_HTML_CSS,
+        re_element_extractor=re_question_elements_extractor_html_css,
+        re_answer_extractor=re_answer_code_html_css,
     ),
 }
 
@@ -440,6 +468,23 @@ def exec_export_answer(action_file: Path):
     language_info = get_language_info(action_file)
     if language_info.language == Language.PYTHON:
         export_answer_python(language_info)
+    elif language_info.language == Language.HTML_CSS:
+        export_answer_html_css(language_info)
+
+
+def export_answer_html_css(language_info: LanguageInfo):
+    # Get base answer text from the current solution file.
+    match = language_info.re_answer_extractor.match(
+        language_info.action_file.read_text())
+    html_text = match.group("HTML")
+    css_text = match.group("CSS")
+    # Copy the answer code to the X clipboard selection.
+    # For the time being I'm just gluing together the html and css code,
+    # might do something better latter on.
+    combined_text = html_text + "\n<--CSS-->\n" + css_text
+    set_clipboard_x_selection_text(combined_text)
+    # set_clipboard_x_selection_text(css_text)
+    # set_clipboard_x_selection_text(html_text)
 
 
 def export_answer_python(language_info: LanguageInfo):
