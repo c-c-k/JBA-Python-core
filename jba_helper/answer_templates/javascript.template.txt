@@ -1,0 +1,18 @@
+/* Jet Brains Academy topic question solution.
+
+Topic category: ${TOPIC_CATEGORY}
+Topic name: ${TOPIC_NAME}
+Question name: ${QUESTION_NAME}
+Question rating: ${QUESTION_RATING}
+
+-=- QUESTION BODY -=-
+${QUESTION_BODY}
+-=- QUESTION BODY -=-
+*/
+// -=- QUESTION SOLUTION -=-
+// -=- ANSWER CODE START -=-
+${ANSWER_CODE}
+// -=- ANSWER CODE END -=-
+/* -=- SAMPLE IO -=-
+${SAMPLE_IO}
+*/

@@ -71,6 +71,7 @@ class Action(enum.Enum):
 class Language(enum.Enum):
     PYTHON = enum.auto()
     HTML_CSS = enum.auto()
+    JAVASCRIPT = enum.auto()
 
 
 # --------------------
@@ -88,6 +89,8 @@ PATH_QUESTIONS_CURRENT_PYTHON = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.py")
 PATH_QUESTIONS_CURRENT_HTML_CSS = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.html")
+PATH_QUESTIONS_CURRENT_JAVASCRIPT = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "current.js")
 # Full solution archives (This should not be uploaded to a public
 # GitHub repo out of licensing concerns).
 PATH_ARCHIVE_FULL_BASE = Path(
@@ -96,6 +99,8 @@ PATH_ARCHIVE_FULL_PYTHON = Path(
     PATH_ARCHIVE_FULL_BASE, "python/")
 PATH_ARCHIVE_FULL_HTML_CSS = Path(
     PATH_ARCHIVE_FULL_BASE, "html_css/")
+PATH_ARCHIVE_FULL_JAVASCRIPT = Path(
+    PATH_ARCHIVE_FULL_BASE, "javascript/")
 # Censored solution archives (The full question text is removed
 # out of licensing concerns).
 PATH_ARCHIVE_CENSORED_BASE = Path(
@@ -104,6 +109,8 @@ PATH_ARCHIVE_CENSORED_PYTHON = Path(
     PATH_ARCHIVE_CENSORED_BASE, "python/")
 PATH_ARCHIVE_CENSORED_HTML_CSS = Path(
     PATH_ARCHIVE_CENSORED_BASE, "html_css/")
+PATH_ARCHIVE_CENSORED_JAVASCRIPT = Path(
+    PATH_ARCHIVE_CENSORED_BASE, "javascript/")
 # Per programing language solution template file.
 DIR_TEMPLATE_BASE = Path(
     PATH_JBA_ROOT, "jba_helper/answer_templates/")
@@ -111,6 +118,8 @@ PATH_TEMPLATE_PYTHON = Path(
     DIR_TEMPLATE_BASE, "python.template.txt")
 PATH_TEMPLATE_HTML_CSS = Path(
     DIR_TEMPLATE_BASE, "html_css.template.txt")
+PATH_TEMPLATE_JAVASCRIPT = Path(
+    DIR_TEMPLATE_BASE, "javascript.template.txt")
 
 # --------------------
 # --REGEX
@@ -177,6 +186,11 @@ re_answer_code_html_css = re.compile(
     r"(?P<CSS>.*?)"
     r"^<!-- -=- CSS END -=- -->\n",
     re.MULTILINE | re.DOTALL)
+re_answer_code_javascript = re.compile(
+    r"// -=- ANSWER CODE START -=-\n"
+    r"(?P<ANSWER_CODE>.*?)"
+    r"// -=- ANSWER CODE END -=-\n",
+    re.MULTILINE | re.DOTALL)
 
 # --------------------
 # --MAPPINGS
@@ -202,6 +216,16 @@ dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
         template_file=PATH_TEMPLATE_HTML_CSS,
         re_element_extractor=re_question_elements_extractor_html_css,
         re_answer_extractor=re_answer_code_html_css,
+    ),
+    PATH_QUESTIONS_CURRENT_JAVASCRIPT: LanguageInfo(
+        language=Language.JAVASCRIPT,
+        action_file=PATH_QUESTIONS_CURRENT_JAVASCRIPT,
+        full_archive=PATH_ARCHIVE_FULL_JAVASCRIPT,
+        censored_archive=PATH_ARCHIVE_CENSORED_JAVASCRIPT,
+        file_suffix=".js",
+        template_file=PATH_TEMPLATE_JAVASCRIPT,
+        re_element_extractor=re_question_elements_extractor_normal,
+        re_answer_extractor=re_answer_code_javascript,
     ),
 }
 
@@ -470,6 +494,16 @@ def exec_export_answer(action_file: Path):
         export_answer_python(language_info)
     elif language_info.language == Language.HTML_CSS:
         export_answer_html_css(language_info)
+    elif language_info.language == Language.JAVASCRIPT:
+        export_answer_javascript(language_info)
+
+
+def export_answer_javascript(language_info: LanguageInfo):
+    # Get base answer text from the current solution file.
+    answer_text = language_info.re_answer_extractor.search(
+        language_info.action_file.read_text()).group("ANSWER_CODE")
+    # Copy the answer code to the X clipboard selection.
+    set_clipboard_x_selection_text(answer_text)
 
 
 def export_answer_html_css(language_info: LanguageInfo):
