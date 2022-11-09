@@ -117,7 +117,7 @@ DIR_TEMPLATE_BASE = Path(
 PATH_TEMPLATE_PYTHON = Path(
     DIR_TEMPLATE_BASE, "python.template.txt")
 PATH_TEMPLATE_HTML_CSS = Path(
-    DIR_TEMPLATE_BASE, "html_css.template.txt")
+    DIR_TEMPLATE_BASE, "html.template.txt")
 PATH_TEMPLATE_JAVASCRIPT = Path(
     DIR_TEMPLATE_BASE, "javascript.template.txt")
 
@@ -451,6 +451,13 @@ def hard_wrap_question_body(question_body: str) -> str:
             line_len = 0
             word = raw_line_words.pop()
             while raw_line_words:
+                if len(word) + 1 > 72:
+                    wrapped_line_words.append("\n")
+                    wrapped_line_words.append(word)
+                    wrapped_line_words.append("\n")
+                    line_len = 0
+                    word = raw_line_words.pop()
+                    continue
                 line_len += len(word) + 1
                 if line_len > 72:
                     wrapped_line_words.append("\n")
