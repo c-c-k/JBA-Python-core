@@ -157,7 +157,7 @@ re_question_elements_tail_html_css = re.compile(
         r"^HTML\n"
         r"(?:.*\n)*?"
         r"^1\n(?:^\d+\n)*"
-        r"(?P<HTML>(?s:.*?\n)*)"
+        r"(?P<HTML>(?:.*?\n)*)"
         r"^CSS\n"
         r"(?:.*\n)*?"
         r"^1\n(?:^\d+\n)*"
