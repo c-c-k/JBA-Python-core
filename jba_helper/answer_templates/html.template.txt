@@ -1,8 +1,5 @@
 ${HTML}
 <!-- -=- HTML END -=- -->
-${CSS}
-<!-- -=- CSS END -=- -->
-
 <!-- Jet Brains Academy topic question solution.
 -=- CHECK LIST -=-
 ${CHECK_LIST}

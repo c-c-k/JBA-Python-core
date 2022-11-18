@@ -87,8 +87,10 @@ PATH_TOPIC_QUESTIONS_BASE = Path(
     PATH_JBA_ROOT, "topic_question_solutions/")
 PATH_QUESTIONS_CURRENT_PYTHON = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.py")
-PATH_QUESTIONS_CURRENT_HTML_CSS = Path(
+PATH_QUESTIONS_CURRENT_HTML = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.html")
+PATH_QUESTIONS_CURRENT_CSS = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "style.css")
 PATH_QUESTIONS_CURRENT_JAVASCRIPT = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.js")
 # Full solution archives (This should not be uploaded to a public
@@ -116,8 +118,10 @@ DIR_TEMPLATE_BASE = Path(
     PATH_JBA_ROOT, "jba_helper/answer_templates/")
 PATH_TEMPLATE_PYTHON = Path(
     DIR_TEMPLATE_BASE, "python.template.txt")
-PATH_TEMPLATE_HTML_CSS = Path(
+PATH_TEMPLATE_HTML = Path(
     DIR_TEMPLATE_BASE, "html.template.txt")
+PATH_TEMPLATE_CSS = Path(
+    DIR_TEMPLATE_BASE, "css.template.txt")
 PATH_TEMPLATE_JAVASCRIPT = Path(
     DIR_TEMPLATE_BASE, "javascript.template.txt")
 
@@ -180,11 +184,12 @@ re_answer_code_python = re.compile(
     r"(?P<ANSWER_CODE>.*?)"
     r"# -=- ANSWER CODE END -=-\n",
     re.MULTILINE | re.DOTALL)
-re_answer_code_html_css = re.compile(
+re_answer_code_html = re.compile(
     r"(?P<HTML>.*?)"
-    r"^<!-- -=- HTML END -=- -->\n"
-    r"(?P<CSS>.*?)"
-    r"^<!-- -=- CSS END -=- -->\n",
+    r"^<!-- -=- HTML END -=- -->\n",
+    re.MULTILINE | re.DOTALL)
+re_answer_code_css = re.compile(
+    r"(?P<CSS>.*?)",
     re.MULTILINE | re.DOTALL)
 re_answer_code_javascript = re.compile(
     r"// -=- ANSWER CODE START -=-\n"
@@ -207,15 +212,25 @@ dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
         re_element_extractor=re_question_elements_extractor_normal,
         re_answer_extractor=re_answer_code_python,
     ),
-    PATH_QUESTIONS_CURRENT_HTML_CSS: LanguageInfo(
+    PATH_QUESTIONS_CURRENT_HTML: LanguageInfo(
         language=Language.HTML_CSS,
-        action_file=PATH_QUESTIONS_CURRENT_HTML_CSS,
+        action_file=PATH_QUESTIONS_CURRENT_HTML,
         full_archive=PATH_ARCHIVE_FULL_HTML_CSS,
         censored_archive=PATH_ARCHIVE_CENSORED_HTML_CSS,
         file_suffix=".html",
-        template_file=PATH_TEMPLATE_HTML_CSS,
+        template_file=PATH_TEMPLATE_HTML,
         re_element_extractor=re_question_elements_extractor_html_css,
-        re_answer_extractor=re_answer_code_html_css,
+        re_answer_extractor=re_answer_code_html,
+    ),
+    PATH_QUESTIONS_CURRENT_CSS: LanguageInfo(
+        language=Language.HTML_CSS,
+        action_file=PATH_QUESTIONS_CURRENT_CSS,
+        full_archive=PATH_ARCHIVE_FULL_HTML_CSS,
+        censored_archive=PATH_ARCHIVE_CENSORED_HTML_CSS,
+        file_suffix=".css",
+        template_file=PATH_TEMPLATE_CSS,
+        re_element_extractor=re_question_elements_extractor_html_css,
+        re_answer_extractor=re_answer_code_css,
     ),
     PATH_QUESTIONS_CURRENT_JAVASCRIPT: LanguageInfo(
         language=Language.JAVASCRIPT,
@@ -286,16 +301,22 @@ def process_action() -> tuple[Path, Action]:
     for action in Action:
         if action.name == requested_action:
             return action_file, action
-    raise JBAHelperNonFatalError(f"Not a supported JBA helper action: {requested_action}")
+    raise JBAHelperNonFatalError("Not a supported JBA helper action: "
+                                 f"{requested_action}")
 
 
 # == Get language info ==
 def get_language_info(action_file: Path) -> LanguageInfo:
+    # CSS quickfix.
+    if action_file.as_posix() == PATH_QUESTIONS_CURRENT_CSS.as_posix():
+        return dict_action_file_to_language_info[PATH_QUESTIONS_CURRENT_HTML]
+    #
     try:
         return dict_action_file_to_language_info[action_file]
     except KeyError:
-        raise JBAHelperNonFatalError(f"File path '{action_file.as_posix()}' doesn't match "
-                                     "any of the question solution editing file paths.")
+        raise JBAHelperNonFatalError(f"File path '{action_file.as_posix()}' "
+                                     "doesn't match any of the question "
+                                     "solution editing file paths.")
 
 
 # == Handle topic question archiving ==
@@ -363,7 +384,8 @@ def archive_previous_question(language_info: LanguageInfo):
     full_archive = build_archive_dir(full_archive, topic_name)
     censored_archive = build_archive_dir(censored_archive, topic_name)
     full_archive = build_archive_file_path(full_archive, name, language_info)
-    censored_archive = build_archive_file_path(censored_archive, name, language_info)
+    censored_archive = build_archive_file_path(
+        censored_archive, name, language_info)
     # Archive full question.
     full_archive.write_text(question_text)
     # Censor and archive censored question.
@@ -405,11 +427,13 @@ def get_sub_dict(language_info: LanguageInfo) -> dict[str, str]:
     # to extract the question elements.
     re_element_extractor = language_info.re_element_extractor
     match = re_element_extractor.match(question_text)
-    # Fail in case the X primary selection didn't contain a question for import.
+    # Fail in case the X primary selection didn't contain
+    # a question for import.
     if not match:
         raise JBAHelperNonFatalError("Can't get base question elements "
                                      "from primary X selection.")
-    # Turn the regex match object into a dictionary and fix the category string.
+    # Turn the regex match object into a dictionary
+    # and fix the category string.
     sub_dict = match.groupdict()
     post_proc_sub_dict(language_info, sub_dict)
     return sub_dict
@@ -476,6 +500,30 @@ def get_question_template_text(language_info: LanguageInfo) -> str:
     return language_info.template_file.read_text()
 
 
+def css_quickfix(substitution_dict: dict[str, str]):
+    # Paste imported css code into separate css file.
+    language_info = dict_action_file_to_language_info[
+        PATH_QUESTIONS_CURRENT_CSS]
+    question_text = get_question_template_text(language_info)
+    question_text = string.Template(
+        question_text).safe_substitute(substitution_dict)
+    language_info.action_file.write_text(question_text)
+    # Add link to the above css file into the html answer file
+    # if it did not already contain a link to a css stylesheet.
+    language_info = dict_action_file_to_language_info[
+        PATH_QUESTIONS_CURRENT_HTML]
+    html_text = language_info.action_file.read_text()
+    if '<link rel="stylesheet' not in html_text:
+        html_text = re.sub(
+            r'^(?P<INDENT>\s*)</head',
+            r'\g<INDENT>  <link rel="stylesheet" href="style.css">\n'
+            r'\g<INDENT> </head',
+            html_text,
+            flags=re.MULTILINE
+        )
+        language_info.action_file.write_text(html_text)
+
+
 def exec_import_question(action_file: Path):
     language_info = get_language_info(action_file)
     # def exec_import_question_python(language_info: LanguageInfo):
@@ -492,6 +540,9 @@ def exec_import_question(action_file: Path):
     # overwrite the old questions text in the current action file
     # with the formatted text of the new question.
     language_info.action_file.write_text(question_text)
+    # Apply CSS quickfix (Because I don't see the time it would take
+    # to properly add css import handling as justified).
+    css_quickfix(substitution_dict)
 
 
 # == Handle export answer action ==
@@ -518,11 +569,16 @@ def export_answer_html_css(language_info: LanguageInfo):
     match = language_info.re_answer_extractor.match(
         language_info.action_file.read_text())
     html_text = match.group("HTML")
-    css_text = match.group("CSS")
+    # CSS quickfix
+    html_text = re.sub(r'^\s*<link.+"style.css".*\n', '', html_text,
+                       flags=re.MULTILINE)
+    language_info = dict_action_file_to_language_info[
+        PATH_QUESTIONS_CURRENT_CSS]
+    css_text = language_info.action_file.read_text()
     # Copy the answer code to the X clipboard selection.
     # For the time being I'm just gluing together the html and css code,
     # might do something better latter on.
-    combined_text = html_text + "\n<!--CSS-->\n" + css_text
+    combined_text = html_text + css_text
     set_clipboard_x_selection_text(combined_text)
     # set_clipboard_x_selection_text(css_text)
     # set_clipboard_x_selection_text(html_text)
