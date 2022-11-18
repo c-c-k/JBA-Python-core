@@ -167,7 +167,7 @@ re_question_elements_tail_html_css = re.compile(
         r"^1\n(?:^\d+\n)*"
         r"(?P<CSS>(?s:.*?\n)*)"
         r"^Checklist\n"
-        r"(?P<CHECK_LIST>(?s:.*?\n)*)"
+        r"(?P<CHECK_LIST>(?s:.*))"
     ), re.MULTILINE)
 re_question_elements_extractor_normal = re.compile(
     re_question_elements_head.pattern
@@ -189,7 +189,8 @@ re_answer_code_html = re.compile(
     r"^<!-- -=- HTML END -=- -->\n",
     re.MULTILINE | re.DOTALL)
 re_answer_code_css = re.compile(
-    r"(?P<CSS>.*?)",
+    r"(?P<CSS>.*)"
+    r"^.+-=- CSS END -=-.+\n",
     re.MULTILINE | re.DOTALL)
 re_answer_code_javascript = re.compile(
     r"// -=- ANSWER CODE START -=-\n"
@@ -574,11 +575,13 @@ def export_answer_html_css(language_info: LanguageInfo):
                        flags=re.MULTILINE)
     language_info = dict_action_file_to_language_info[
         PATH_QUESTIONS_CURRENT_CSS]
-    css_text = language_info.action_file.read_text()
+    match = language_info.re_answer_extractor.match(
+        language_info.action_file.read_text())
+    css_text = match.group("CSS")
     # Copy the answer code to the X clipboard selection.
     # For the time being I'm just gluing together the html and css code,
     # might do something better latter on.
-    combined_text = html_text + css_text
+    combined_text = html_text + "\n" + css_text
     set_clipboard_x_selection_text(combined_text)
     # set_clipboard_x_selection_text(css_text)
     # set_clipboard_x_selection_text(html_text)

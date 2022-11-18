@@ -1,1 +1,17 @@
 ${CSS}
+/* -=- CSS END -=- */
+
+/* Jet Brains Academy topic question solution.
+-=- CHECK LIST -=-
+${CHECK_LIST}
+-=- CHECK LIST -=-
+
+-=- QUESTION BODY -=-
+${QUESTION_BODY}
+-=- QUESTION BODY -=-
+
+Topic category: ${TOPIC_CATEGORY}
+Topic name: ${TOPIC_NAME}
+Question name: ${QUESTION_NAME}
+Question rating: ${QUESTION_RATING}
+*/
