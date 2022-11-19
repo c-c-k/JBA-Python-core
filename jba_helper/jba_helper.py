@@ -515,13 +515,15 @@ def css_quickfix(substitution_dict: dict[str, str]):
         PATH_QUESTIONS_CURRENT_HTML]
     html_text = language_info.action_file.read_text()
     if '<link rel="stylesheet' not in html_text:
-        html_text = re.sub(
-            r'^(?P<INDENT>\s*)</head',
-            r'\g<INDENT>  <link rel="stylesheet" href="style.css">\n'
-            r'\g<INDENT> </head',
-            html_text,
-            flags=re.MULTILINE
-        )
+        html_text = ('<link rel="stylesheet" href="style.css">\n'
+                     + html_text)
+        # html_text = re.sub(
+        #     r'^(?P<INDENT>\s*)</head',
+        #     r'\g<INDENT>  <link rel="stylesheet" href="style.css">\n'
+        #     r'\g<INDENT> </head',
+        #     html_text,
+        #     flags=re.MULTILINE
+        # )
         language_info.action_file.write_text(html_text)
 
 
