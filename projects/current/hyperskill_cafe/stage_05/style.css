@@ -1,0 +1,10 @@
+html, body, p, div, h1, h2, h4, h5{
+  color: #93a1a1 !important;
+  background: #073642 !important;
+}
+body {
+  font-family: 'McLaren', cursive !important;
+}
+footer {
+  font-style: italic !important;
+}
