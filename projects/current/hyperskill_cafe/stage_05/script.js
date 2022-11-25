@@ -27,13 +27,19 @@ function addReview() {
   let reviewClone = reviewsRow.firstElementChild.cloneNode(true)
   reviewsRow.appendChild(reviewClone)
   // Get the child elements of the new review that need to be adjusted.
+  // Avoid having to go through the sub-container <div> elements by using querySelector to find
+  // the elements that contain the text that needs to be adjusted.
+  // Title is in the <h4/> element.
   let newReviewTitle = reviewClone.querySelector("h4")
-  let newReviewText = reviewClone.querySelector("p")
-  let newReviewName = reviewClone.querySelector("footer")
+  // Text is in the <p/> element inside the <blockquoute/> element.
+  let newReviewText = reviewClone.querySelector("p")  // Text is in the <p/> element.
+  // Name is in the <I/> element inside the <footer/> element inside the <blockquoute/> element.
+  let newReviewName = reviewClone.querySelector("I")  // Name is in <I/> in
   // Adjust the values of the child elements of the new review.
   newReviewTitle.textContent = reviewTitleValue
   newReviewText.textContent = reviewTextValue
   newReviewName.textContent = reviewNameValue
+
   // test/debug
   // console.log(newReviewTitle.textContent)
 }
