@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'polls',
     'candy_factory',
     'blog',
+    'tournament'
 ]
 
 MIDDLEWARE = [
