@@ -25,8 +25,12 @@ class Game(models.Model):
 
 
 def clear_db():
-    for team in Team.objects.all():
-        team.delete()
+    teams = Team.objects.all()
+    print("teams in database before delete: ", teams.count())
+    teams.delete()
+    print("teams in database after delete: ", teams.count())
+    # for team in Team.objects.all().delete():
+    #     team.delete()
 
 
 def populate_db():
@@ -40,7 +44,10 @@ def populate_db():
 
 def create_team(num: int) -> Team:
     name = f"Team #{num}"
-    return Team.objects.create(name=name)
+    team = Team(name=name)
+    team.save()
+    return team
+    # return Team.objects.create(name=name)
 
 
 def create_player(team: Team, num: int) -> Player:
