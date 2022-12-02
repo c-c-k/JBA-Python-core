@@ -9,10 +9,10 @@ It is meant to be invoked by an IDE shortcut that executes an external
 program on the currently edited file.
 The IDE should pass the file path and required action to this script.
 The currently implemented actions are:
-  - Paste question text copied from the J.B.A. site into the currently
+  - Paste question_text text copied from the J.B.A. site into the currently
    edited action file (NOTE: The X selection used here is the PRIMARY
    selection, that is highlighted text and not <C-V>).
-  - Copy the currently edited question's solution code to the clipboard
+  - Copy the currently edited question_text's solution code to the clipboard
    (NOTE: The X selection used here is the clipboard selection,
    that is <C-C> and not highlighted text ).
 """
@@ -103,7 +103,7 @@ PATH_ARCHIVE_FULL_HTML_CSS = Path(
     PATH_ARCHIVE_FULL_BASE, "html_css/")
 PATH_ARCHIVE_FULL_JAVASCRIPT = Path(
     PATH_ARCHIVE_FULL_BASE, "javascript/")
-# Censored solution archives (The full question text is removed
+# Censored solution archives (The full question_text text is removed
 # out of licensing concerns).
 PATH_ARCHIVE_CENSORED_BASE = Path(
     PATH_TOPIC_QUESTIONS_BASE, "archive/censored/")
@@ -316,11 +316,11 @@ def get_language_info(action_file: Path) -> LanguageInfo:
         return dict_action_file_to_language_info[action_file]
     except KeyError:
         raise JBAHelperNonFatalError(f"File path '{action_file.as_posix()}' "
-                                     "doesn't match any of the question "
+                                     "doesn't match any of the question_text "
                                      "solution editing file paths.")
 
 
-# == Handle topic question archiving ==
+# == Handle topic question_text archiving ==
 def get_archive_names_from_text(
         question_text: str) -> tuple[str | None, str | None]:
     name_match = re_question_name_archive.search(question_text)
@@ -373,23 +373,23 @@ def archive_previous_question(language_info: LanguageInfo):
     full_archive = language_info.full_archive
     censored_archive = language_info.censored_archive
     # Read the questions text from the action file to deduce from it
-    # the name and topic subdirectory for the question's archive file.
+    # the name and topic subdirectory for the question_text's archive file.
     question_text = file_to_archive.read_text()
     # Handle edge case where the file was manually emptied
     # or is otherwise empty.
     if question_text.strip() == "":
         return
-    # extract question and topic names from the question's text.
+    # extract question_text and topic names from the question_text's text.
     name, topic_name = get_archive_names_from_text(question_text)
-    # construct full archive path from question and topic names.
+    # construct full archive path from question_text and topic names.
     full_archive = build_archive_dir(full_archive, topic_name)
     censored_archive = build_archive_dir(censored_archive, topic_name)
     full_archive = build_archive_file_path(full_archive, name, language_info)
     censored_archive = build_archive_file_path(
         censored_archive, name, language_info)
-    # Archive full question.
+    # Archive full question_text.
     full_archive.write_text(question_text)
-    # Censor and archive censored question.
+    # Censor and archive censored question_text.
     question_text = censor_question_text(question_text)
     censored_archive.write_text(question_text)
 
@@ -412,7 +412,7 @@ def set_clipboard_x_selection_text(text: str):
     # exit_status = x_selection_pipe.wait()
 
 
-# == Handle import question action ==
+# == Handle import question_text action ==
 def format_topic_category(substitution_dict: dict[str, str]) -> dict[str, str]:
     topic_category = substitution_dict["TOPIC_CATEGORY"]
     topic_category = re_topic_category_spliter.findall(topic_category)
@@ -422,16 +422,16 @@ def format_topic_category(substitution_dict: dict[str, str]) -> dict[str, str]:
 
 
 def get_sub_dict(language_info: LanguageInfo) -> dict[str, str]:
-    # Read the new question's text from the X primary selection.
+    # Read the new question_text's text from the X primary selection.
     question_text = get_primary_x_selection_text()
     # Get the language's regex element extractor and use it
-    # to extract the question elements.
+    # to extract the question_text elements.
     re_element_extractor = language_info.re_element_extractor
     match = re_element_extractor.match(question_text)
     # Fail in case the X primary selection didn't contain
-    # a question for import.
+    # a question_text for import.
     if not match:
-        raise JBAHelperNonFatalError("Can't get base question elements "
+        raise JBAHelperNonFatalError("Can't get base question_text elements "
                                      "from primary X selection.")
     # Turn the regex match object into a dictionary
     # and fix the category string.
@@ -453,7 +453,7 @@ def post_proc_sub_dict(language_info: LanguageInfo, sub_dict: dict[str, str]):
     # Remove lots of extra empty lines.
     for element in sub_dict:
         sub_dict[element] = sub_dict[element].strip()
-    # Hard wrap question body lines to be no longer than
+    # Hard wrap question_text body lines to be no longer than
     # 72 characters as per PEP-8.
     sub_dict["QUESTION_BODY"] = hard_wrap_question_body(
         sub_dict["QUESTION_BODY"])
@@ -530,18 +530,18 @@ def css_quickfix(substitution_dict: dict[str, str]):
 def exec_import_question(action_file: Path):
     language_info = get_language_info(action_file)
     # def exec_import_question_python(language_info: LanguageInfo):
-    # Archive the previously edited question.
+    # Archive the previously edited question_text.
     archive_previous_question(language_info)
-    # Extract the question's elements from the question's text:
+    # Extract the question_text's elements from the question_text's text:
     substitution_dict = get_sub_dict(language_info)
-    # Get base question text from the answer template
+    # Get base question_text text from the answer template
     # for the given programing language.
     question_text = get_question_template_text(language_info)
-    # Format the question's text.
+    # Format the question_text's text.
     question_text = string.Template(
         question_text).safe_substitute(substitution_dict)
     # overwrite the old questions text in the current action file
-    # with the formatted text of the new question.
+    # with the formatted text of the new question_text.
     language_info.action_file.write_text(question_text)
     # Apply CSS quickfix (Because I don't see the time it would take
     # to properly add css import handling as justified).
@@ -652,7 +652,7 @@ if __name__ == "__main__":
 
 # === unused start: primary modes ===
 # def execute_topic_mode(action_file: str, action: str):
-#     # Use the file path to deduce the question's programing language.
+#     # Use the file path to deduce the question_text's programing language.
 #     language = get_language(action_file)
 #     # Execute the selected action:
 #     if action == ACTION_ANSWER_EXPORT:
@@ -682,7 +682,7 @@ if __name__ == "__main__":
 #         return PATH_ARCHIVE_FULL_PYTHON
 #     else:
 #         raise ValueError(f"Language '{language}' doesn't have "
-#                          "a question archive directory.")
+#                          "a question_text archive directory.")
 
 
 # def exec_import_question(action_file: Path):

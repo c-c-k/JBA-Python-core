@@ -31,18 +31,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'site_index.apps.SiteIndexConfig',
+    'movies.apps.MoviesConfig',
+    'polls.apps.PollsConfig',
+    'candy_factory.apps.CandyFactoryConfig',
+    'blog.apps.BlogConfig',
+    # 'tournament.apps.TournamentConfig'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'site_index',
-    'movies',
-    'polls',
-    'candy_factory',
-    'blog',
-    'tournament'
 ]
 
 MIDDLEWARE = [
@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Israel'
 
 USE_I18N = True
 
