@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'movies',
     'polls',
     'candy_factory',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -142,4 +143,9 @@ APPLICATION_URLS = [
         "url": "candy_factory/",
         "description": "HyperSkill sample candy_factory application",
     },
+    {
+        "url": "blog",
+        "description": "HyperSkill sample blog application",
+    },
 ]
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ blog_name }}</title>
+  </head>
+  <body>
+    <h2>{{ blog_name.upper }}</h2>
+    {% for post in posts %}
+      <hr>
+      <h3>
+      {% if post.theme %}
+        Theme: {{ post.theme }}
+      {% else %}
+        No theme
+      {% endif %}
+      </h3>
+      <div>{{ post.text }}</div>
+      <div>
+      {% if post.comments %}
+        {% for comment in post.comments %}
+          <div>comment #{{ forloop.counter }}: {{ comment }}</div>
+        {% endfor %}
+      {% else %}
+        No comments
+      {% endif %}
+      </div>
+    {% endfor %}
+  </body>
+</html>
