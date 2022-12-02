@@ -1,0 +1,11 @@
+<div><b>{{ candy_name }}</b></div>
+<hr>
+<table>
+  <tbody>
+  {% for field, value in candy_info.items %}
+    <tr>
+    <td>{{ field }} : {{ value }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
