@@ -148,5 +148,9 @@ APPLICATION_URLS = [
         "url": "blog",
         "description": "HyperSkill sample blog application",
     },
+    {
+        "url": "tournament",
+        "description": "HyperSkill sample tournament application",
+    },
 ]
 

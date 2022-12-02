@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ team.name }}'s info page</title>
+  </head>
+  <body>
+    <h2>{{ team.name.upper }}</h2>
+    <hr>
+    <ul>
+      <li><h4>Team players:</h4></li>
+      <li><ol>
+        {% for player in players %}
+          <li>{{ player.name }} ({{ player.height }} cm)</li>
+        {% endfor %}
+      </ol></li>
+    </ul>
+  <hr>
+  <a href="./">back to games</a>
+  </body>
+</html>

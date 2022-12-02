@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>tournament games</title>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <td>HOME TEAM</td>
+          <td>HOME TEAM POINTS</td>
+          <td>vs</td>
+          <td>RIVAL TEAM</td>
+          <td>RIVAL TEAM POINTS</td>
+          <td>PLAYED ON</td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for game in games %}
+        <tr>
+          <td><a href="{{ game.home_team.id }}">{{ game.home_team.name.upper }}</a></td>
+          <td>{{ game.home_points }}</td>
+          <td>vs</td>
+          <td><a href="{{ game.rival_team.id }}">{{ game.rival_team.name.upper }}</a></td>
+          <td>{{ game.rival_points }}</td>
+          <td>{{ game.date }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <a href="-1">non existent team test</a>
+    <a href="../">back to main index</a>
+  </body>
+</html>

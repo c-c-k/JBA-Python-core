@@ -31,7 +31,7 @@ def clear_db():
 
 def populate_db():
     clear_db()
-    for i in range(1, 3):
+    for i in range(1, 7):
         team = create_team(i)
         for j in range(1, randint(4, 6)):
             create_player(team, j)
@@ -62,7 +62,7 @@ def create_games():
             rival_team=Team.objects.get(id=teams[1]),
             rival_points=randint(0, 10),
             date=date(
-                year=randint(-4200, 2050),
+                year=randint(2000, 2050),
                 month=randint(1, 12),
                 day=randint(1, 28)
             )
