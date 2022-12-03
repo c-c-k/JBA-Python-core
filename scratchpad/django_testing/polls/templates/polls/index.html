@@ -17,25 +17,12 @@
             {% if question.was_published_recently %}
               *RECENT*
             {% endif %}
-            <sub><a href="{% url 'polls:delete_question' %}?question_id={{ question.id }}">delete</a></sub>
           </div>
-{% comment %}
           <div>
-            <table>
-              <tbody>
-              {% for choice in question.choice_set.all %}
-                <tr>
-                  <td>{{ choice.choice_text }}</td>
-                  <td>VOTES: {{ choice.vote_tally }}</td>
-                  <td><sub>
-                    <a href="{% url 'polls:delete_choice' %}?choice_id={{ choice.id }}">delete</a>
-                  </sub></td>
-                </tr>
-              {% endfor %}
-              </tbody>
-            </table>
+            <a href="{% url 'polls:details' question_id=question.id %}">details</a>
+            <a href="{% url 'polls:results' question_id=question.id %}">results</a>
+            <a href="{% url 'polls:delete_question' %}?question_id={{ question.id }}">delete</a>
           </div>
-{% endcomment %}
           </li>
         {% endfor %}
         </ol>
