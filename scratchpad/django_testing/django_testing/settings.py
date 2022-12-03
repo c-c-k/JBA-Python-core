@@ -32,8 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'site_index.apps.SiteIndexConfig',
-    'movies.apps.MoviesConfig',
     'polls.apps.PollsConfig',
+    'movies.apps.MoviesConfig',
     'candy_factory.apps.CandyFactoryConfig',
     'blog.apps.BlogConfig',
     # 'tournament.apps.TournamentConfig'
@@ -133,6 +133,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # -- application: site_index
 APPLICATION_URLS = [
     {
+        "url": "admin/",
+        "description": "Django admin",
+    },
+    {
         "url": "polls/",
         "description": "Django sample polls application",
     },
@@ -145,11 +149,11 @@ APPLICATION_URLS = [
         "description": "HyperSkill sample candy_factory application",
     },
     {
-        "url": "blog",
+        "url": "blog/",
         "description": "HyperSkill sample blog application",
     },
     {
-        "url": "tournament",
+        "url": "tournament/",
         "description": "HyperSkill sample tournament application",
     },
 ]
