@@ -17,25 +17,25 @@
             {% if question.was_published_recently %}
               *RECENT*
             {% endif %}
-            <sub>
-                  <a href="./?delete_question&question_id={{ question.id }}">delete</a>
-                </sub>
+            <sub><a href="{% url 'polls:delete_question' %}?question_id={{ question.id }}">delete</a></sub>
           </div>
+{% comment %}
           <div>
             <table>
               <tbody>
               {% for choice in question.choice_set.all %}
                 <tr>
-                <td>{{ choice.choice_text }}<sub>
-                  <a href="./?delete_choice&choice_id={{ choice.id }}">delete</a>
-                </sub></td>
-                <td>VOTES: {{ choice.vote_tally }}</td>
+                  <td>{{ choice.choice_text }}</td>
+                  <td>VOTES: {{ choice.vote_tally }}</td>
+                  <td><sub>
+                    <a href="{% url 'polls:delete_choice' %}?choice_id={{ choice.id }}">delete</a>
+                  </sub></td>
                 </tr>
               {% endfor %}
               </tbody>
             </table>
           </div>
-
+{% endcomment %}
           </li>
         {% endfor %}
         </ol>
@@ -43,7 +43,7 @@
         There are no questions.
       {% endif %}
     </div>
-    <div><a href=".?reset_polls_data">reset polls data</a></div>
-    <div><a href="..">Back to root index</a></div>
+    <div><a href="{% url 'polls:repopulate' %}">reset polls data</a></div>
+    <div><a href="{% url 'site_index:index' %}">Back to root index</a></div>
   </body>
 </html>

@@ -30,11 +30,11 @@ class Choice(models.Model):
 def create_questions() -> list[Question]:
     return [
         Question(
-            question_text=f"Ipsum lorem #{num}",
-            publication_date=timezone.now() - timedelta(days=-1 * num)
+            question_text="Ipsum lorem",
+            publication_date=timezone.now() - timedelta(seconds=sec_diff)
         )
-        for num
-        in sample(range(1, 100), k=5)
+        for sec_diff
+        in sample(range(int(timedelta(days=6).total_seconds())), k=6)
     ]
 
 
@@ -52,7 +52,7 @@ def create_choices(questions: list[Question]) -> list[Choice]:
     ]
 
 
-def populate_db():
+def repopulate_polls():
     for model in (Question, Choice):
         model.objects.all().delete()
     questions = create_questions()
