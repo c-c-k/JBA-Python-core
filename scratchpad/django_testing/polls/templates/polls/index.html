@@ -8,9 +8,9 @@
     <h2>This is the polls app index page.</h2>
     <hr>
     <div>
-      {% if questions %}
+      {% if questions_list %}
         <ol>
-        {% for question in questions %}
+        {% for question in questions_list %}
           <li>
           <div>
             {{ question.question_text }} PUBLISHED ON: {{ question.publication_date }}
@@ -19,9 +19,9 @@
             {% endif %}
           </div>
           <div>
-            <a href="{% url 'polls:details' question_id=question.id %}">details</a>
-            <a href="{% url 'polls:results' question_id=question.id %}">results</a>
-            <a href="{% url 'polls:delete_question' %}?question_id={{ question.id }}">delete</a>
+            <a href="{% url 'polls:details' pk=question.pk %}">details</a>
+            <a href="{% url 'polls:results' pk=question.pk %}">results</a>
+            <a href="{% url 'polls:delete_question' %}?pk={{ question.pk }}">delete</a>
           </div>
           </li>
         {% endfor %}

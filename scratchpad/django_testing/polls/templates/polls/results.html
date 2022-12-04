@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Results for question #{{ question.id }}</title>
+    <title>Results for question #{{ question.pk }}</title>
   </head>
   <body>
   <div>
@@ -23,7 +23,7 @@
           <td>VOTES: {{ choice.vote_tally }}</td>
           <td><sub>
             <a
-                href="{% url 'polls:delete_choice' %}?choice_id={{ choice.id }}&source={% url 'polls:results' question.id %}"
+                href="{% url 'polls:delete_choice' %}?pk={{ choice.pk }}&source={% url 'polls:results' question.pk %}"
             >delete</a>
           </sub></td>
         </tr>
@@ -32,7 +32,8 @@
     </table>
   </div>
   <div>
-    <a href="{% url 'polls:index' %}">Back to questions index.</a>
+    <p><a href="{% url 'polls:details' pk=question.pk %}">Vote again</a></p>
+    <p><a href="{% url 'polls:index' %}">Back to questions index.</a></p>
   </div>
   </body>
 </html>
