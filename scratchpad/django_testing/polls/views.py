@@ -16,26 +16,16 @@ class IndexView(ListView):
         return Question.objects.order_by('-publication_date')[:3]
 
 
-class DetailsView(DetailView):
+class QuestionDetails(DetailView):
+    context_object_name = "question"
     model = Question
     template_name = "polls/detail.html"
+
+
+class QuestionResults(DetailView):
     context_object_name = "question"
-
-
-def details(request, pk):
-    print(Question._defualt_manager)
-    question = get_object_or_404(Question, pk=pk)
-    context = {
-        "question": question,
-        "error_message": None,
-    }
-    return render(request, "polls/detail.html", context)
-
-
-def results(request, pk):
-    question = get_object_or_404(Question, pk=pk)
-    context = {"question": question}
-    return render(request, "polls/results.html", context)
+    model = Question
+    template_name = "polls/results.html"
 
 
 def vote(request, pk):
