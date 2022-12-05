@@ -8,10 +8,27 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     publication_date = models.DateTimeField('date published')
 
-    def was_published_recently(self):
+    def is_future_publication(self):
+        """
+        Check if the question's publication date is in the future.
+
+        :return: True if the question's publication date is greater than
+            the current server time and False otherwise.
+        """
+        return self.publication_date > timezone.now()
+
+    def is_recent_publication(self):
+        """
+        Check if the question was published within the last day.
+
+        NOTE: A question with a future publication date is not considered
+            to be a recent question.
+        :return: True if the question's publication date is within the last
+        day and False otherwise.
+        """
         return (
-            self.publication_date
-            >= timezone.now() - timedelta(days=1)
+                (self.publication_date >= timezone.now() - timedelta(days=1))
+                and not self.is_future_publication()
         )
 
     def __str__(self):

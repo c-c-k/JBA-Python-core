@@ -5,7 +5,7 @@ from django.views.generic import DetailView, ListView
 from django.urls import reverse
 
 from .models import Choice, Question
-from .scripts import repopulate_polls
+from .utils import repopulate_polls
 
 
 class IndexView(ListView):

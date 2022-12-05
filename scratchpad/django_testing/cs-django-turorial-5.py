@@ -19,11 +19,14 @@ NOTE: This is a django console script (i.e. it is meant to:
 # --------------------
 # IMPORTS
 # --------------------
-# Standard library modules:
+# Standard library imports:
+from datetime import timedelta
 
-# Third party modules:
+# Django imports:
+from django.utils import timezone
 
-# Local scripts and modules:
+# Local imports:
+from polls.models import Question
 
 # --------------------
 # CONSTANTS
@@ -36,3 +39,23 @@ NOTE: This is a django console script (i.e. it is meant to:
 # --------------------
 # FUNCTIONS
 # --------------------
+
+
+# --------------------
+# DIRECT EXECUTION
+# --------------------
+
+# == Before fixing the Question models' was_published_recently function.
+# Create a question with the publication date of tomorrow.
+question = Question(
+    question_text="manual test 1",
+    publication_date=timezone.now() + timedelta(days=1)
+)
+question.save()
+# Check if the new question is reported as recent.
+# Before the above-mentioned bug is fixed this will return True.
+question.is_recent_publication()
+
+
+# ... test is continued as a proper test in polls/tests.py
+
