@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'movies.apps.MoviesConfig',
     'candy_factory.apps.CandyFactoryConfig',
     'blog.apps.BlogConfig',
+    'todo_list.apps.TodoListConfig',
     # 'tournament.apps.TournamentConfig'
     'django.contrib.admin',
     'django.contrib.auth',
@@ -155,6 +156,10 @@ APPLICATION_URLS = [
     {
         "url": "tournament/",
         "description": "HyperSkill sample tournament application",
+    },
+    {
+        "url": "todo_list/",
+        "description": "HyperSkill sample todo_list application",
     },
 ]
 
