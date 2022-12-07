@@ -24,6 +24,9 @@ from datetime import timedelta
 
 # Django imports:
 from django.utils import timezone
+from django.urls import reverse
+from django.test.utils import setup_test_environment
+from django.test import Client
 
 # Local imports:
 from polls.models import Question
@@ -44,6 +47,7 @@ from polls.models import Question
 # --------------------
 # DIRECT EXECUTION
 # --------------------
+setup_test_environment()
 
 # == Before fixing the Question models' was_published_recently function.
 # Create a question with the publication date of tomorrow.
@@ -56,6 +60,21 @@ question.save()
 # Before the above-mentioned bug is fixed this will return True.
 question.is_recent_publication()
 
-
 # ... test is continued as a proper test in polls/tests.py
 
+# ==test urls
+client = Client()
+# test response from "/"
+response = client.get("/")
+print(response.status_code)
+
+# test response from "/polls/
+response = client.get(reverse("polls:index"))
+print(response, response.status_code, sep="\n")
+print(response.content)
+print([
+    f"{key}: {value}"
+    for key, value
+    in response.context
+], sep="\n")
+print(response.context["questions_list"], sep="\n")

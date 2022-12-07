@@ -3,6 +3,7 @@ from django.shortcuts import (
 from django.http import HttpRequest, HttpResponseRedirect
 from django.views.generic import DetailView, ListView
 from django.urls import reverse
+from django.utils import timezone
 
 from .models import Choice, Question
 from .utils import repopulate_polls
@@ -13,7 +14,9 @@ class IndexView(ListView):
     context_object_name = 'questions_list'
 
     def get_queryset(self):
-        return Question.objects.order_by('-publication_date')[:3]
+        return Question.objects.filter(
+            publication_date__lte=timezone.now()).order_by(
+            '-publication_date')[:3]
 
 
 class QuestionDetails(DetailView):

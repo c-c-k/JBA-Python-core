@@ -4,24 +4,18 @@
 
 """
 
-# --------------------
-# IMPORTS
-# --------------------
-# Standard library imports:
+# ====================IMPORTS=======================================
 from datetime import timedelta
 from typing import Callable
 
-# Django imports:
+from django.urls import reverse
 from django.test import TestCase
 from django.utils import timezone
 
-# Local imports:
 from .models import Question
 
 
-# --------------------
-# ==testing utilities==
-# --------------------
+# ====================TESTING UTILITIES===============================
 def add_question_with_timedelta_offset(
         text: str = "Ipsum lorem.", weeks: int = 0, days: int = 0,
         hours: int = 0, minutes: int = 0, seconds: int = 0,
@@ -63,9 +57,7 @@ def date_error_msg(
     )
 
 
-# --------------------
-# ==model tests==
-# --------------------
+# ====================MODELS TESTS==================================
 class QuestionModelTests(TestCase):
 
     # -- tests for method: is_future_publication() --
@@ -146,10 +138,147 @@ class QuestionModelTests(TestCase):
                 extra_msg="past publication date reported as recent."
             )
         )
-# --------------------
-#
-# --------------------
 
-# --------------------
-#
-# --------------------
+
+# ====================VIEWS TESTS===================================
+class IndexViewTests(TestCase):
+    def test_no_questions(self):
+        """
+        Test that the Question queryset is empty and that
+        the polls index page reports that there are no questions
+        in the database.
+        """
+        response = self.client.get(reverse("polls:index"))
+        # check that the index page is at all reachable.
+        self.assertEqual(
+            response.status_code, 200,
+            msg="No status code 200 from index url with empty question db."
+        )
+        # check that the returned queryset contains no items.
+        self.assertQuerysetEqual(
+            response.context["questions_list"], [],
+            msg="Question queryset not empty with no questions in the db."
+        )
+        # check that the index page displays the no questions message.
+        self.assertContains(
+            response, "There are no questions.",
+            msg_prefix="No questions message doesn't appear on the index page"
+                       "with no questions in the db.\n"
+        )
+
+    def test_only_future_questions(self):
+        """
+        Test that the polls index page reports that there are no questions
+        when there are only questions with a future publication date in the
+        database.
+        """
+        # populate db with future questions
+        for days_offset in range(1, 4):
+            add_question_with_timedelta_offset(days=days_offset)
+        # get simulated server response
+        response = self.client.get(reverse("polls:index"))
+        # check that the index page is at all reachable.
+        self.assertEqual(
+            response.status_code, 200,
+            msg="No status code 200 from index url with only future "
+                "questions in the db."
+        )
+        # check that the returned queryset contains no items.
+        self.assertQuerysetEqual(
+            response.context["questions_list"], [],
+            msg="Question queryset not empty with only future questions in "
+                "the db."
+        )
+        # check that the index page displays the no questions message.
+        self.assertContains(
+            response, "There are no questions.",
+            msg_prefix="No questions message doesn't appear on the index page"
+                       "with only future questions in the db.\n"
+        )
+
+    def test_only_past_questions(self):
+        """
+        Test that the polls index page properly shows only the latest 3
+        questions when there are only questions with a past publication date
+        in the database.
+        """
+        # populate db with past questions
+        past_questions = []
+        for days_offset in range(-1, -6, -1):
+            question = add_question_with_timedelta_offset(
+                text="test_past_question",
+                days=days_offset
+            )
+            past_questions.append(question)
+        # get simulated server response
+        response = self.client.get(reverse("polls:index"))
+        # check that the index page is at all reachable.
+        self.assertEqual(
+            response.status_code, 200,
+            msg="No status code 200 from index url with only past "
+                "questions in the db."
+        )
+        # check that the returned queryset is not empty.
+        self.assertGreater(
+            response.context["questions_list"].count(), 0,
+            msg="Question queryset empty with past questions in "
+                "the db."
+        )
+        # check that the returned queryset contains only the latest 3
+        # questions.
+        self.assertQuerysetEqual(
+            response.context["questions_list"], past_questions[:3],
+            msg="Question queryset contains wrong questions with only past"
+                "questions in the db."
+        )
+        # check that the index page displays the test questions.
+        self.assertContains(
+            response, "test_past_question",
+            msg_prefix="Questions don't appear on the index page"
+                       "with only past questions in the db.\n"
+        )
+
+    def test_future_and_past_questions(self):
+        """
+        Test that the polls index page properly shows only the latest 3
+        questions when there are questions with both past and future
+        publication dates in the database.
+        """
+        # populate db with past questions
+        past_questions = []
+        for days_offset in range(-1, -6, -1):
+            question = add_question_with_timedelta_offset(
+                text="test_past_question",
+                days=days_offset
+            )
+            past_questions.append(question)
+        # populate db with future questions
+        for days_offset in range(1, 4):
+            add_question_with_timedelta_offset(days=days_offset)
+        # get simulated server response
+        response = self.client.get(reverse("polls:index"))
+        # check that the index page is at all reachable.
+        self.assertEqual(
+            response.status_code, 200,
+            msg="No status code 200 from index url with both past and future "
+                "questions in the db."
+        )
+        # check that the returned queryset is not empty.
+        self.assertGreater(
+            response.context["questions_list"].count(), 0,
+            msg="Question queryset empty with both past and future questions "
+                "in the db."
+        )
+        # check that the returned queryset contains only the latest 3
+        # questions.
+        self.assertQuerysetEqual(
+            response.context["questions_list"], past_questions[:3],
+            msg="Question queryset contains wrong questions with"
+                "both past and future questions in the db."
+        )
+        # check that the index page displays the test questions.
+        self.assertContains(
+            response, "test_past_question",
+            msg_prefix="Questions don't appear on the index page"
+                       "with both past and future questions in the db.\n"
+        )
