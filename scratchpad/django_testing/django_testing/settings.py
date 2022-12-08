@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'candy_factory.apps.CandyFactoryConfig',
     'blog.apps.BlogConfig',
     'todo_list.apps.TodoListConfig',
+    'hypergift.apps.HypergiftConfig',
     # 'tournament.apps.TournamentConfig'
     'django.contrib.admin',
     'django.contrib.auth',
@@ -160,6 +161,10 @@ APPLICATION_URLS = [
     {
         "url": "todo_list/",
         "description": "HyperSkill sample todo_list application",
+    },
+    {
+        "url": "hypergift/",
+        "description": "HyperSkill sample hypergift application",
     },
 ]
 
