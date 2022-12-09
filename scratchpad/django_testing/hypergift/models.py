@@ -12,5 +12,5 @@ class PostcardModel(models.Model):
     author = models.CharField(max_length=255)
     compliment = models.CharField(max_length=1024)
     usage = models.CharField(max_length=3, choices=TITLE_CHOICES)
-    date_of_delivery = models.DateField(blank=True, null=True)
+    delivery_date = models.DateField(blank=True, null=True)
     email = models.EmailField()

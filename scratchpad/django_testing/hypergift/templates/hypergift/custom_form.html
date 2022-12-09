@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>model form</title>
+    <title>custom form</title>
   </head>
   <body>
     <div>
-      <h2>Model form with default formatting (table)</h2>
+      <h2>Custom form with default formatting (table)</h2>
       <form method="post">
         {% csrf_token %}
         <table>{{ form }}</table>
@@ -14,7 +14,7 @@
       </form>
     </div>
     <div>
-      <h2>Model form as table</h2>
+      <h2>Custom form as table</h2>
       <form method="post">
         {% csrf_token %}
         <table>{{ form.as_table }}</table>
@@ -22,7 +22,7 @@
       </form>
     </div>
     <div>
-      <h2>Model form as paragraph</h2>
+      <h2>Custom form as paragraph</h2>
       <form method="post">
         {% csrf_token %}
         <p>{{ form.as_p }}</p>
@@ -30,7 +30,7 @@
       </form>
     </div>
     <div>
-      <h2>Model form as unordered list</h2>
+      <h2>Custom form as unordered list</h2>
       <form method="post">
         {% csrf_token %}
         <ul>{{ form.as_ul }}</ul>
