@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'todo_list.apps.TodoListConfig',
     'hypergift.apps.HypergiftConfig',
-    # 'tournament.apps.TournamentConfig'
+    'wishlist.apps.WishlistConfig',
+    'tournament.apps.TournamentConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -154,10 +155,10 @@ APPLICATION_URLS = [
         "url": "blog/",
         "description": "HyperSkill sample blog application",
     },
-    {
-        "url": "tournament/",
-        "description": "HyperSkill sample tournament application",
-    },
+    # {
+    #     "url": "tournament/",
+    #     "description": "HyperSkill sample tournament application",
+    # },
     {
         "url": "todo_list/",
         "description": "HyperSkill sample todo_list application",
@@ -165,6 +166,10 @@ APPLICATION_URLS = [
     {
         "url": "hypergift/",
         "description": "HyperSkill sample hypergift application",
+    },
+    {
+        "url": "wishlist/",
+        "description": "HyperSkill sample wishlist application",
     },
 ]
 
