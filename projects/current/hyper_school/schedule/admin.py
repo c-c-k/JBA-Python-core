@@ -3,35 +3,29 @@ from django.contrib import admin
 from .models import Teacher, Course, Student
 
 
-class TeacherInline(admin.TabularInline):
+class TeacherCourseInline(admin.StackedInline):
     can_delete = False
-    model = Teacher
-    readonly_fields = ('name', 'surname')
+    model = Course.teacher.through
 
 
-class CourseInline(admin.TabularInline):
+class StudentCourseInline(admin.TabularInline):
     can_delete = False
-    model = Course
-    readonly_fields = ('title', 'duration_months')
-
-
-class StudentInline(admin.TabularInline):
-    can_delete = False
-    model = Student
-    readonly_fields = ('name', 'surname')
+    model = Student.course.through
 
 
 class TeacherAdmin(admin.ModelAdmin):
-    fields = ("__all__",)
+    fields = ('name', 'surname', 'age', 'about')
+    inlines = (TeacherCourseInline,)
 
 
 class CourseAdmin(admin.ModelAdmin):
-    fields = ("__all__",)
-    # inlines = (StudentInline, )
+    inlines = (StudentCourseInline, TeacherCourseInline)
+    exclude = ('teacher',)
+
 
 class StudentAdmin(admin.ModelAdmin):
-    fields = ("__all__",)
-    # inlines = (CourseInline, )
+    inlines = (StudentCourseInline,)
+    exclude = ('course',)
 
 
 admin.site.register(Teacher, TeacherAdmin)
