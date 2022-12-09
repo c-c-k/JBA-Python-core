@@ -6,7 +6,13 @@
     <title>Django test site main index page</title>
   </head>
   <body>
-    <h1>Sections</h1>
+    <div>
+      <h1>{{ greet_msg }}</h1>
+    </div>
+    <hr>
+    <div>
+      <h2>Sections</h2>
+    </div>
     <hr>
     <ul>
       {% for application in applications %}

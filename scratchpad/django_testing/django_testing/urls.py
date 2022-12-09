@@ -26,5 +26,6 @@ urlpatterns = [
     path('todo_list/', include('todo_list.urls')),
     path('hypergift/', include('hypergift.urls')),
     path('wishlist/', include('wishlist.urls')),
+    path('user_manager/', include('user_manager.urls')),
     path('admin/', admin.site.urls),
 ]

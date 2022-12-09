@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,10 +38,11 @@ INSTALLED_APPS = [
     'movies.apps.MoviesConfig',
     'candy_factory.apps.CandyFactoryConfig',
     'blog.apps.BlogConfig',
+    'tournament.apps.TournamentConfig',
     'todo_list.apps.TodoListConfig',
     'hypergift.apps.HypergiftConfig',
     'wishlist.apps.WishlistConfig',
-    'tournament.apps.TournamentConfig',
+    'user_manager.apps.UserManagerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,6 +62,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'django_testing.urls'
+LOGIN_REDIRECT_URL = reverse_lazy("site_index:index")
+LOGOUT_REDIRECT_URL = reverse_lazy("user_manager:index")
 
 TEMPLATES = [
     {
@@ -166,6 +171,10 @@ APPLICATION_URLS = [
     {
         "url": "hypergift/",
         "description": "HyperSkill sample hypergift application",
+    },
+    {
+        "url": "user_manager/",
+        "description": "HyperSkill sample user management application",
     },
     {
         "url": "wishlist/",
