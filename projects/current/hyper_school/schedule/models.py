@@ -11,7 +11,7 @@ class PersonCommonInfo(models.Model):
 
 
 class Teacher(PersonCommonInfo):
-    about = models.TextField
+    about = models.TextField()
 
 
 class Course(models.Model):
