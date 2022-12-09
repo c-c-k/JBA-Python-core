@@ -1,7 +1,8 @@
-# Private modifications
-###
+### Private modifications
 # Links to local files (mostly local copies of questions and assignments).
 *.lln
+# practice database files
+*.sqlite3
 
 
 #
