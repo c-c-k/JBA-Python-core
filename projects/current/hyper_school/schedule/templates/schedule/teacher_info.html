@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}teacher info page{% endblock %}
+{% block content %}
+  <table>
+  {{ object.as_table }}
+  </table>
+  <div>
+    <p><a href="{% url "schedule:main" %}">Back to main page</a></p>
+  </div>
+{% endblock %}

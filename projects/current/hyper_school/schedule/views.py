@@ -1,3 +1,4 @@
+from django.views.generic import DetailView
 from django.shortcuts import render, redirect, reverse
 from django.views import View
 
@@ -24,7 +25,13 @@ class IndexView(View):
         return render(request, "schedule/index.html", context)
 
 
-class CourseInfoView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'schedule/course_info.html')
+class CourseInfoView(DetailView):
+    model = Course
+    template_name = "schedule/course_info.html"
+
+
+class TeacherInfoView(DetailView):
+    model = Teacher
+    template_name = "schedule/teacher_info.html"
+
 
