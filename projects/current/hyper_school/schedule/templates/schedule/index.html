@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 {% block title %} index page title {% endblock %}
 {% block content %}
-  index page content
+  <div>
+  <p>There are a total of {{ courses.count }} courses in the system.</p>
+  <form method="get" action="{% url 'schedule:main' %}">
+    <label for="search_field">Search for courses: </label>
+    <input type="search" name="q" id="search_field">
+    <button type="submit">search</button>
+  </form>
+  </div>
+  <div>
+  <ul>
+    {% for course in courses %}
+      <li><a href="{% url "schedule:course_info" course.pk %}">{{ course.title }}</a></li>
+    {% endfor %}
+  </ul>
+  </div>
+  <div>
+    <button type="button"><a href="">Clear Database</a></button>
+    <button type="button"><a href="">Populate Database</a></button>
+  </div>
 {% endblock %}
