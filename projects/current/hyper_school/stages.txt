@@ -1,4 +1,4 @@
-stage 1: In progress
+stage 1: Done
 stage 2: 
 stage 3: 
 stage 4: 
