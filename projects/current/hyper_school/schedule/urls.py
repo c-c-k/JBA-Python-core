@@ -9,6 +9,8 @@ urlpatterns = [
          name="course_info"),
     path('schedule/teacher_details/<int:pk>', views.TeacherInfoView.as_view(),
          name="teacher_info"),
+    path('schedule/add_course/', views.JoinCourseView.as_view(),
+         name="join_course"),
     path('', views.root_redirect),
     path('schedule', views.root_redirect),
     path('schedule/index', views.root_redirect),

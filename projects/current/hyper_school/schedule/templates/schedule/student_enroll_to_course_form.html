@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Enroll to course{% endblock %}
+{% block content %}
+  <div>
+    <h2></h2>
+  </div>
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+      <button type="submit">Apply</button>
+    </form>
+  </div>
+  <div>
+    <p><a href="{% url "schedule:main" %}">Back to main page</a></p>
+  </div>
+{% endblock %}

@@ -1,6 +1,6 @@
 stage 1: Done
 stage 2: Done
 stage 3: Done
-stage 4: In Progress
-stage 5: 
-stage 6: 
+stage 4: Done
+stage 5:
+stage 6:
