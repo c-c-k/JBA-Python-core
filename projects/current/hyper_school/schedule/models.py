@@ -6,6 +6,9 @@ class PersonCommonInfo(models.Model):
     surname = models.CharField(max_length=50)
     age = models.PositiveIntegerField()
 
+    def full_name(self):
+        return ' '.join((self.name, self.surname))
+
     class Meta:
         abstract = True
 
@@ -20,6 +23,9 @@ class Course(models.Model):
     duration_months = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     teacher = models.ManyToManyField(Teacher)
+
+    def enrolled_students(self):
+        return self.student_set.all()
 
 
 class Student(PersonCommonInfo):

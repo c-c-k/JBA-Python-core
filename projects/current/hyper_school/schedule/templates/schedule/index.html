@@ -2,6 +2,16 @@
 {% block title %} index page title {% endblock %}
 {% block content %}
   <div>
+  {% if user.is_authenticated %}
+    <p>Hello {{ user.username }}</p>
+    <p><a href="{% url 'schedule:student_logout' %}">Logout</a></p>
+  {% else %}
+    <p><a href="{% url 'schedule:student_signup' %}">Signup</a></p>
+    <p><a href="{% url 'schedule:student_login' %}">Login</a></p>
+  {% endif %}
+  </div>
+  <hr>
+  <div>
   <p>There are a total of {{ courses.count }} courses in the system.</p>
   <form method="get" action="{% url 'schedule:main' %}">
     <label for="search_field">Search for courses: </label>

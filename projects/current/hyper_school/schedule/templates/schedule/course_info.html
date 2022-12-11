@@ -12,6 +12,15 @@
     <p>Duration: {{ object.duration_months }}</p>
     <p>Description:</p><p> {{ object.info }}</p>
   </div>
+  <hr>
+  <div>
+  <h3>Enrolled Students</h3>
+  <ol>
+    {% for student in object.enrolled_students %}
+      <li>{{ student.full_name }}</li>
+    {% endfor %}
+  </ol>
+  </div>
   <div>
     <p><a href="{% url "schedule:join_course" %}">Join course</a></p>
   </div>
