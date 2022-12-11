@@ -1,6 +1,0 @@
-stage 1: Done
-stage 2: Done
-stage 3: Done
-stage 4: Done
-stage 5: Done
-stage 6: Done
