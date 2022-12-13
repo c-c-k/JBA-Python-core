@@ -90,7 +90,7 @@ PATH_QUESTIONS_CURRENT_PYTHON = Path(
 PATH_QUESTIONS_CURRENT_HTML = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.html")
 PATH_QUESTIONS_CURRENT_CSS = Path(
-    PATH_TOPIC_QUESTIONS_BASE, "style.css")
+    PATH_TOPIC_QUESTIONS_BASE, "current.css")
 PATH_QUESTIONS_CURRENT_JAVASCRIPT = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.js")
 # Full solution archives (This should not be uploaded to a public
@@ -515,11 +515,11 @@ def css_quickfix(substitution_dict: dict[str, str]):
         PATH_QUESTIONS_CURRENT_HTML]
     html_text = language_info.action_file.read_text()
     if '<link rel="stylesheet' not in html_text:
-        html_text = ('<link rel="stylesheet" href="style.css">\n'
+        html_text = ('<link rel="stylesheet" href="current.css">\n'
                      + html_text)
         # html_text = re.sub(
         #     r'^(?P<INDENT>\s*)</head',
-        #     r'\g<INDENT>  <link rel="stylesheet" href="style.css">\n'
+        #     r'\g<INDENT>  <link rel="stylesheet" href="current.css">\n'
         #     r'\g<INDENT> </head',
         #     html_text,
         #     flags=re.MULTILINE
@@ -573,7 +573,7 @@ def export_answer_html_css(language_info: LanguageInfo):
         language_info.action_file.read_text())
     html_text = match.group("HTML")
     # CSS quickfix
-    html_text = re.sub(r'^\s*<link.+"style.css".*\n', '', html_text,
+    html_text = re.sub(r'^\s*<link.+"current.css".*\n', '', html_text,
                        flags=re.MULTILINE)
     language_info = dict_action_file_to_language_info[
         PATH_QUESTIONS_CURRENT_CSS]
