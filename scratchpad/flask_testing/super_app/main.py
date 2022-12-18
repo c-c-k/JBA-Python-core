@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'''Flask test app: Super App'''
+"""Flask test app: Super App"""
 
 from flask import Flask
-from flask import request
+from flask import jsonify
+from flask import make_response, request
 from flask import render_template
 
 app = Flask('super-app')
@@ -12,7 +13,8 @@ app = Flask('super-app')
 
 @app.route('/')
 def index():
-    return 'Flask Hellow World'
+    response = ("Index page, All good", 200)
+    return response
 
 
 @app.route('/str/<int:val1>/<val2>')
@@ -27,36 +29,31 @@ def mult(val1, val2):
 
 @app.route('/request_test', methods=['GET', 'POST'])
 def request_test():
-    if request.method == 'GET':
-        page = """
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>request test</title>
-  </head>
-  <body>
-    <div>
-      <form method="post">
-        <input type="text" name="text_input">
-        <input type="checkbox" name="cb_input">
-        <input type="submit" name="sub">
-      </form>
-    </div>
-    <hr>
-    <div>
-      <form method="get">
-        <input type="search" name="search_input">
-      </form>
-    </div>
-  </body>
-</html>
-        """
-        page += f"<p> GET args are: {str(request.args)}</p>"
-        return page
-    elif request.method == 'POST':
-        page = f"<p> POST args are: {str(request.data)}</p>"
-        return page
+    method = request.method
+    args = request.args
+    response = render_template('request_test.html', method=method, args=args)
+    return response
+
+
+@app.route('/err_demo')
+def error_page():
+    response = make_response('Error page', 404)
+    return response
+
+
+@app.route('/jsonify_demo')
+def jsonify_demo():
+    data = {
+        'id': 45,
+        'name': 'test_name',
+        'dict': {'key1': 'a', 'key2': 'b'},
+        'list': [1, 2, 3],
+        'tuple': ('a', 'b'),
+    }
+    response = jsonify(data)
+    response.status_code = 212
+    return response
+
 
 def main():
     app.run()

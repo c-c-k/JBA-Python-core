@@ -19,5 +19,13 @@
         <input type="submit" name="sea sub">
       </form>
     </div>
+    <div>
+      <p>{{ method }}args are:</p>
+      <ul>
+        {% for arg in args %}
+          <li>{{ arg }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   </body>
 </html>
