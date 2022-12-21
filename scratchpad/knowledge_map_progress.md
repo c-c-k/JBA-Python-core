@@ -11,7 +11,7 @@
         * errors and exceptions 5/5
         * testing and debugging 7/7
         * code performance ?/5 TODO: ALL
-      * working with data 46/46
+      * work.. data 46/46
         * data types and operations 20/20
           * basic data types and ops 4/4
           * objects in python 5/5
@@ -36,6 +36,22 @@
         * classes 3/3
         * methods 4/4
         * advanced oop 5/5
-      * additional instruments
-        * ...
+      * add.. inst.. ?/18
+        * coding environments 3/5 TODO: jupyter nb, g. colab (less relevant for fullstack development)
+        * Advanced tools 4/4
+        * Interaction with os 3/3
+        * algorithms and data structures ?/6 TODO: sort, index u.t.h (depends on search & sort fundamentals)
+      * py lib 23/30
+        * time 3/3
+        * math 3/5 TODO: scipy, statistics (depends on advanced mathematics)
+        * networking 7/7
+        * regex 10/11 TODO: regex in programs (depends on nlp)
+        * sql alchemy ?/4 TODO: ALL
+      * possible todos
+        * py lib
+          * math 3/5 TODO: scipy, statistics (depends on advanced mathematics)
+          * regex 10/11 TODO: regex in programs (depends on nlp)
+          * sql alchemy ?/4 TODO: ALL
+        * additional instruments
+          * coding environments 3/5 TODO: jupyter nb, g. colab (less relevant for fullstack development)
 
