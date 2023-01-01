@@ -149,7 +149,7 @@ re_question_elements_head = re.compile(
 re_question_elements_tail_normal = re.compile(
     (
         r"(?P<SAMPLE_IO>(?:.*\n)*?)"
-        r"Write a program\n"
+        r"Write a program.*\n"
         r"(?:.*\n)+?"
         r"^1\n(?:^\d+\n)*"
         r"(?P<ANSWER_CODE>(?s:.*))"
