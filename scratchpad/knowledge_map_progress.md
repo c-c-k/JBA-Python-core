@@ -79,10 +79,10 @@
       * 0/3 interaction with backend
   * ?/100 frontend 
     * ?/42 html
-      * ?/11 html intro
+      * 11/11 html intro
         * 3/3 intro to html
         * 2/2 code style
-        * ?/6 text formating
+        * 6/6 text formatting
       * ?/? html elements
       * ?/? other tech
       * ?/? basic tags
