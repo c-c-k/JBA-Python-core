@@ -83,11 +83,11 @@
         * 3/3 intro to html
         * 2/2 code style
         * 6/6 text formatting
-      * ?/? html elements
-      * ?/? other tech
-      * ?/? basic tags
-        * ?/? tables
-        * ?/? lists
+      * 4/4 html elements
+      * 4/4 Interaction with other technologies
+      * 7/7 basic tags
+        * 5/5 tables
+        * 2/2 lists
       * ?/? forms
       * ?/? advanced elements
       * ?/? media files
