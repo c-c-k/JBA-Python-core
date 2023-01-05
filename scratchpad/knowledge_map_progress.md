@@ -90,7 +90,7 @@
         * 2/2 lists
       * 7/7 forms
       * 5/5 advanced elements
-      * ?/? media files
+      * 4/4 media files
     * ?/? css
       * ?/? intro to css
       * ?/? code style
