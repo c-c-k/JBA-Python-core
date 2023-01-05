@@ -88,8 +88,8 @@
       * 7/7 basic tags
         * 5/5 tables
         * 2/2 lists
-      * ?/? forms
-      * ?/? advanced elements
+      * 7/7 forms
+      * 5/5 advanced elements
       * ?/? media files
     * ?/? css
       * ?/? intro to css
