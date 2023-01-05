@@ -78,7 +78,7 @@
         * 0/3 promise
       * 0/3 interaction with backend
   * ?/100 frontend 
-    * ?/42 html
+    * 42/42 html
       * 11/11 html intro
         * 3/3 intro to html
         * 2/2 code style
@@ -91,8 +91,8 @@
       * 7/7 forms
       * 5/5 advanced elements
       * 4/4 media files
-    * ?/? css
-      * ?/? intro to css
+    * ?/52 css
+      * 3/4 intro to css TODO: what is cascade.
       * ?/? code style
       * ?/? units
       * ?/? basic properties
