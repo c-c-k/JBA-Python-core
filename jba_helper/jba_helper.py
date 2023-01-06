@@ -584,8 +584,8 @@ def export_answer_html_css(language_info: LanguageInfo):
     # For the time being I'm just gluing together the html and css code,
     # might do something better latter on.
     combined_text = html_text + "\n" + css_text
-    set_clipboard_x_selection_text(combined_text)
-    # set_clipboard_x_selection_text(css_text)
+    # set_clipboard_x_selection_text(combined_text)
+    set_clipboard_x_selection_text(css_text)
     # set_clipboard_x_selection_text(html_text)
 
 

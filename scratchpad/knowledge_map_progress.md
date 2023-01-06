@@ -1,4 +1,7 @@
 * ?/? computer science
+  * ?/? fundamentals
+  * ?/? ...
+  * 9/9 ux ui
   * ?/? prog lang
     * 163/175 python
       * 16/16 basics
@@ -91,18 +94,19 @@
       * 7/7 forms
       * 5/5 advanced elements
       * 4/4 media files
-    * ?/52 css
-      * 3/4 intro to css TODO: what is cascade.
-      * ?/? code style
-      * ?/? units
-      * ?/? basic properties
-        * ?/? positioning
-        * ?/? common properties
-        * ?/? working with text
-        * ?/? specific properties
-      * ?/? flexbox
-      * ?/? concepts
-      * ?/? animation
-      * ?/? advanced reatures
-      * ?/? selectors in depth
+    * 52/52 css
+      * 4/4 intro to css TODO: what is cascade.
+      * 3/3 code style
+      * 2/2 units
+      * 22/22 basic properties
+        * 7/7 positioning
+        * 7/7 common properties
+        * 6/6 working with text
+        * 2/2 specific properties
+      * 4/4 flexbox
+      * 4/4 concepts
+      * 2/2 animation
+      * 7/7 advanced features
+      * 4/4 selectors in depth
+    * react ?/6
 
