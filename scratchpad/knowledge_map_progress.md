@@ -60,13 +60,13 @@
         * 3/5 additional instruments
           * ?/? coding environments   TODO: jupyter nb, g. colab (less relevant for fullstack development)
     * ?/70 javascript
-      * ?/30 basics
-        * 5/6 intro
-        * 4/5 data types
-        * 3/5 operations
-        * 4/8 functions
+      * 30/30 basics
+        * 6/6 intro
+        * 5/5 data types
+        * 5/5 operations
+        * 8/8 functions
         * 2/2 conditions
-        * 0/4 loops
+        * 4/4 loops
       * 3/3 code style
       * ?/20 working with data
         * 0/10 arrays
