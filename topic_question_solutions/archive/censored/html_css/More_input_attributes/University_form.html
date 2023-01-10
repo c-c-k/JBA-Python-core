@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="current.css">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forms</title>
+  </head>
+  <body>
+    <form action="">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" />
+      
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" />
+      
+      <label for="dob">Date of Birth:</label>
+      <input type="date" name="date" id="date" min="1990-01-01" />
+      
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username"
+             pattern="[A-Za-z]{5}"/>
+      
+      <label for="files">Attach your file:</label>
+      <input type="file" name="file" id="files" multiple />
+      
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password"
+             pattern="[0-9]{4}-[5-9]{2}-[2-9]{4}" placeholder="7384-79-2342" />
+      
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
+<!-- -=- HTML END -=- -->
+<!-- Jet Brains Academy topic question solution.
+-=- CHECK LIST -=-
+The code is valid
+Add attribute to the input element of date type as per above instrucitions.
+Add attribute to the input of the file type such that more than one files can be uploaded.
+Add attribute such that the username is of only 5 characters as per above given intstructions.
+Add initial hint to the password input field as given in the image with the same value.
+Add pattern to the password input field as per above given instructions.
+-=- CHECK LIST -=-
+
+-=- QUESTION BODY -=-
+Question text censored.
+-=- QUESTION BODY -=-
+
+Topic category: Computer science  -> Frontend  -> HTML  -> Forms
+Topic name: More input attributes
+Question name: University form
+Question rating: Easy
+-->
