@@ -69,7 +69,7 @@
         * 4/4 loops
       * 3/3 code style
       * ?/20 working with data
-        * 0/10 arrays
+        * 10/10 arrays
         * 0/3 objects
         * 2/7 strings
       * ?/10 interaction with browser
