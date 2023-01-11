@@ -59,27 +59,27 @@
           * 0/2 _   TODO: ALL (sqlite library, appears in the root node of the py lib node itself)
         * 3/5 additional instruments
           * ?/? coding environments   TODO: jupyter nb, g. colab (less relevant for fullstack development)
-    * ?/70 javascript
-      * 30/30 basics
+    * 73/73 javascript
+      * 31/31 basics
         * 6/6 intro
         * 5/5 data types
-        * 5/5 operations
+        * 6/6 operations
         * 8/8 functions
         * 2/2 conditions
         * 4/4 loops
       * 3/3 code style
-      * ?/20 working with data
-        * 10/10 arrays
+      * 21/21 working with data
+        * 11/11 arrays
         * 3/3 objects
-        * 2/7 strings
-      * ?/10 interaction with browser
-        * 1/3 dom events
-        * 2/5 dom interaction
-        * 1/2 browser window
-      * ?/4 advanced features
+        * 7/7 strings
+      * 11/11 interaction with browser
+        * 3/3 dom events
+        * 3/3 browser window
+        * 5/5 dom interaction
+      * 4/4 advanced features
         * 1/1 modules
-        * 0/3 promise
-      * 0/3 interaction with backend
+        * 3/3 promise
+      * 3/3 interaction with backend
   * ?/100 frontend 
     * 42/42 html
       * 11/11 html intro
