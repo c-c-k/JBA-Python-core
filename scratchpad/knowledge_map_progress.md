@@ -70,7 +70,7 @@
       * 3/3 code style
       * ?/20 working with data
         * 10/10 arrays
-        * 0/3 objects
+        * 3/3 objects
         * 2/7 strings
       * ?/10 interaction with browser
         * 1/3 dom events
