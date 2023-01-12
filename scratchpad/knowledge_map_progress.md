@@ -80,7 +80,7 @@
         * 1/1 modules
         * 3/3 promise
       * 3/3 interaction with backend
-  * ?/100 frontend 
+  * 100/100 frontend 
     * 42/42 html
       * 11/11 html intro
         * 3/3 intro to html
@@ -108,5 +108,5 @@
       * 2/2 animation
       * 7/7 advanced features
       * 4/4 selectors in depth
-    * react ?/6
+    * react 6/6
 
