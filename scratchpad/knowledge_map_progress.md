@@ -1,7 +1,38 @@
 * ?/? computer science
   * ?/? fundamentals
-  * ?/? ...
-  * 9/9 ux ui
+    * ?/? essentials
+    * ?/? jvm
+    * ?/? dev tools
+    * ?/? algorithms and structures
+    * ?/80 databases and sql
+      * ?/16 db theory
+        * ?/6 common db topics
+        * ?/4 relational db theory
+        * ?/6 nosql dbs
+      * ?/32 basic sql
+        * ?/8 intro to sql
+        * ?/3 data definition language
+        * ?/8 retrieving data
+        * ?/5 data modification language
+        * ?/4 functions and operations
+        * ?/1 sub-queries
+        * ?/1 data-control language
+        * ?/2 transaction management
+      * ?/32 dbms
+        * ?/14 mysql
+          * ?/1 _
+          * ?/4 data definition language
+          * ?/2 mysql syntax
+          * ?/4 db objects
+          * ?/2 data types
+          * ?/1 optimization
+        * ?/2 sqlite
+        * ?/15 mongodb
+          * ?/3 intro to mongodb
+          * ?/11 operations and operators
+          * ?/1 data modeling
+        * ?/1 postgresql
+    * 9/9 ux ui
   * ?/? prog lang
     * 163/175 python
       * 16/16 basics
