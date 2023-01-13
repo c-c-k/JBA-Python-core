@@ -11,7 +11,7 @@
         * 6/6 nosql dbs
       * ?/32 basic sql
         * 8/8 intro to sql
-        * ?/3 data definition language
+        * 3/3 data definition language
         * ?/8 retrieving data
         * ?/5 data modification language
         * ?/4 functions and operations
