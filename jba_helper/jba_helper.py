@@ -69,9 +69,10 @@ class Action(enum.Enum):
 
 # Supported programing languages.
 class Language(enum.Enum):
-    PYTHON = enum.auto()
-    HTML_CSS = enum.auto()
     JAVASCRIPT = enum.auto()
+    HTML_CSS = enum.auto()
+    PYTHON = enum.auto()
+    SQL_GENERIC = enum.auto()
 
 
 # --------------------
@@ -85,45 +86,53 @@ PATH_JBA_ROOT = Path(__file__).resolve().parents[1]
 # Currently worked on questions' paths.
 PATH_TOPIC_QUESTIONS_BASE = Path(
     PATH_JBA_ROOT, "topic_question_solutions/")
-PATH_QUESTIONS_CURRENT_PYTHON = Path(
-    PATH_TOPIC_QUESTIONS_BASE, "current.py")
-PATH_QUESTIONS_CURRENT_HTML = Path(
-    PATH_TOPIC_QUESTIONS_BASE, "current.html")
 PATH_QUESTIONS_CURRENT_CSS = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.css")
 PATH_QUESTIONS_CURRENT_JAVASCRIPT = Path(
     PATH_TOPIC_QUESTIONS_BASE, "current.js")
+PATH_QUESTIONS_CURRENT_HTML = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "current.html")
+PATH_QUESTIONS_CURRENT_PYTHON = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "current.py")
+PATH_QUESTIONS_CURRENT_SQL_GENERIC = Path(
+    PATH_TOPIC_QUESTIONS_BASE, "current.sql")
 # Full solution archives (This should not be uploaded to a public
 # GitHub repo out of licensing concerns).
 PATH_ARCHIVE_FULL_BASE = Path(
     PATH_TOPIC_QUESTIONS_BASE, "archive/full/")
-PATH_ARCHIVE_FULL_PYTHON = Path(
-    PATH_ARCHIVE_FULL_BASE, "python/")
-PATH_ARCHIVE_FULL_HTML_CSS = Path(
-    PATH_ARCHIVE_FULL_BASE, "html_css/")
 PATH_ARCHIVE_FULL_JAVASCRIPT = Path(
     PATH_ARCHIVE_FULL_BASE, "javascript/")
+PATH_ARCHIVE_FULL_HTML_CSS = Path(
+    PATH_ARCHIVE_FULL_BASE, "html_css/")
+PATH_ARCHIVE_FULL_PYTHON = Path(
+    PATH_ARCHIVE_FULL_BASE, "python/")
+PATH_ARCHIVE_FULL_SQL_GENERIC = Path(
+    PATH_ARCHIVE_FULL_BASE, "sql_generic/")
 # Censored solution archives (The full question_text text is removed
 # out of licensing concerns).
 PATH_ARCHIVE_CENSORED_BASE = Path(
     PATH_TOPIC_QUESTIONS_BASE, "archive/censored/")
-PATH_ARCHIVE_CENSORED_PYTHON = Path(
-    PATH_ARCHIVE_CENSORED_BASE, "python/")
-PATH_ARCHIVE_CENSORED_HTML_CSS = Path(
-    PATH_ARCHIVE_CENSORED_BASE, "html_css/")
 PATH_ARCHIVE_CENSORED_JAVASCRIPT = Path(
     PATH_ARCHIVE_CENSORED_BASE, "javascript/")
+PATH_ARCHIVE_CENSORED_HTML_CSS = Path(
+    PATH_ARCHIVE_CENSORED_BASE, "html_css/")
+PATH_ARCHIVE_CENSORED_PYTHON = Path(
+    PATH_ARCHIVE_CENSORED_BASE, "python/")
+PATH_ARCHIVE_CENSORED_SQL_GENERIC = Path(
+    PATH_ARCHIVE_CENSORED_BASE, "sql_generic/")
 # Per programing language solution template file.
 DIR_TEMPLATE_BASE = Path(
     PATH_JBA_ROOT, "jba_helper/answer_templates/")
-PATH_TEMPLATE_PYTHON = Path(
-    DIR_TEMPLATE_BASE, "python.template.txt")
-PATH_TEMPLATE_HTML = Path(
-    DIR_TEMPLATE_BASE, "html.template.txt")
 PATH_TEMPLATE_CSS = Path(
     DIR_TEMPLATE_BASE, "css.template.txt")
+PATH_TEMPLATE_HTML = Path(
+    DIR_TEMPLATE_BASE, "html.template.txt")
 PATH_TEMPLATE_JAVASCRIPT = Path(
     DIR_TEMPLATE_BASE, "javascript.template.txt")
+PATH_TEMPLATE_PYTHON = Path(
+    DIR_TEMPLATE_BASE, "python.template.txt")
+PATH_TEMPLATE_SQL_GENERIC = Path(
+    DIR_TEMPLATE_BASE, "sql_generic.template.txt")
 
 # --------------------
 # --REGEX
@@ -149,7 +158,7 @@ re_question_elements_head = re.compile(
 re_question_elements_tail_normal = re.compile(
     (
         r"(?P<SAMPLE_IO>(?:.*\n)*?)"
-        r"Write a program.*\n"
+        r"Write an? [Sp].*\n"
         r"(?:.*\n)+?"
         r"^1\n(?:^\d+\n)*"
         r"(?P<ANSWER_CODE>(?s:.*))"
@@ -179,23 +188,28 @@ re_question_elements_extractor_html_css = re.compile(
     + re_question_elements_tail_html_css.pattern,
     re.MULTILINE
 )
-re_answer_code_python = re.compile(
-    r"^\s*# -=- ANSWER CODE START -=-\n"
-    r"(?P<ANSWER_CODE>.*?)"
-    r"# -=- ANSWER CODE END -=-\n",
+re_answer_code_css = re.compile(
+    r"(?P<CSS>.*)"
+    r"^.+-=- CSS END -=-.+\n",
     re.MULTILINE | re.DOTALL)
 re_answer_code_html = re.compile(
     r"(?P<HTML>.*?)"
     r"^<!-- -=- HTML END -=- -->\n",
     re.MULTILINE | re.DOTALL)
-re_answer_code_css = re.compile(
-    r"(?P<CSS>.*)"
-    r"^.+-=- CSS END -=-.+\n",
-    re.MULTILINE | re.DOTALL)
 re_answer_code_javascript = re.compile(
     r"// -=- ANSWER CODE START -=-\n"
     r"(?P<ANSWER_CODE>.*?)"
     r"// -=- ANSWER CODE END -=-\n",
+    re.MULTILINE | re.DOTALL)
+re_answer_code_python = re.compile(
+    r"^\s*# -=- ANSWER CODE START -=-\n"
+    r"(?P<ANSWER_CODE>.*?)"
+    r"# -=- ANSWER CODE END -=-\n",
+    re.MULTILINE | re.DOTALL)
+re_answer_code_sql_generic = re.compile(
+    r"-- -=- ANSWER CODE START -=-\n"
+    r"(?P<ANSWER_CODE>.*?)"
+    r"-- -=- ANSWER CODE END -=-\n",
     re.MULTILINE | re.DOTALL)
 
 # --------------------
@@ -203,15 +217,15 @@ re_answer_code_javascript = re.compile(
 # --------------------
 dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
     # Topic action file to programing language info mapping.
-    PATH_QUESTIONS_CURRENT_PYTHON: LanguageInfo(
-        language=Language.PYTHON,
-        action_file=PATH_QUESTIONS_CURRENT_PYTHON,
-        full_archive=PATH_ARCHIVE_FULL_PYTHON,
-        censored_archive=PATH_ARCHIVE_CENSORED_PYTHON,
-        file_suffix=".py",
-        template_file=PATH_TEMPLATE_PYTHON,
-        re_element_extractor=re_question_elements_extractor_normal,
-        re_answer_extractor=re_answer_code_python,
+    PATH_QUESTIONS_CURRENT_CSS: LanguageInfo(
+        language=Language.HTML_CSS,
+        action_file=PATH_QUESTIONS_CURRENT_CSS,
+        full_archive=PATH_ARCHIVE_FULL_HTML_CSS,
+        censored_archive=PATH_ARCHIVE_CENSORED_HTML_CSS,
+        file_suffix=".css",
+        template_file=PATH_TEMPLATE_CSS,
+        re_element_extractor=re_question_elements_extractor_html_css,
+        re_answer_extractor=re_answer_code_css,
     ),
     PATH_QUESTIONS_CURRENT_HTML: LanguageInfo(
         language=Language.HTML_CSS,
@@ -223,16 +237,6 @@ dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
         re_element_extractor=re_question_elements_extractor_html_css,
         re_answer_extractor=re_answer_code_html,
     ),
-    PATH_QUESTIONS_CURRENT_CSS: LanguageInfo(
-        language=Language.HTML_CSS,
-        action_file=PATH_QUESTIONS_CURRENT_CSS,
-        full_archive=PATH_ARCHIVE_FULL_HTML_CSS,
-        censored_archive=PATH_ARCHIVE_CENSORED_HTML_CSS,
-        file_suffix=".css",
-        template_file=PATH_TEMPLATE_CSS,
-        re_element_extractor=re_question_elements_extractor_html_css,
-        re_answer_extractor=re_answer_code_css,
-    ),
     PATH_QUESTIONS_CURRENT_JAVASCRIPT: LanguageInfo(
         language=Language.JAVASCRIPT,
         action_file=PATH_QUESTIONS_CURRENT_JAVASCRIPT,
@@ -242,6 +246,26 @@ dict_action_file_to_language_info: dict[Path, LanguageInfo] = {
         template_file=PATH_TEMPLATE_JAVASCRIPT,
         re_element_extractor=re_question_elements_extractor_normal,
         re_answer_extractor=re_answer_code_javascript,
+    ),
+    PATH_QUESTIONS_CURRENT_PYTHON: LanguageInfo(
+        language=Language.PYTHON,
+        action_file=PATH_QUESTIONS_CURRENT_PYTHON,
+        full_archive=PATH_ARCHIVE_FULL_PYTHON,
+        censored_archive=PATH_ARCHIVE_CENSORED_PYTHON,
+        file_suffix=".py",
+        template_file=PATH_TEMPLATE_PYTHON,
+        re_element_extractor=re_question_elements_extractor_normal,
+        re_answer_extractor=re_answer_code_python,
+    ),
+    PATH_QUESTIONS_CURRENT_SQL_GENERIC: LanguageInfo(
+        language=Language.SQL_GENERIC,
+        action_file=PATH_QUESTIONS_CURRENT_SQL_GENERIC,
+        full_archive=PATH_ARCHIVE_FULL_SQL_GENERIC,
+        censored_archive=PATH_ARCHIVE_CENSORED_SQL_GENERIC,
+        file_suffix=".sql",
+        template_file=PATH_TEMPLATE_SQL_GENERIC,
+        re_element_extractor=re_question_elements_extractor_normal,
+        re_answer_extractor=re_answer_code_sql_generic,
     ),
 }
 
@@ -381,7 +405,7 @@ def archive_previous_question(language_info: LanguageInfo):
         return
     # extract question_text and topic names from the question_text's text.
     name, topic_name = get_archive_names_from_text(question_text)
-    # construct full archive path from question_text and topic names.
+    # construct archive paths from question_text and topic names.
     full_archive = build_archive_dir(full_archive, topic_name)
     censored_archive = build_archive_dir(censored_archive, topic_name)
     full_archive = build_archive_file_path(full_archive, name, language_info)
@@ -551,15 +575,17 @@ def exec_import_question(action_file: Path):
 # == Handle export answer action ==
 def exec_export_answer(action_file: Path):
     language_info = get_language_info(action_file)
-    if language_info.language == Language.PYTHON:
-        export_answer_python(language_info)
-    elif language_info.language == Language.HTML_CSS:
+    if language_info.language == Language.HTML_CSS:
         export_answer_html_css(language_info)
     elif language_info.language == Language.JAVASCRIPT:
-        export_answer_javascript(language_info)
+        export_answer_generic(language_info)
+    elif language_info.language == Language.PYTHON:
+        export_answer_python(language_info)
+    elif language_info.language == Language.SQL_GENERIC:
+        export_answer_generic(language_info)
 
 
-def export_answer_javascript(language_info: LanguageInfo):
+def export_answer_generic(language_info: LanguageInfo):
     # Get base answer text from the current solution file.
     answer_text = language_info.re_answer_extractor.search(
         language_info.action_file.read_text()).group("ANSWER_CODE")
