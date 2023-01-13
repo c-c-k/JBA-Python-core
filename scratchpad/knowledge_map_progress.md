@@ -5,12 +5,12 @@
     * ?/? dev tools
     * ?/? algorithms and structures
     * ?/80 databases and sql
-      * ?/16 db theory
-        * ?/6 common db topics
-        * ?/4 relational db theory
-        * ?/6 nosql dbs
+      * 16/16 db theory
+        * 6/6 common db topics
+        * 4/4 relational db theory
+        * 6/6 nosql dbs
       * ?/32 basic sql
-        * ?/8 intro to sql
+        * 8/8 intro to sql
         * ?/3 data definition language
         * ?/8 retrieving data
         * ?/5 data modification language
