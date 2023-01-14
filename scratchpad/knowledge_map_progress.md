@@ -9,15 +9,15 @@
         * 6/6 common db topics
         * 4/4 relational db theory
         * 6/6 nosql dbs
-      * ?/32 basic sql
+      * 32/32 basic sql
         * 8/8 intro to sql
         * 3/3 data definition language
-        * ?/8 retrieving data
-        * ?/5 data modification language
-        * ?/4 functions and operations
-        * ?/1 sub-queries
-        * ?/1 data-control language
-        * ?/2 transaction management
+        * 8/8 retrieving data
+        * 5/5 data modification language
+        * 4/4 functions and operations
+        * 1/1 sub-queries
+        * 1/1 data-control language
+        * 2/2 transaction management
       * ?/32 dbms
         * ?/14 mysql
           * ?/1 _
