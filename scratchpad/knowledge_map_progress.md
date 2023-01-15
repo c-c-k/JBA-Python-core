@@ -19,13 +19,13 @@
         * 1/1 data-control language
         * 2/2 transaction management
       * ?/32 dbms
-        * ?/14 mysql
+        * 14/14 mysql
           * 1/1 _
           * 4/4 data definition language
-          * ?/2 mysql syntax
-          * ?/4 db objects
-          * ?/2 data types
-          * ?/1 optimization
+          * 2/2 mysql syntax
+          * 4/4 db objects
+          * 2/2 data types
+          * 1/1 optimization
         * 2/2 sqlite
         * ?/15 mongodb
           * ?/3 intro to mongodb
