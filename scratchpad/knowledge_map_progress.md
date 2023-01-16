@@ -4,7 +4,7 @@
     * ?/? jvm
     * ?/? dev tools
     * ?/? algorithms and structures
-    * ?/80 databases and sql
+    * 80/80 databases and sql
       * 16/16 db theory
         * 6/6 common db topics
         * 4/4 relational db theory
@@ -18,7 +18,7 @@
         * 1/1 sub-queries
         * 1/1 data-control language
         * 2/2 transaction management
-      * ?/32 dbms
+      * 32/32 dbms
         * 14/14 mysql
           * 1/1 _
           * 4/4 data definition language
@@ -27,10 +27,13 @@
           * 2/2 data types
           * 1/1 optimization
         * 2/2 sqlite
-        * ?/15 mongodb
+        * 15/15 mongodb
           * 3/3 intro to mongodb
-          * ?/11 operations and operators
-          * ?/1 data modeling
+          * 11/11 operations and operators
+            * 5/5 _
+            * 4/4 crud operations
+            * 2/2 operators
+          * 1/1 data modeling
         * 1/1 postgresql
     * 9/9 ux ui
   * ?/? prog lang
