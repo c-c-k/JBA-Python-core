@@ -28,7 +28,7 @@
           * 1/1 optimization
         * 2/2 sqlite
         * ?/15 mongodb
-          * ?/3 intro to mongodb
+          * 3/3 intro to mongodb
           * ?/11 operations and operators
           * ?/1 data modeling
         * 1/1 postgresql
