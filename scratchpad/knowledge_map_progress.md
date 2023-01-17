@@ -240,22 +240,22 @@
       * 4/4 Selectors in Depth 
     * 6/6 React 
   * ?/127 Backend
-    * ?/30 Django
-      * ?/9 Launching server
-      * ?/1 Django testing
-      * ?/7 ORM
-      * ?/6 Templates
-      * ?/2 Views
-      * ?/5 Forms 
+    * 24/30 Django
+      * 7/9 Launching server
+      * 0/1 Django testing
+      * 5/7 ORM
+      * 6/6 Templates
+      * 1/2 Views
+      * 5/5 Forms 
     * -/48 Spring Boot
-    * ?/20 Flask
-      * ?/4 Launching server
-      * ?/3 Accessing the app
-      * ?/4 Templates
-      * ?/4 Advanced application configuration
-      * ?/1 Forms
-      * ?/2 Working with database
-      * ?/2 RESTful Flask 
+    * 6/20 Flask
+      * 4/4 Launching server
+      * 1/3 Accessing the app
+      * 1/4 Templates
+      * 0/4 Advanced application configuration
+      * 0/1 Forms
+      * 0/2 Working with database
+      * 0/2 RESTful Flask 
     * -/22 Ktor
     * -/7 Node.js 
   * -/91 Data science
