@@ -78,19 +78,17 @@
         * 4/4 Advanced tools
         * 3/3 Interaction with os
         * 6/6 algorithms and data structures
-      * 23/33 py lib
+      * 31/34 py lib
         * 3/3 time
         * 3/5 math   TODO: scipy, statistics (depends on advanced mathematics)
         * 7/7 networking
         * 10/11 regex   TODO: regex in programs (depends on nlp)
-        * ?/5 sql alchemy   TODO: ALL
-        * 0/2 _   TODO: ALL (sqlite library, appears in the root node of the py lib node itself)
+        * 6/6 sql alchemy
+        * 2/2 _ (sqlite)
       * 3/5 possible todos
         * ?/? py lib
           * ?/? math   TODO: scipy, statistics (depends on advanced mathematics)
           * 10/11 regex   TODO: regex in programs (depends on nlp)
-          * ?/4 sql alchemy   TODO: ALL
-          * 0/2 _   TODO: ALL (sqlite library, appears in the root node of the py lib node itself)
         * 3/5 additional instruments
           * ?/? coding environments   TODO: jupyter nb, g. colab (less relevant for fullstack development)
     * 73/73 javascript
