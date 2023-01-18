@@ -248,14 +248,14 @@
       * 1/2 Views
       * 5/5 Forms 
     * -/48 Spring Boot
-    * 6/20 Flask
+    * 20/20 Flask
       * 4/4 Launching server
-      * 1/3 Accessing the app
-      * 1/4 Templates
-      * 0/4 Advanced application configuration
-      * 0/1 Forms
-      * 0/2 Working with database
-      * 0/2 RESTful Flask 
+      * 3/3 Accessing the app
+      * 4/4 Templates
+      * 4/4 Advanced application configuration
+      * 1/1 Forms
+      * 2/2 Working with database
+      * 2/2 RESTful Flask 
     * -/22 Ktor
     * -/7 Node.js 
   * -/91 Data science
