@@ -2,11 +2,13 @@
 * ?/1543 Computer science
   * ?/385 Fundamentals
     * ?/115 Essentials
-      * ?/17 Programming concepts
-        * ?/9 Intro to programming
-        * ?/5 Object-oriented programming
-        * ?/2 Fields of programming 
+      * 17/17 Programming concepts
+        * 1/1 _
+        * 9/9 Intro to programming
+        * 5/5 Object-oriented programming
+        * 2/2 Fields of programming 
       * ?/10 Standards and formats
+        * 2/2 _
         * ?/2 Encoding standards
         * ?/4 Data formats
         * ?/2 Markup languages 
