@@ -36,7 +36,7 @@
       * ?/6 Computer graphics
         * ?/3 Media formats 
       * ?/2 Networking 
-    * ?/11 JVM
+    * -/11 JVM
     * ?/94 Dev tools
       * ?/16 IDE
         * ?/2 Android studio
@@ -49,15 +49,15 @@
         * ?/4 Gradle
         * ?/1 Make
         * ?/3 Maven 
-      * ?/38 Command line
-        * ?/3 Basic principles
-        * ?/8 Bash syntax
-        * ?/10 Working with files
-        * ?/4 Text processing
-        * ?/5 Managing processes
-        * ?/3 Networking
-        * ?/1 Tasks automation
-        * ?/3 Package managers 
+      * 38/38 Command line
+        * 3/3 Basic principles
+        * 8/8 Bash syntax
+        * 10/10 Working with files
+        * 4/4 Text processing
+        * 5/5 Managing processes
+        * 3/3 Networking
+        * 1/1 Tasks automation
+        * 3/3 Package managers 
       * ?/3 GitHub
       * ?/10 Git
         * ?/8 Git commands
@@ -129,7 +129,7 @@
           * 1/1 Data Modeling 
         * 1/1 PostgreSQL 
     * 9/9 UI/UX 
-  * ?/778 Programming languages
+  * +/778 Programming languages
     * -/185 Kotlin
     * -/244 Java
     * 163/177 Python
@@ -210,8 +210,8 @@
     * -/71 Golang
     * -/2 Scala
   * -/49 Mobile
-  * 100/101 Frontend
-    * 42/43 HTML
+  * 101/101 Frontend
+    * 43/43 HTML
       * 11/11 HTML Intro
         * 3/3 Introduction to HTML
         * 2/2 Code style
@@ -221,7 +221,7 @@
       * 7/7 Basic Tags
         * 5/5 Tables
         * 2/2 Lists 
-      * 7/8 Forms
+      * 8/8 Forms
       * 5/5 Advanced elements
       * 4/4 Media files 
     * 52/52 CSS
@@ -239,13 +239,12 @@
       * 7/7 Advanced features
       * 4/4 Selectors in Depth 
     * 6/6 React 
-  * ?/127 Backend
-    * 24/30 Django
-      * 7/9 Launching server
-      * 0/1 Django testing
-      * 5/7 ORM
+  * +/127 Backend
+    * 27/27 Django
+      * 8/8 Launching server
+      * 7/7 ORM
       * 6/6 Templates
-      * 1/2 Views
+      * 1/1 Views
       * 5/5 Forms 
     * -/48 Spring Boot
     * 20/20 Flask
