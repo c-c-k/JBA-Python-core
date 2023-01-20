@@ -7,27 +7,29 @@
         * 9/9 Intro to programming
         * 5/5 Object-oriented programming
         * 2/2 Fields of programming 
-      * ?/10 Standards and formats
+      * 10/10 Standards and formats
         * 2/2 _
-        * ?/2 Encoding standards
-        * ?/4 Data formats
-        * ?/2 Markup languages 
-      * ?/16 Operating systems
-        * ?/4 Multithreading and multiprocessing
-        * ?/5 Memory management
-        * ?/2 Unix
-        * ?/2 Virtualization and containerization 
-      * ?/9 Web technologies
-      * ?/45 Software construction
-        * ?/6 Software distribution
-        * ?/7 Software quality
-        * ?/7 Introduction to Design Principles and SOLID
-        * ?/5 Software architecture
-          * ?/1 Architectural patterns 0 / 1
-        * ?/13 Design patterns
-          * ?/5 Creational patterns
-          * ?/8 Structural design patterns
-        * ?/5 Software development models 
+        * 2/2 Encoding standards
+        * 4/4 Data formats
+        * 2/2 Markup languages 
+      * 16/16 Operating systems
+        * 3/3 _ 
+        * 4/4 Multithreading and multiprocessing
+        * 5/5 Memory management
+        * 2/2 Unix
+        * 2/2 Virtualization and containerization 
+      * 9/9 Web technologies
+      * 45/45 Software construction
+        * 2/2 _ 
+        * 6/6 Software distribution
+        * 7/7 Software quality
+        * 7/7 Introduction to Design Principles and SOLID
+        * 5/5 Software architecture
+          * 1/1 Architectural patterns 0 / 1
+        * 13/13 Design patterns
+          * 5/5 Creational patterns
+          * 8/8 Structural design patterns
+        * 5/5 Software development models 
       * ?/3 Programming techniques
         * ?/2 Operations with sequences
         * ?/1 Regular expressions 
