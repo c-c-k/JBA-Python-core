@@ -1,7 +1,7 @@
 * -/150 Math
 * ?/1543 Computer science
   * ?/385 Fundamentals
-    * ?/115 Essentials
+    * 115/115 Essentials
       * 17/17 Programming concepts
         * 1/1 _
         * 9/9 Intro to programming
@@ -30,29 +30,29 @@
           * 5/5 Creational patterns
           * 8/8 Structural design patterns
         * 5/5 Software development models 
-      * ?/3 Programming techniques
-        * ?/2 Operations with sequences
-        * ?/1 Regular expressions 
-      * ?/6 Security
-        * ?/1 Access control 
-      * ?/1 DevOps
-        * ?/1 CI/CD processes 
-      * ?/6 Computer graphics
-        * ?/3 Media formats 
-      * ?/2 Networking 
+      * 3/3 Programming techniques
+        * 2/2 Operations with sequences
+        * 1/1 Regular expressions 
+      * 6/6 Security
+        * 1/1 Access control 
+      * 1/1 DevOps
+        * 1/1 CI/CD processes 
+      * 6/6 Computer graphics
+        * 3/3 Media formats 
+      * 2/2 Networking 
     * -/11 JVM
     * ?/94 Dev tools
-      * ?/16 IDE
-        * ?/2 Android studio
-        * ?/3 PyCharm
-        * ?/2 GoLand
-        * ?/7 Intellij IDEA
-        * ?/1 WebStorm 
-      * ?/11 Build Tools
-        * ?/3 Intro to build tools
-        * ?/4 Gradle
-        * ?/1 Make
-        * ?/3 Maven 
+      * +/16 IDE
+        * -/2 Android studio
+        * 3/3 PyCharm
+        * -/2 GoLand
+        * -/7 Intellij IDEA
+        * 1/1 WebStorm 
+      * +/11 Build Tools
+        * -/3 Intro to build tools
+        * -/4 Gradle
+        * 1/1 Make
+        * -/3 Maven 
       * 38/38 Command line
         * 3/3 Basic principles
         * 8/8 Bash syntax
@@ -68,14 +68,14 @@
         * ?/2 Gitflow 
       * ?/5 CI/CD
         * ?/5 GitHub Actions 
-      * ?/1 HTTP clients
-      * ?/1 Browsers
+      * -/1 HTTP clients
+      * -/1 Browsers
       * ?/7 Docker
         * ?/3 Basic commands
         * ?/3 Building images with Dockerfile
         * ?/1 Docker resources 
-      * ?/1 Design Tools
-      * ?/1 Cloud platforms 
+      * -/1 Design Tools
+      * 1/1 Cloud platforms 
     * ?/76 Algorithms and structures
       * ?/8 Intro to algorithms and data structures
         * ?/4 Algorithm representation 
