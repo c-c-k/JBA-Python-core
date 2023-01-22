@@ -77,11 +77,12 @@
       * -/1 Design Tools
       * 1/1 Cloud platforms 
     * ?/76 Algorithms and structures
-      * ?/8 Intro to algorithms and data structures
-        * ?/4 Algorithm representation 
-      * ?/19 Data structures
-        * ?/4 Linear structures
-        * ?/5 Limited access data types
+      * 8/8 Intro to algorithms and data structures
+        * 4/4 Algorithm representation 
+      * 19/19 Data structures
+        * 1/1 _
+        * 4/4 Linear structures
+        * 5/5 Limited access data types
         * ?/9 Graphs 
           * ?/3 Graphs: basics
           * ?/6 Graph types
