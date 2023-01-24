@@ -83,9 +83,9 @@
         * 1/1 _
         * 4/4 Linear structures
         * 5/5 Limited access data types
-        * ?/9 Graphs 
-          * ?/3 Graphs: basics
-          * ?/6 Graph types
+        * 9/9 Graphs 
+          * 3/3 Graphs: basics
+          * 6/6 Graph types
       * ?/48 Algorithms 
         * ?/18 Graph algorithms
           * ?/7 Shortest path algorithms
