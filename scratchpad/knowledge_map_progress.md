@@ -62,10 +62,10 @@
         * 3/3 Networking
         * 1/1 Tasks automation
         * 3/3 Package managers 
-      * ?/3 GitHub
-      * ?/10 Git
-        * ?/8 Git commands
-        * ?/2 Gitflow 
+      * 3/3 GitHub
+      * 10/10 Git
+        * 8/8 Git commands
+        * 2/2 Gitflow 
       * ?/5 CI/CD
         * ?/5 GitHub Actions 
       * -/1 HTTP clients
