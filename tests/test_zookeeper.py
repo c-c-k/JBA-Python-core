@@ -1,16 +1,7 @@
-from zookeeper.zookeeper import main
-
-TEST_OUTPUT = """I love animals!
-Let's check on the animals...
-The deer looks fine.
-The bat looks happy.
-The lion looks healthy.
-"""
+from zookeeper import zookeeper, messages
 
 
 def test_main_output(capsys):
-    main()
+    zookeeper.main()
     captured = capsys.readouterr()
-    for (prog_line, test_line) in zip(
-            captured.out.splitlines(), TEST_OUTPUT.splitlines()):
-        assert prog_line == test_line
+    assert captured.out.strip() == messages.CAMEL.strip()

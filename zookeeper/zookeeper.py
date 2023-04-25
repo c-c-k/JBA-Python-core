@@ -1,13 +1,11 @@
-MESSAGE = """I love animals!
-Let's check on the animals...
-The deer looks fine.
-The bat looks happy.
-The lion looks healthy.
-"""
+try: 
+    from . import messages
+except ImportError:
+    import messages
 
 
 def main():
-    print(MESSAGE)
+    print(messages.CAMEL)
 
 
 if __name__ == "__main__":
