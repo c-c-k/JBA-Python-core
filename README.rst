@@ -1,1 +1,1 @@
-hyperskill zookeeper project: stage 2
+hyperskill zookeeper project: stage 3
