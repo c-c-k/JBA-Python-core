@@ -29,7 +29,7 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["flaskr"]
+source = ["zookeeper"]
 
 [build-system]
 requires = ["poetry-core"]
