@@ -10,6 +10,7 @@ packages = [{include = "cconverter"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+requests = "^2.29.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
