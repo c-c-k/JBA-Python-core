@@ -9,4 +9,4 @@ jobs:
           repository: abystoma/external-workflow
           ref: branch
       - name: Greetings
-        run: echo "$(<greeting.txt)"
+        run: echo "$(<greetings.txt)"
