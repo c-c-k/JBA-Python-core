@@ -1,0 +1,6 @@
+line with trailing spaces    
+line with trailing tabs		
+line with trailing spaces and tabs		
+line with no trailing.
+		
+

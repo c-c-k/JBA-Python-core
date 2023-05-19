@@ -1,0 +1,115 @@
+----- QUESTIONS -----
+
+    01.	Display a list of all the users on your system who log in with the Bash shell as a default.
+
+    02.	From the /etc/group directory, display all lines starting with the string "daemon".
+
+    03.	Print all the lines from the same file that don't contain the string.
+
+    04.	Display localhost information from the /etc/hosts file, display the line number(s) matching the search string and count the number of occurrences of the string.
+
+    05.	Display a list of /usr/share/doc subdirectories containing information about shells.
+
+    06.	How many README files do these subdirectories contain? Don't count anything in the form of "README.a_string".
+
+    07.	Make a list of files in your home directory that were changed less that 10 hours ago, using grep, but leave out directories.
+
+    08.	Put these commands in a shell script that will generate comprehensible output.
+
+    09.	Can you find an alternative for wc -l, using grep?
+
+    10.	Using the file system table (/etc/fstab for instance), list local disk devices.
+
+    11.	Make a script that checks whether a user exists in /etc/passwd. For now, you can specify the user name in the script, you don't have to work with arguments and conditionals at this stage.
+
+    12.	Display configuration files in /etc that contain numbers in their names.
+    
+----- ANSWERS -----
+
+    01.	Display a list of all the users on your system who log in with the Bash shell as a default.
+	Answer:
+	    long options:
+	    :$	grep --regexp='bash$' -- /etc/passwd | cut --delimiter=':' --fields='1' | paste --delimiters=',' --serial 
+	    short options:
+	    :$	grep -e'bash$' -- /etc/passwd | cut -d':' -f'1' | paste -sd','
+
+    02.	From the /etc/group directory, display all lines starting with the string "daemon".
+	Answer:
+	    long options:
+	    :$	grep --regexp='^daemon' -- /etc/group
+	    short options:
+	    :$	grep -e'^daemon' -- /etc/group
+
+    03.	Print all the lines from the same file that don't contain the string.
+	Answer:
+	    long options:
+	    :$	grep --invert-match --regexp='^daemon' -- /etc/group
+	    short options:
+	    :$	grep -ve'^daemon' -- /etc/group
+
+    04.	Display localhost information from the /etc/hosts file, display the line number(s) matching the search string and count the number of occurrences of the string.
+	Answer:
+	    long options:
+	    :$	echo $'The \033[01m/etc/hosts\033[00m file contains\033[01m' \
+		$(grep --count --fixed-strings --regexp='localhost' -- /etc/hosts) \
+		$'\033[00mlines pertaining to localhost information, those lines are: '
+	    :$	grep --line-number --initial-tab --fixed-strings --regexp='localhost' -- /etc/hosts
+	    short options:
+	    :$	echo $'The \033[01m/etc/hosts\033[00m file contains\033[01m' \
+		$(grep -cFe'localhost' -- /etc/hosts) \
+		$'\033[00mlines pertaining to localhost information, those lines are: '
+	    :$	grep -nTFe 'localhost' -- /etc/hosts
+
+    05.	Display a list of /usr/share/doc subdirectories containing information about shells.
+	Answer:
+	    long options:
+	    :$  grep --fixed-strings --files-with-matches --binary-files=without-match --recursive \
+		--regexp='shells' --file='/etc/shells' -- /usr/share/doc | grep \
+		--only-matching --regexp='/.\+/'|sort --unique
+	    short options:
+	    :$  grep -FlrIe'shells' -f'/etc/shells' -- /usr/share/doc|less
+
+    06.	How many README files do these subdirectories contain? Don't count anything in the form of "README.a_string".
+	Answer:
+	    long options:
+	    :$	grep --recursive --files-with-matches  --binary-files=without-match --regexp='' $(grep --fixed-strings --files-with-matches --binary-files=without-match --recursive --regexp='shells' --file='/etc/shells' -- $(find /usr/share/doc -type f \( -ipath '*README*' -a \( \! -iname '*.*' -o \( -iname '*.txt' -o -iname '*.md' \) \) \) | grep --only-matching --regexp='.\+/' | sort --unique) | grep --only-matching --regexp='/.\+/'|sort --unique ) | grep --regexp='README' --ignore-case | grep --extended-regexp --regexp='(README|\.md|\.txt)$' --ignore-case --count
+
+	    short options:
+	    :$	grep -Ilre '' $(grep -FlIre 'shells' -f '/etc/shells' -- $(find /usr/share/doc -type f \( -ipath '*README*' -a \( \! -iname '*.*' -o \( -iname '*.txt' -o -iname '*.md' \) \) \) | grep -oe '.\+/' | sort -u) | grep -oe '/.\+/'|sort -u ) | grep -ie 'README' | grep -Eice '(README|\.md|\.txt)$'
+
+    07.	Make a list of files in your home directory that were changed less that 10 hours ago, using grep, but leave out directories.
+	Answer:
+	    long options:
+	    :$	ls --quote-name --time-style=long-iso --format=long --almost-all $HOME | grep --extended-regexp --regexp="$(echo -en {0,1,2,3,4,5,6,7,8,9}' hours ago\n' | date --file=- +'%Y-%m-%d %H' | paste --serial --delimiter='|')" | grep --invert-match --regexp='^d' | grep --extended-regexp --only-matching --regexp='".+"' | paste --serial --delimiter=','
+
+	    short options:
+	    :$	ls -QAl --time-style=long-iso $HOME | grep -Ee "$(echo -en {0,1,2,3,4,5,6,7,8,9}' hours ago\n' | date -f - +'%Y-%m-%d %H' | paste -sd'|')" | grep -ve '^d' | grep -Eoe '".+"' | paste -sd','
+
+    08.	Put these commands in a shell script that will generate comprehensible output.
+	Answer:
+	    Done, the script file is: "s4.1-grep-reports-demonstration.sh"
+
+    09.	Can you find an alternative for wc -l, using grep?
+	Answer:
+	    long options:
+	    :$ grep --count --regexp='^.*$'
+	    short options:
+	    :$ grep -ce '^.*$'
+
+    10.	Using the file system table (/etc/fstab for instance), list local disk devices.
+	Answer:
+	    I'm essentially skipping this one, a possible answer could be:
+	    $:	grep -osre '/dev/sd[[:lower:]][[:digit:]]' /etc/fstab|sort -u
+	    However this is completely unreliable since local disk devices are usually mounted with UUID's and resolving the UUID's to disk names would require using blkid or lsblk in which case reading information from fstab seems pointless in the first place (especially since it doesn't even necessarily contain all the local devices in the first place).
+
+
+    11.	Make a script that checks whether a user exists in /etc/passwd. For now, you can specify the user name in the script, you don't have to work with arguments and conditionals at this stage.
+	Answer:
+	    Done the script file is: "s4.2-grep-find-fstab-user.sh"
+
+    12.	Display configuration files in /etc that contain numbers in their names.
+	Answer:
+	    long options:
+	    :$	grep --no-messages --files-with-matches --recursive --regexp='' /etc|grep --extended-regexp --regexp='/[^/]*[[:digit:]][^/]*(\.cfg|\.conf)$'
+	    short options:
+	    :$	grep -slre '' /etc|grep -Ee '/[^/]*[[:digit:]][^/]*(\.cfg|\.conf)$'

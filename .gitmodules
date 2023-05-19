@@ -31,3 +31,6 @@
 [submodule "project_stubs/bash/simple-calculator"]
 	path = project_stubs/bash/simple-calculator
 	url = https://github.com/c-c-k/zzz-proj-stub--simple-calculator
+[submodule "scratchpad/git_and_github/github-actions"]
+	path = scratchpad/git_and_github/github-actions
+	url = https://github.com/c-c-k/zzz-scratchpad--github-actions

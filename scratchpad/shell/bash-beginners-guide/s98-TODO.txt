@@ -1,0 +1,7 @@
+CHAPTER 6:
+    *	Exercise 2 :
+	*   Entire exercise, stuck on how to get directory size via find.
+	*   Do the mail bit after learning how to deal with mails from the command line.
+    *	Exercise 3 :
+	*   Add XML header and tail.
+	*   Finish the exercise.

@@ -1,0 +1,66 @@
+----- QUESTIONS -----
+    For this exercise, you will need to read the useradd man pages, because we are going to use the /etc/skel directory to hold default shell configuration files, which are copied to the home directory of each newly added user.
+
+    First we will do some general exercises on setting and displaying variables.
+
+	1.) Create 3 variables, VAR1, VAR2 and VAR3; initialize them to hold the values "thirteen", "13" and "Happy Birthday" respectively.
+
+	2.) Display the values of all three variables.
+
+	3.) Are these local or global variables?
+
+	4.) Remove VAR3.
+
+	5.) Can you see the two remaining variables in a new terminal window?
+
+	6.) Edit /etc/profile so that all users are greeted upon login (test this).
+
+	7.) For the root account, set the prompt to something like "Danger!! root is doing stuff in \w", preferably in a bright color such as red or pink or in reverse video mode.
+
+	8.) Make sure that newly created users also get a nice personalized prompt which informs them on which system in which directory they are working. Test your changes by adding a new user and logging in as that user.
+
+	9.) Write a script in which you assign two integer values to two variables. The script should calculate the surface of a rectangle which has these proportions. It should be aired with comments and generate elegant output.
+
+    Don't forget to chmod your scripts!
+
+
+----- ANSWERS -----
+	1.) Create 3 variables, VAR1, VAR2 and VAR3; initialize them to hold the values "thirteen", "13" and "Happy Birthday" respectively.
+		u@h:> VAR1='thirteen'
+		u@h:> VAR2='13'
+		u@h:> VAR3='Happy Birthday'
+
+	2.) Display the values of all three variables.
+		u@h:> echo $VAR{1,2,3}
+
+	3.) Are these local or global variables?
+		These are local variables since they were not exported.
+
+	4.) Remove VAR3.
+		u@h:> unset -v VAR3
+
+	5.) Can you see the two remaining variables in a new terminal window?
+		No, because they are local variables.
+
+	6.) Edit /etc/profile so that all users are greeted upon login (test this).
+		added the following to "/etc/profile"
+		    # Login greeting
+		    echo "hi $USER, you have logged in into $HOSTNAME."
+		    echo "It is now `date +%H:%M` of `date +%Y-%m-%d`"
+		Done.
+
+	7.) For the root account, set the prompt to something like "Danger!! root is doing stuff in \w", preferably in a bright color such as red or pink or in reverse video mode.
+		In "/root/.bashrc" modified the line:
+		    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+		to:
+		    PS1='${debian_chroot:+($debian_chroot)}\[\033[5;1;7;31m\]!!!!DANGER:ROOT MODE!!!\[\033[25m\]\u@\h\[\033[03m\]:\w\[\033[22m\]\$ '
+
+	8.) Make sure that newly created users also get a nice personalized prompt which informs them on which system in which directory they are working. Test your changes by adding a new user and logging in as that user.
+		in "/etc/skel/.bashrc" modified the line:
+		    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+		to:
+		    SYSNAME=`uname -o`
+		    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h($SYSNAME)\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] :) '
+
+	9.) Write a script in which you assign two integer values to two variables. The script should calculate the surface of a rectangle which has these proportions. It should be aired with comments and generate elegant output.
+	    Done, the script file is : "./3.6-rectangle-surface-calculator.sh"

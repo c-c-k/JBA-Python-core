@@ -1,0 +1,21 @@
+# api testing for https://openweathermap.org/
+# Global definitions.
+// Default host.
+http://api.openweathermap.org/
+
+// Default (buffer scope) cUrl options.
+--include
+-L
+--connect-timeout 10
+
+// Default headers.
+Accept: application/json
+# X-Header: Custom Data
+--
+
+--
+#
+# Simple GET request
+#
+# the -- are to use the global options
+GET data/2.5/weather?q=Haifa,il&APPID=<APP_KEY>

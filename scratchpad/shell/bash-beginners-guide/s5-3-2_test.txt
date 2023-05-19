@@ -1,0 +1,10 @@
+<html>
+<head><title>sed generated html</title></head>
+<body bgcolor="#ffffff">
+<pre>
+line 1
+line 2
+line 3
+</pre>
+</body>
+</html>

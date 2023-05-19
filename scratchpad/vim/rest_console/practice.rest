@@ -1,0 +1,66 @@
+# see the `help vim-rest-console` for more info
+# Global definitions.
+// Default host.
+https://reqres.in
+
+// Default (buffer scope) cUrl options.
+--include
+-L
+--connect-timeout 10
+
+// Default headers.
+Accept: application/json
+# X-Header: Custom Data
+--
+
+--
+#
+# Simple GET request
+#
+# the -- are to use the global options
+GET /api/users?page=2
+
+
+--
+#
+# Simple GET request with  multiple parameters
+#
+GET /api/users?page=2&per_page=3
+
+#
+# Same but using key-value pairs instead of query parameters        
+# NOTE: only works if `vrc_split_request_body = 1` has been set on a global or buffer level.
+# ALSO NOTE: This causes query parameters and JSON requests to stop working
+#
+--
+GET /api/users
+page=2
+per_page=1
+
+--
+#
+# using post with json
+#
+
+// Specify optional headers.
+Content-Type: application/json; charset=utf-8
+
+POST /api/register
+{
+    "email": "eve.holt@reqres.in",
+    "password": "pistol"
+}
+
+--
+#
+# another example using post with json
+#
+
+// Specify optional headers.
+Content-Type: application/json; charset=utf-8
+
+POST /api/register
+{
+    "email": "charles.morris@reqres.in",
+    "password": "N0_0N3_KN0W5"
+}
