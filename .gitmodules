@@ -1,0 +1,33 @@
+[submodule "project_stubs/python/zookeeper"]
+	path = project_stubs/python/zookeeper
+	url = https://github.com/c-c-k/zz-proj-stub--zookeeper
+[submodule "project_stubs/python/simple-banking-system"]
+	path = project_stubs/python/simple-banking-system
+	url = https://github.com/c-c-k/zz-proj-stub--simple-banking-system
+[submodule "project_stubs/python/arithmetic-exam-application"]
+	path = project_stubs/python/arithmetic-exam-application
+	url = https://github.com/c-c-k/zz-proj-stub--arithmetic-exam-application
+[submodule "project_stubs/python/currency-converter"]
+	path = project_stubs/python/currency-converter
+	url = https://github.com/c-c-k/zz-proj-stub--currency-converter
+[submodule "project_stubs/python/learning-progress-tracker"]
+	path = project_stubs/python/learning-progress-tracker
+	url = https://github.com/c-c-k/zz-proj-stub--learning-progress-tracker
+[submodule "project_stubs/python/simple-chatty-bot"]
+	path = project_stubs/python/simple-chatty-bot
+	url = https://github.com/c-c-k/zz-proj-stub--simple-chatty-bot
+[submodule "project_stubs/sql/hacker-attack"]
+	path = project_stubs/sql/hacker-attack
+	url = https://github.com/c-c-k/zz-proj-stub--hacker-attack
+[submodule "project_stubs/sql/school-of-wizards-and-magic-wars"]
+	path = project_stubs/sql/school-of-wizards-and-magic-wars
+	url = https://github.com/c-c-k/zz-proj-stub--school-of-wizards-and-magic-wars
+[submodule "project_stubs/sql/video-game-db"]
+	path = project_stubs/sql/video-game-db
+	url = https://github.com/c-c-k/zz-proj-stub--video-game-db
+[submodule "project_stubs/flask/weather-app"]
+	path = project_stubs/flask/weather-app
+	url = https://github.com/c-c-k/zz-proj-stub--weather-app
+[submodule "project_stubs/bash/simple-calculator"]
+	path = project_stubs/bash/simple-calculator
+	url = https://github.com/c-c-k/zz-proj-stub--simple-calculator
