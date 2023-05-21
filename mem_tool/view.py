@@ -1,23 +1,24 @@
 from . import messages as msg
+from . import model
 
 
 def print_message(message):
     print(message.strip())
 
 
-def get_menu_choice(message):
+def get_user_input(message):
     print_message(message)
     return input().strip()
 
 
 # main menu
 def get_menu_choice_main():
-    return get_menu_choice(msg.MENU_MAIN)
+    return get_user_input(msg.MENU_MAIN)
 
 
 # add_flashcards menu
 def get_menu_choice_add_flashcards():
-    return get_menu_choice(msg.MENU_ADD_FLASHCARD)
+    return get_user_input(msg.MENU_ADD_FLASHCARD)
 
 
 # get new flashcard data
@@ -29,10 +30,10 @@ def get_non_blank_input(prompt):
             return test_input
 
 
-def get_flashcard_data():
+def flashcard_create():
     question = get_non_blank_input(msg.PROMPT_NEW_QUESTION)
     answer = get_non_blank_input(msg.PROMPT_NEW_ANSWER)
-    return {"question": question, "answer": answer}
+    model.add_new_flashcard({"question": question, "answer": answer})
 
 
 # practice flashcards
@@ -40,20 +41,34 @@ def print_no_flashcards():
     print_message(msg.ERROR_NO_FLASHCARDS)
 
 
-def practice_flashcard(flashcard):
-    print_message(
-        msg.INFO_SHOW_QUESTION.substitute(
+def get_menu_choice_practice(flashcard):
+    return get_user_input(
+        msg.MENU_PRACTICE.substitute(
             question=flashcard.question))
-    show_answer = get_menu_choice(msg.PROMPT_YES_NO_REVEAL_ANSWER)
-    if show_answer == 'y':
-        print_message(
-            msg.INFO_SHOW_ANSWER.substitute(
-                answer=flashcard.answer))
 
 
-def practice_flashcards(flashcards):
-    for flashcard in flashcards:
-        practice_flashcard(flashcard)
+def get_menu_choice_update_flashcard():
+    return get_user_input(msg.MENU_UPDATE_FLASHCARD)
+
+
+def flashcard_show_answer(flashcard):
+    print_message(msg.INFO_SHOW_ANSWER.substitute(answer=flashcard.answer))
+
+
+def flashcard_update_edit(flashcard):
+    flashcard_data = {}
+    for attribute in ['question', 'answer']:
+        new_value = get_user_input(
+            msg.PROMPT_EDIT_FLASHCARD.substitute(
+                attribute=attribute,
+                current_value=getattr(flashcard, attribute)))
+        if new_value != "":
+            flashcard_data[attribute] = new_value
+    model.update_flashcard(flashcard, flashcard_data)
+
+
+def flashcard_update_delete(flashcard):
+    model.delete_flashcard(flashcard)
 
 
 # print wrong choice message and redirect

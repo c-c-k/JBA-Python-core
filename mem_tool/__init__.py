@@ -19,7 +19,7 @@ logger.addHandler(logging.NullHandler())
 
 def main():
     init_db()
-    command = ["print", "menu", "main"]
+    command = ["menu", "main"]
     while True:
         try:
             command = controller(command)
