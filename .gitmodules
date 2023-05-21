@@ -34,3 +34,6 @@
 [submodule "scratchpad/git_and_github/github-actions"]
 	path = scratchpad/git_and_github/github-actions
 	url = https://github.com/c-c-k/zzz-scratchpad--github-actions
+[submodule "project_stubs/python/memorization-tool"]
+	path = project_stubs/python/memorization-tool
+	url = https://github.com/c-c-k/zzz-proj-stub--memorization-tool
