@@ -1,6 +1,6 @@
-<PROJECT NAME>
+Memorization Tool
 ================
 
-A minimal implementation of the `HyperSkill "<PROJECT NAME>" project`_.
+A minimal implementation of the `HyperSkill "Memorization Tool" project`_.
 
-.. _HyperSkill "<PROJECT NAME>" project: https://hyperskill.org/projects/<PROJECT ID>
+.. _HyperSkill "Memorization Tool" project: https://hyperskill.org/projects/159

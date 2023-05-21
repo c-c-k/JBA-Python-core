@@ -47,12 +47,9 @@ def get_menu_choice_practice(flashcard):
             question=flashcard.question))
 
 
+# update flashcards
 def get_menu_choice_update_flashcard():
     return get_user_input(msg.MENU_UPDATE_FLASHCARD)
-
-
-def flashcard_show_answer(flashcard):
-    print_message(msg.INFO_SHOW_ANSWER.substitute(answer=flashcard.answer))
 
 
 def flashcard_update_edit(flashcard):
@@ -69,6 +66,13 @@ def flashcard_update_edit(flashcard):
 
 def flashcard_update_delete(flashcard):
     model.delete_flashcard(flashcard)
+
+
+# Learning by Leitner system
+def get_menu_choice_learning(flashcard):
+    return get_user_input(
+        msg.MENU_LEARNING.substitute(
+            answer=flashcard.answer))
 
 
 # print wrong choice message and redirect

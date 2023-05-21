@@ -13,10 +13,10 @@ def controller(command):
             choice = view.get_menu_choice_main()
             next_command = ["menu_choice", "main", choice]
         case ["menu_choice", "main", "1"]:
-            # 1. Add flashcards
+            # 1. Enter add flashcards menu
             next_command = ["menu", "add_flashcard"]
         case ["menu_choice", "main", "2"]:
-            # 2. Practice flashcards
+            # 2. Enter practice flashcards menu
             next_command = ["menu", "practice"]
         case ["menu_choice", "main", "3"]:
             # 3. Exit
@@ -60,36 +60,61 @@ def controller(command):
             next_command = [
                 "menu_choice", "practice", choice, flashcards, flashcard]
         case ["menu_choice", "practice", "y", flashcards, flashcard]:
-            # "y" = show answer
-            view.flashcard_show_answer(flashcard)
-            next_command = ["menu", "practice", flashcards]
+            # "y" = Enter learning menu
+            next_command = ["menu", "learning", flashcards, flashcard]
         case ["menu_choice", "practice", "n", flashcards, _]:
-            # "n" = don't show answer
+            # "n" = skip flashcard
             next_command = ["menu", "practice", flashcards]
         case ["menu_choice", "practice", "u", flashcards, flashcard]:
-            # "u" = update
-            choice = view.get_menu_choice_update_flashcard()
-            next_command = [
-                "menu_choice", "practice", "u", choice, flashcards, flashcard]
-        case ["menu_choice", "practice", "u", "e", flashcards, flashcard]:
-            # "e" = update:edit
-            view.flashcard_update_edit(flashcard)
-            next_command = ["menu", "practice", flashcards]
-        case ["menu_choice", "practice", "u", "d", flashcards, flashcard]:
-            # "d" = update:delete
-            view.flashcard_update_delete(flashcard)
-            next_command = ["menu", "practice", flashcards]
+            # "u" = Enter update menu
+            next_command = ["menu", "update_flashcards", flashcards, flashcard]
         case ["menu_choice", "practice", invalid_choice, flashcards,
               flashcard]:
             # invalid choice (practice menu)
             view.print_invalid_menu_choice_error(invalid_choice)
             next_command = ["menu", "practice", flashcards, flashcard]
-        case ["menu_choice", "practice", "u", invalid_choice,
+
+        # flashcard update menu
+        case ["menu", "update_flashcards", flashcards, flashcard]:
+            choice = view.get_menu_choice_update_flashcard()
+            next_command = [
+                "menu_choice", "update_flashcards", choice,
+                flashcards, flashcard]
+        case ["menu_choice", "update_flashcards", "e", flashcards, flashcard]:
+            # "e" = update:edit
+            view.flashcard_update_edit(flashcard)
+            next_command = ["menu", "practice", flashcards]
+        case ["menu_choice", "update_flashcards", "d", flashcards, flashcard]:
+            # "d" = update:delete
+            view.flashcard_update_delete(flashcard)
+            next_command = ["menu", "practice", flashcards]
+        case ["menu_choice", "update_flashcards", invalid_choice,
               flashcards, flashcard]:
-            next_command = ["menu_choice", "practice", "u", flashcards,
-                            flashcard]
-            # invalid choice (update submenu)
+            # invalid choice
             view.print_invalid_menu_choice_error(invalid_choice)
+            next_command = ["menu_choice", "update_flashcards",
+                            flashcards, flashcard]
+
+        # learning menu
+        case ["menu", "learning", flashcards, flashcard]:
+            choice = view.get_menu_choice_learning(flashcard)
+            next_command = [
+                "menu_choice", "learning", choice,
+                flashcards, flashcard]
+        case ["menu_choice", "learning", "y", flashcards, flashcard]:
+            # "y" = correct answer
+            model.flashcard_add_correct_answer(flashcard)
+            next_command = ["menu", "practice", flashcards]
+        case ["menu_choice", "learning", "n", flashcards, flashcard]:
+            # "n" = wrong_answer
+            model.flashcard_add_wrong_answer(flashcard)
+            next_command = ["menu", "practice", flashcards]
+        case ["menu_choice", "learning", invalid_choice,
+              flashcards, flashcard]:
+            # invalid choice
+            view.print_invalid_menu_choice_error(invalid_choice)
+            next_command = ["menu_choice", "learning",
+                            flashcards, flashcard]
 
         # exit program
         case ["exit"]:

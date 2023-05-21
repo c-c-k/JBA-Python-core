@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 DB_URI = "sqlite:///flashcard.db?check_same_thread=False"
 _db = None
 
-
 DeclarativeBase = declarative_base()
 
 
@@ -15,6 +14,7 @@ class Flashcard(DeclarativeBase):
     id = Column(Integer, primary_key=True)
     question = Column(String)
     answer = Column(String)
+    box = Column(Integer, default=1)
 
 
 class Flashcards:
@@ -38,6 +38,14 @@ def get_db():
 
 def init_db():
     DeclarativeBase.metadata.create_all(get_db())
+
+
+def get_all_flashcards():
+    with Session(get_db()) as session:
+        flashcards = session.query(Flashcard).all()
+    if len(flashcards) == 0:
+        return None
+    return Flashcards(flashcards)
 
 
 def add_new_flashcard(flashcard_data):
@@ -64,9 +72,18 @@ def delete_flashcard(flashcard):
         session.commit()
 
 
-def get_all_flashcards():
+def flashcard_add_correct_answer(flashcard):
     with Session(get_db()) as session:
-        flashcards = session.query(Flashcard).all()
-    if len(flashcards) == 0:
-        return None
-    return Flashcards(flashcards)
+        flashcard = session.get(Flashcard, flashcard.id)
+        if flashcard.box >= 3:
+            session.delete(flashcard)
+        else:
+            flashcard.box += 1
+        session.commit()
+
+
+def flashcard_add_wrong_answer(flashcard):
+    with Session(get_db()) as session:
+        flashcard = session.get(Flashcard, flashcard.id)
+        flashcard.box = 1
+        session.commit()
