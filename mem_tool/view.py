@@ -43,12 +43,12 @@ def print_no_flashcards():
 def practice_flashcard(flashcard):
     print_message(
         msg.INFO_SHOW_QUESTION.substitute(
-            question=flashcard['question']))
+            question=flashcard.question))
     show_answer = get_menu_choice(msg.PROMPT_YES_NO_REVEAL_ANSWER)
     if show_answer == 'y':
         print_message(
             msg.INFO_SHOW_ANSWER.substitute(
-                answer=flashcard['answer']))
+                answer=flashcard.answer))
 
 
 def practice_flashcards(flashcards):
