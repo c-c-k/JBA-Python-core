@@ -1,0 +1,21 @@
+# api testing for FastAPI tutorial : hello world
+# Global definitions.
+// Default host.
+http://127.0.0.1:8000
+
+// Default (buffer scope) cUrl options.
+--include
+-L
+--connect-timeout 10
+
+// Default headers.
+Accept: application/json
+# X-Header: Custom Data
+--
+
+--
+#
+# Simple GET request
+#
+# the -- are to use the global options
+GET /
