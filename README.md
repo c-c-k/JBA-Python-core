@@ -2,4 +2,4 @@
 
 _Herein lie my past exercises and practice projects. Sleeping yet always ready to rise and heed my call_
 
-<img src="./memnto.png">
+<img src="./memento.png">
