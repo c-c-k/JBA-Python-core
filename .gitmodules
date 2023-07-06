@@ -44,11 +44,20 @@
 	path = project_stubs/python/calculator-for-investors
 	url = https://github.com/c-c-k/zzz-proj-stub--calculator-for-investors
 [submodule "scratchpad/react/react101"]
-	path = scratchpad/react/react101
+	path = PitOfDespair/FaceOfHate/react/react101
 	url = https://github.com/c-c-k/zzz-jbm--react101
 [submodule "project_stubs/react/tic-tac-toe"]
-	path = project_stubs/react/tic-tac-toe
+	path = PitOfDespair/FaceOfHate/react/tic-tac-toe
 	url = https://github.com/c-c-k/zzz-tutorial--react-tic-tac-toe
 [submodule "scratchpad/fastapi/tutorial-official"]
 	path = scratchpad/fastapi/tutorial-official
 	url = https://github.com/c-c-k/zzz-tutorial--fastapi-official
+[submodule "PitOfDespair/flights-project"]
+	path = PitOfDespair/flights-project
+	url = https://github.com/c-c-k/zzz-despair--flights-project
+[submodule "PitOfDespair/J.B.Mediatech"]
+	path = PitOfDespair/J.B.Mediatech
+	url = https://github.com/c-c-k/zzz--JBM-studies
+[submodule "PitOfDespair/books-library/2"]
+	path = PitOfDespair/books-library/2
+	url = https://github.com/c-c-k/zzz-despair--books-library
