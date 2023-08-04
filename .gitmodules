@@ -1,6 +1,3 @@
-[submodule "project_stubs/python/calculator-for-investors"]
-	path = project_stubs/python/calculator-for-investors
-	url = https://github.com/c-c-k/zzz-proj-stub--calculator-for-investors
 [submodule "scratchpad/react/react101"]
 	path = PitOfDespair/FaceOfHate/react/react101
 	url = https://github.com/c-c-k/zzz-jbm--react101
