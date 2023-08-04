@@ -1,0 +1,42 @@
+# api testing for FastAPI tutorial : hello world
+# Global definitions.
+// Default host.
+http://localhost:8000
+
+// Default (buffer scope) cUrl options.
+--include
+-L
+--connect-timeout 10
+
+// Default headers.
+Accept: application/json
+# X-Header: Custom Data
+--
+# the -- are to use the global options
+--
+# get json schema
+GET /openapi.json
+--
+# get route dependant item without type restrictions
+GET /item/any/4.2
+--
+# get error with route dependant item of a wrong type
+GET /item/int/4.2
+--
+# get processed result with route dependant item of a correct type
+GET /item/int/42
+--
+# get fall through route
+GET /item/42
+--
+# get enum choice 1
+GET /cloud-path/mountain
+--
+# get enum choice 2
+GET /cloud-path/vale
+--
+# get error due to non-existing enum choice 
+GET /cloud-path/plain
+--
+# get error due to non-existing enum choice 
+GET /files//home/userdir/.gitconfig

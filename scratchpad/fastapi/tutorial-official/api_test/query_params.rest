@@ -1,0 +1,56 @@
+# api testing for FastAPI tutorial : hello world
+# Global definitions.
+// Default host.
+http://localhost:8000
+
+// Default (buffer scope) cUrl options.
+--include
+-L
+--connect-timeout 10
+
+// Default headers.
+Accept: application/json
+# X-Header: Custom Data
+--
+# the -- are to use the global options
+--
+# get with query parameters missing
+GET /items/
+--
+# get with query parameters supplied
+GET /items/?start_index=1&end_index=2
+--
+# get with query out of range
+GET /items/?start_index=10
+--
+# get with query invalid parameters
+GET /items/?start_index=a&end_index=b
+--
+# get with mixed path & query
+GET /items/0?q=wave%20to%20the%20sky
+--
+# get with mixed path & query (query missing)
+GET /items/0
+--
+# get with mixed path & query type cast to True
+#   can be "True", "true", "1", "on", "yes"
+GET /items/bool/1?show=true
+--
+# get with mixed path & query type cast to False
+#   can be "False", "false", "0", "off", "no"
+GET /items/bool/2?show=false
+--
+# get error due to query value that can't be cast to bool
+GET /items/bool/2?show=2
+--
+# get multi-mixed path and query params
+GET /items/multi/path_string/44.22?q1=23&q2=off
+--
+# get error due to missing required query item
+GET /items/missing/required
+--
+# get default value for query item with default
+GET /items/missing/default
+--
+# get nothing for optional query item
+GET /items/missing/optional
