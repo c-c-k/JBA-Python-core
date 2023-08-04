@@ -1,6 +1,3 @@
-[submodule "project_stubs/sql/video-game-db"]
-	path = project_stubs/sql/video-game-db
-	url = https://github.com/c-c-k/zzz-proj-stub--video-game-db
 [submodule "project_stubs/flask/weather-app"]
 	path = project_stubs/flask/weather-app
 	url = https://github.com/c-c-k/zzz-proj-stub--weather-app
