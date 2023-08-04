@@ -1,6 +1,3 @@
-[submodule "project_stubs/python/simple-chatty-bot"]
-	path = project_stubs/python/simple-chatty-bot
-	url = https://github.com/c-c-k/zzz-proj-stub--simple-chatty-bot
 [submodule "project_stubs/sql/hacker-attack"]
 	path = project_stubs/sql/hacker-attack
 	url = https://github.com/c-c-k/zzz-proj-stub--hacker-attack
