@@ -4,9 +4,6 @@
 [submodule "project_stubs/react/tic-tac-toe"]
 	path = PitOfDespair/FaceOfHate/react/tic-tac-toe
 	url = https://github.com/c-c-k/zzz-tutorial--react-tic-tac-toe
-[submodule "scratchpad/fastapi/tutorial-official"]
-	path = scratchpad/fastapi/tutorial-official
-	url = https://github.com/c-c-k/zzz-tutorial--fastapi-official
 [submodule "PitOfDespair/flights-project"]
 	path = PitOfDespair/flights-project
 	url = https://github.com/c-c-k/zzz-despair--flights-project
