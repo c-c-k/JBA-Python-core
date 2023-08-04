@@ -1,6 +1,3 @@
-[submodule "project_stubs/python/memorization-tool"]
-	path = project_stubs/python/memorization-tool
-	url = https://github.com/c-c-k/zzz-proj-stub--memorization-tool
 [submodule "project_stubs/python/to-do-list"]
 	path = project_stubs/python/to-do-list
 	url = https://github.com/c-c-k/zzz-proj-stub--to-do-list
