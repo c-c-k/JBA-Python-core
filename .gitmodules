@@ -1,6 +1,3 @@
-[submodule "project_stubs/python/arithmetic-exam-application"]
-	path = project_stubs/python/arithmetic-exam-application
-	url = https://github.com/c-c-k/zzz-proj-stub--arithmetic-exam-application
 [submodule "project_stubs/python/currency-converter"]
 	path = project_stubs/python/currency-converter
 	url = https://github.com/c-c-k/zzz-proj-stub--currency-converter
